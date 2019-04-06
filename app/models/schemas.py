@@ -199,7 +199,6 @@ class Face(FaceBase):
 
     apertures: List[Aperture] = Schema(default=[])
 
-
 class Model(BaseModel):
     """Face by Face Model Schema"""
     type: Enum('Model', {'type': 'Model'})
@@ -215,4 +214,41 @@ class Model(BaseModel):
         default=1
     )
 
-    faces: List[Face]
+    faces: List[Face] = Schema(
+        default=[]
+    )
+
+class ModelOut(BaseModel):
+    """Face by Face Model Schema Out"""
+    type: Enum('Model', {'type': 'Model'})
+
+    id: UUID = Schema(default=None, description="Unique UUID value.")
+
+    name: str = Schema(
+        ...,
+        regex=r'^[.A-Za-z0-9_-]*$'
+    )
+
+    convert_to_meters: float = Schema(
+        default=1
+    )
+
+    face_count: int = Schema(
+        ...,
+        description="Number of faces attached to this model"
+    )
+
+    created_at: datetime = Schema(
+        None, description="Model creation time.")
+
+    url: UrlStr = Schema(
+        ...,
+        description='URL to the model',
+        example='https://api.pollination.cloud/models/7bd00d58-6485-4ca6-b889-3da6d8df3ee4'
+    )
+
+    faces_url: UrlStr = Schema(
+        ...,
+        description='URL to get faces from this model.',
+        example='https://api.pollination.cloud/models/7bd00d58-6485-4ca6-b889-3da6d8df3ee4/faces'
+    )
