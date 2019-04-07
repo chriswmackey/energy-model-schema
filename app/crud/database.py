@@ -17,7 +17,7 @@ def create_model_db(data, user: User):
         session.flush()
         print(e)
         # TODO(): Add logging
-        raise HTTPException(500, 'Failed to create the sensor-grid')
+        raise HTTPException(500, 'Failed to create the model')
 
     return new.id
 

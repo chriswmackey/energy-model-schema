@@ -21,3 +21,4 @@ else:
 
 PROJECT_NAME = os.getenv('PROJECT_NAME', 'Pollination Cloud')
 ALLOWED_HOSTS = CommaSeparatedStrings(os.getenv('ALLOWED_HOSTS', ''))
+HOST_NAME = os.getenv('HOST_NAME ', 'https://api.pollination.cloud')

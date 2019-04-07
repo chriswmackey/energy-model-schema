@@ -15,6 +15,7 @@ from app.models.responses import (
 )
 from app.models.security import User
 from app.core.jwt import get_user_info
+from app.core.config import HOST_NAME
 
 # TODO(): change input parameters to dependency
 from app.models.parameters import per_page_param, page_param
@@ -22,13 +23,11 @@ from app.crud.database import (create_model_db, get_models_db, get_model_db,
     delete_model_db, get_faces_db, create_faces_db
 )
 
-HOST = 'https://api.pollination.cloud'
-
 router = APIRouter()
 
 @router.get(
     "/",
-    operation_id='sensor_grids_welcome',
+    operation_id='models_welcome',
     include_in_schema=False,
     content_type=None
 )
@@ -61,7 +60,7 @@ def get_models(
     """Retrieve a list of sensor grids."""
     models = get_models_db(page, per_page, user)
     return [
-        ModelOut.parse_obj(model.to_model_out(HOST)) for model in models
+        ModelOut.parse_obj(model.to_model_out()) for model in models
         ]
 
 
@@ -90,8 +89,9 @@ def create_model(
 ):
     """Create a new model."""
     nid = create_model_db(model, user)
-    location = '%s/models/%s' % (HOST, nid)
+    location = '%s/models/%s' % (HOST_NAME, nid)
     return JSONResponse(
+        status_code=201,
         headers={'Location': location},
         content={
             'id': nid,
@@ -114,7 +114,7 @@ def get_model(
     user: User = Depends(get_user_info)
 ):
     """Retrieve a sensor grid."""
-    return ModelOut.parse_obj(get_model_db(id, user).to_model_out(HOST))
+    return ModelOut.parse_obj(get_model_db(id, user).to_model_out())
 
 
 
@@ -176,7 +176,7 @@ def get_faces(
     }
 )
 def create_faces(
-    model: List[Face] = Body(
+    faces: List[Face] = Body(
         ...,
         description = "A list of Pollination model faces",
         title = "Faces",
@@ -184,9 +184,10 @@ def create_faces(
     user: User = Depends(get_user_info)
 ):
     """Create new model faces."""
-    nids = create_faces_db(model, user)
-    location = '%s/models/%s/faces' % (HOST, nids)
+    nids = create_faces_db(id, faces, user)
+    location = '%s/models/%s/faces' % (HOST_NAME, nids)
     return JSONResponse(
+        status_code=201,
         headers={'Location': location},
         content={
             'ids': nids,

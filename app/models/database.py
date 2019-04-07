@@ -7,6 +7,8 @@ import datetime
 import uuid
 import json
 
+from app.core.config import HOST_NAME
+
 Base = declarative_base()
 
 class Model(Base):
@@ -44,7 +46,7 @@ class Model(Base):
         model.faces = faces_db
         return model
 
-    def to_model_out(self, host):
+    def to_model_out(self):
         return {
             "type": self.type,
             "id": self.id,
@@ -52,8 +54,8 @@ class Model(Base):
             "convert_to_meters": self.convert_to_meters,
             "face_count": self.face_count,
             "created_at": self.created_at,
-            "url": "{}/models/{}".format(host, self.id),
-            "faces_url": "{}/models/{}/faces".format(host, self.id)
+            "url": "{}/models/{}".format(HOST_NAME, self.id),
+            "faces_url": "{}/models/{}/faces".format(HOST_NAME, self.id)
         }
 
 class Face(Base):

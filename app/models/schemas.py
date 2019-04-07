@@ -176,14 +176,14 @@ class ShadeFace(FaceBase):
     """ShadeFace Schema"""
     type: Enum('ShadeFace', {'type': 'ShadeFace'})
 
-    face_type = FaceType.shading
+    face_type: Enum('Shading', {'face_type': 'Shading'})
 
 
 class Aperture(FaceBase):
     """Aperture Schema"""
     type: Enum('Aperture', {'type': 'Aperture'})
 
-    face_type = FaceType.window
+    face_type: Enum('Window', {'face_type': 'Window'})
 
     blinds: List[ShadeFace] = []
 
@@ -214,7 +214,7 @@ class Model(BaseModel):
         default=1
     )
 
-    faces: List[Face] = Schema(
+    faces: List[Union[Face, ShadeFace]] = Schema(
         default=[]
     )
 
