@@ -34,6 +34,17 @@ It contains the following payload:
 }
 ```
 
+### Testing
+For testing purposes you must export this environment variable:
+```console
+export POSTGRES_DB=test
+```
+
+You should then be able to run pytest without any issues in the root of this project like so:
+
+```console
+python -m pytest
+```
 
 **IMPORTANT SECURITY NOTE**
 
