@@ -51,9 +51,9 @@ class Model(Base):
             "type": self.type,
             "id": self.id,
             "name": self.name,
-            "convert_to_meters": self.convert_to_meters,
+            "convert_to_meters": float(self.convert_to_meters),
             "face_count": self.face_count,
-            "created_at": self.created_at,
+            "created_at": str(self.created_at),
             "url": "{}/models/{}".format(HOST_NAME, self.id),
             "faces_url": "{}/models/{}/faces".format(HOST_NAME, self.id)
         }

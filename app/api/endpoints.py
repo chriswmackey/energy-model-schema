@@ -71,7 +71,7 @@ def get_models(
     return JSONResponse(
         status_code=200,
         headers={'Link': str(header_links)},
-        content=[ModelOut.parse_obj(model.to_model_out()).json() for model in models]
+        content=[model.to_model_out() for model in models]
     )
 
 
@@ -173,7 +173,7 @@ def get_faces(
     return JSONResponse(
         status_code=200,
         headers={'Link': str(links)},
-        content= [Face.parse_obj(face.to_face_out()).json() for face in faces]
+        content= [face.to_face_out() for face in faces]
     )
 
 @router.post(
