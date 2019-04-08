@@ -197,7 +197,10 @@ class Face(FaceBase):
     """
     type: Enum('Face', {'type': 'Face'})
 
-    apertures: List[Aperture] = Schema(default=[])
+    apertures: List[Aperture] = Schema(
+        default=[],
+        description='List of Apertures bound to the Face'
+        )
 
 class Model(BaseModel):
     """Face by Face Model Schema"""
@@ -207,15 +210,18 @@ class Model(BaseModel):
 
     name: str = Schema(
         ...,
+        description='Model name',
         regex=r'^[.A-Za-z0-9_-]*$'
     )
 
     convert_to_meters: float = Schema(
-        default=1
+        default=1,
+        description='Value to use to convert the current model into meters'
     )
 
     faces: List[Union[Face, ShadeFace]] = Schema(
-        default=[]
+        default=[],
+        description='List of model faces, can be of type Face or ShadeFace'
     )
 
 class ModelOut(BaseModel):
@@ -226,11 +232,13 @@ class ModelOut(BaseModel):
 
     name: str = Schema(
         ...,
+        description='Model name',
         regex=r'^[.A-Za-z0-9_-]*$'
     )
 
     convert_to_meters: float = Schema(
-        default=1
+        default=1,
+        description='Value to use to convert the current model into meters'
     )
 
     face_count: int = Schema(
@@ -239,7 +247,9 @@ class ModelOut(BaseModel):
     )
 
     created_at: datetime = Schema(
-        None, description="Model creation time.")
+        ..., 
+        description="Model creation time.",
+        example='2019-04-07 22:34:16.764143')
 
     url: UrlStr = Schema(
         ...,

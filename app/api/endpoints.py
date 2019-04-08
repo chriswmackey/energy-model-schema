@@ -23,6 +23,8 @@ from app.crud.database import (create_model_db, get_models_db, get_model_db,
     delete_model_db, get_faces_db, create_faces_db, count_models_db
 )
 
+from app.models.samples.model import model_sample
+
 from app.crud.util import generate_paging_link 
 
 router = APIRouter()
@@ -95,7 +97,7 @@ def create_model(
         ...,
         description = "A Pollination model",
         title = "Model",
-        example = {}), # TODO(): Add model example
+        example = model_sample),
     user: User = Depends(get_user_info)
 ):
     """Create a new model."""
@@ -196,7 +198,7 @@ def create_faces(
         ...,
         description = "A list of Pollination model faces",
         title = "Faces",
-        example = {}), # TODO(): Add model example
+        example = model_sample['faces']),
     user: User = Depends(get_user_info)
 ):
     """Create new model faces."""
