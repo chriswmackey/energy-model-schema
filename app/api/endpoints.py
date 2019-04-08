@@ -10,7 +10,7 @@ from starlette.responses import JSONResponse, HTMLResponse
 from app.models.schemas import Face, Model, ModelOut
 
 from app.models.responses import (
-    created_header_schema, CreatedContent,
+    created_header_schema, CreatedContent, paging_header_schema,
     additional_error_post_responses, additional_error_responses
 )
 from app.models.security import User
@@ -20,8 +20,10 @@ from app.core.config import HOST_NAME
 # TODO(): change input parameters to dependency
 from app.models.parameters import per_page_param, page_param
 from app.crud.database import (create_model_db, get_models_db, get_model_db, 
-    delete_model_db, get_faces_db, create_faces_db
+    delete_model_db, get_faces_db, create_faces_db, count_models_db
 )
+
+from app.crud.util import generate_paging_link 
 
 router = APIRouter()
 
@@ -50,18 +52,27 @@ def say_hi_models():
     status_code=HTTP_200_OK,
     response_description='Retrieved',
     response_model=List[ModelOut],
-    responses={**additional_error_responses}
-)
+    responses={
+        **additional_error_responses,
+        200: {
+            'headers': paging_header_schema
+        }
+    })
 def get_models(
     page: int = page_param,
     per_page: int = per_page_param,
     user: User = Depends(get_user_info)
 ):
-    """Retrieve a list of sensor grids."""
+    """Retrieve a list of models."""
+    link = 'http://%s/models' % (HOST_NAME)
+    total_count = count_models_db(user)
     models = get_models_db(page, per_page, user)
-    return [
-        ModelOut.parse_obj(model.to_model_out()) for model in models
-        ]
+    header_links = generate_paging_link(link, page, total_count, per_page) 
+    return JSONResponse(
+        status_code=200,
+        headers={'Link': str(header_links)},
+        content=[ModelOut.parse_obj(model.to_model_out()).json() for model in models]
+    )
 
 
 @router.post(
@@ -156,9 +167,14 @@ def get_faces(
     """Retrieve list of sensors for a sensor grid.
     See Location in response headers for paging links.
     """
-    faces = get_faces_db(id, page, per_page, user)
-    return [Face.parse_obj(face.to_face_out()) for face in faces]
-
+    link = 'http://%s/models' % (HOST_NAME)
+    faces, face_count = get_faces_db(id, page, per_page, user)
+    links = generate_paging_link(link, page, face_count, per_page)
+    return JSONResponse(
+        status_code=200,
+        headers={'Link': str(links)},
+        content= [Face.parse_obj(face.to_face_out()).json() for face in faces]
+    )
 
 @router.post(
     "/models/{id}/faces",

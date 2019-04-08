@@ -22,6 +22,14 @@ def create_model_db(data, user: User):
     return new.id
 
 
+def count_models_db(user: User):
+    """Return the number of models the user has created"""
+    session = get_db_session()
+    count = session.query(Model.id).filter_by(user_id=str(user.user_id)).count()
+    session.close()
+    return count
+
+
 def get_models_db(page, per_page, user: User):
     """Return paginated list of models"""
     session = get_db_session()
@@ -58,14 +66,21 @@ def delete_model_db(id, user: User):
         session.close()
 
 
+def count_faces_db(model_id, user: User):
+    """Return the number of models the user has created"""
+    session = get_db_session()
+    count = session.query(Face.id).filter_by(user_id=str(user.user_id), model_id=str(model_id)).count()
+    session.close()
+    return count
+
 def get_faces_db(model_id, page, per_page, user: User):
     """Return paginated list of faces"""
+    face_count = count_faces_db(model_id, user)
     session = get_db_session()
     faces = session.query(Face).filter_by(user_id=str(user.user_id), model_id=str(model_id)).offset(
         (page - 1) * per_page).limit(per_page)
-    # print(faces)
     session.close()
-    return faces
+    return faces, face_count
 
 def create_faces_db(model_id, data, user: User):
     """Create faces from a list"""

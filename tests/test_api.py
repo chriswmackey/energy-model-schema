@@ -28,6 +28,8 @@ def test_get_models(client, get_superuser_token_headers):
 
   assert r.status_code == 200
 
+  assert r.headers['link'] == '<http://https://api.pollination.cloud/models?page=2&per_page=25>; rel="next",<http://https://api.pollination.cloud/models?page=1&per_page=25>; rel="last"'
+
   response = r.json()
 
   assert len(response) == 1
@@ -58,6 +60,8 @@ def test_get_faces(client, get_superuser_token_headers, created_item_data):
     )
 
     assert r.status_code == 200
+
+    assert r.headers['link'] == '<http://https://api.pollination.cloud/models?page=2&per_page=25>; rel="next",<http://https://api.pollination.cloud/models?page=1&per_page=25>; rel="last"'
 
     response = r.json()
     assert len(response) == 6
