@@ -68,12 +68,6 @@ def face_by_face_model():
 
 
 @pytest.fixture
-def pollination_model():
-    with open('tests/fixtures/model_pollination.json', 'r') as f:
-        return json.load(f)
-
-
-@pytest.fixture
 def opaque_material():
     return {
         "modifier": "void",
