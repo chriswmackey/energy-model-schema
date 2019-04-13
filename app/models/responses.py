@@ -16,7 +16,7 @@ paging_header_schema = {
   'Link': {
     'description': 'The Link header with pagination information. For details see ' \
     '[link header](https://pollination.cloud/api/#section/Pagination/Link-header).',
-    'schema': { 'type': 'str'}
+    'schema': { 'type': 'string'}
   }
 }
 
