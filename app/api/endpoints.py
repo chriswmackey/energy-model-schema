@@ -194,6 +194,7 @@ def get_faces(
     }
 )
 def create_faces(
+    id: UUID = Path(..., title = "Model id."),
     faces: List[Face] = Body(
         ...,
         description = "A list of Pollination model faces",
