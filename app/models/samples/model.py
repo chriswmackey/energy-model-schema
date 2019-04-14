@@ -145,10 +145,6 @@ model_sample = {
                     "name": "back_glazing",
                     "face_type": "Window",
                     "type": "Aperture",
-                    "parent": {
-                        "name": "back_wall",
-                        "type": "face"
-                    },
                     "rad_modifier": {
                         "modifier": "void",
                         "type": "Glass",

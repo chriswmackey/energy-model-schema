@@ -8,23 +8,20 @@ from datetime import datetime
 
 class FaceType(str, Enum):
     wall = 'Wall'
-    roof_celing = 'RoofCeiling'
+    roof_ceiling = 'RoofCeiling'
     floor = 'Floor'
     air_wall = 'AirWall'
-    window = 'Window'
     shading = 'Shading'
 
 
-class ParentFace(BaseModel):
-    """Parent face information"""
+class Parent(BaseModel):
+    """Parent zone information"""
     id: UUID = Schema(default=None, description="Unique UUID value.")
 
     name: str = Schema(
         ...,
         regex=r'^[.A-Za-z0-9_-]*$'
     )
-
-    type = 'face'
 
 
 class Opaque(BaseModel):
@@ -146,10 +143,7 @@ class Vertex(BaseModel):
 
 
 class FaceBase(BaseModel):
-    """The Base Face model
-
-    Some clever description
-    """
+    """The Base Face model"""
 
     id: UUID = Schema(default=None, description="Unique UUID value.")
 
@@ -160,16 +154,27 @@ class FaceBase(BaseModel):
 
     vertices: List[Vertex] = Schema(
         ...,
-        min_items=3
+        minItems=3
     )
+
+    @validator('vertices', whole=True)
+    def check_min_items(cls, v):
+        assert len(v) >= 3, \
+            'Number of face vertices must be 3 or more. Vertices count: %d.' % len(
+                v)
 
     # TODO: write type assignment based on face normal direction as default value function
     face_type: FaceType = FaceType.wall
 
-    rad_modifier: Union[Opaque, Transparent, Plastic, Glass]
+    rad_modifier: Union[Opaque, Transparent, Plastic, Glass] = Schema(
+        default=None,
+        description='Radiance material.'
+    )
 
-    rad_modifier_dir: Union[Opaque, Transparent,
-                            Plastic, Glass] = Schema(default=None)
+    rad_modifier_dir: Union[Opaque, Transparent, Plastic, Glass] = Schema(
+        default=None,
+        description='Radiance material for direct sunlight simulation.'
+    )
 
 
 class ShadeFace(FaceBase):
@@ -185,9 +190,9 @@ class Aperture(FaceBase):
 
     face_type: Enum('Window', {'face_type': 'Window'})
 
-    blinds: List[ShadeFace] = []
+    rad_modifier: Union[Transparent, Glass] = None
 
-    parent: ParentFace
+    blinds: List[ShadeFace] = []
 
 
 class Face(FaceBase):
@@ -200,13 +205,14 @@ class Face(FaceBase):
     apertures: List[Aperture] = Schema(
         default=[],
         description='List of Apertures bound to the Face'
-        )
+    )
+
+    parent: Parent = None
+
 
 class Model(BaseModel):
     """Face by Face Model Schema"""
     type: Enum('Model', {'type': 'Model'})
-
-    id: UUID = Schema(default=None, description="Unique UUID value.")
 
     name: str = Schema(
         ...,
@@ -223,6 +229,7 @@ class Model(BaseModel):
         default=[],
         description='List of model faces, can be of type Face or ShadeFace'
     )
+
 
 class ModelOut(BaseModel):
     """Face by Face Model Schema Out"""
@@ -247,7 +254,7 @@ class ModelOut(BaseModel):
     )
 
     created_at: datetime = Schema(
-        ..., 
+        ...,
         description="Model creation time.",
         example='2019-04-07 22:34:16.764143')
 
