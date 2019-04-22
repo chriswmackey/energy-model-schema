@@ -1,15 +1,31 @@
 language: python
 python: '3.6'
 
-services:
-  - postgresql
-
 env:
   global:
-    - POSTGRES_DB=test
-
+  - POSTGRES_DB=test
+  - secure: MvZ6ZtPwgiq9GWw0GEFsCOobB4MYFlMltj5J3341QyKnqJJWuUbPoDibCkdOrQ7LRDX8mFdez/tPZlDH4WxrVde2djquGZLVbW/4aF1w75mamJp59z0y/iBUt/ucmdzjgpPA6LBAYTjI7ory7lfIpAzM5ME22YULwBYgxxt5IFB3TlyWs48c9G80J5r7FH+yNSFmSZGSHNZO37BM00eiLDDTdcYEANiGD8Vfu2QHl84n0bewmIcMuHSdDPhUlApFpTDCecIDix4i35z8BSE7yK60lPX0yKZBD6MllikvdrEP9t/S/HjpyKrz0wBgz7FVdagtDtCNTiCYtv7v7l9GeRheZM12yPu+wtizzuDwbqj4jzikhgv1iAzAnZrxAhVmiv7hc3WxEmN9A+hQl3R2+oEvhwlrbmBLTvGTQU7zT4kCQZjuEt+8VWMrcSJiVF1fYtjifcLZggxzZ14xvn64ZTTgVduVb0qVPdIPQBaWmwJ3aPlDwmA+2Hs/buhMaPoSQ0RGK+bnorA7F4AlLQM++BI6GbmKXnxq83hAMCqNty30EBokkQTaX7u/+a75XBFaVz3vPq4f4IV6paIgp6/QAFFl1df2jWAo1A/PkekLqhjD5RXh1nEpYgaOg8JbOZGp9KE9Na2f/c9K8allvNQRUBYxFF6aTCu0ePRJG5ETPBk=
+  - secure: r9KZd8r4I+8hiyqtuWuhdKQuLMxsV6yK3G/AHMKlIfWW/K5dQcuZRF2J2yGM2rMYtlPSbeKI8Oo9xGgPF6B/rx5TZqJWpzNe2NLYRExoNLtjAzJbszeshtV+tFwJmGTRIcDeE4Mk+DQ6QgL38ETc3IPhVmg5EkhWmtm07LDba1DibqZ9DGdSRrbfQHtniakN1CzKkWsXL+vb7tROYyHpSSXf9FkskF0DSyomu6DJVR4KkxmVcVhlxrGO8Sk/dIyeee6RL90UponPrZfKhS2ekWhGEcQN8U6tzfq7AKU4wUo0oJdSTpwHmBxJ7VTljnj5v4OrIs3Gacp93LQoBWUrUsxjw0oOSThep7nQYO7E6x9WZpiC4N80VE4pBi9okN5sYQCJiZBIPJfSro/VifxgRPksLU2gml3u0Ozh3m2WwHeTrO2sQPuAcoDZ+Ys/sVW1EUUOIfshOIAJMeKbD+EODFNtK0SAKaEVGN5fAm79fF4Y4if7sMOPHmQ0pNPYaovc+j4PyN3gI/R/S0rplxdr1KRNiwcnJJPe7SaHnkWPYmNbC4TI0M21ejAuORk1eD6Ry9flhXAisiS04YGMff8yyFil6U+mRpptulKQLie775RZB4Ehye113VSiEmzDtWMsD0s0n/OaR2CP00YWSVfY0C21pB3pum8O5YslLIa/zF4=
 before_script:
-  - pip install -r requirements.txt
-
+- pip install -r requirements.txt
 script:
-  - python -m pytest
+- python -m pytest
+
+jobs:
+  include:
+  - stage: test
+    services:
+    - postgresql
+    script: python -m pytest
+  - stage: deploy
+    if: branch = master AND (NOT type IN (pull_request))
+    services:
+    - docker
+    before_install:
+    - npm i -g npm@6.6.0
+    language: node_js
+    node_js:
+    - '8'
+    script:
+    - npm install @semantic-release/exec
+    - npx semantic-release
