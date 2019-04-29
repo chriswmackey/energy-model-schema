@@ -1,5 +1,5 @@
 """Construction Schema"""
-from pydantic import BaseModel, Schema, validator, ValidationError, UrlStr, ConstrainedStr
+from pydantic import BaseModel, Schema, validator, ValidationError
 from typing import List, Union
 from enum import Enum
 from uuid import UUID, uuid4
@@ -275,7 +275,8 @@ class EnergyWindowMaterialBlind(BaseModel):
     Window blind properties consist of flat, equally-spaced slats.
     """
 
-    type: Enum('EnergyWindowMaterialBlind', {'type': 'EnergyWindowMaterialBlind'})
+    type: Enum('EnergyWindowMaterialBlind', {
+               'type': 'EnergyWindowMaterialBlind'})
 
     name: str = Schema(
         ...,
@@ -780,11 +781,27 @@ class EnergyConstruction(BaseModel):
         regex=r'^[\s.A-Za-z0-9_-]*$',
     )
 
-    materials: Union[
-        EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialAirGap,
-        EnergyWindowMaterialSimpleGlazSys, EnergyWindowMaterialBlind,
-        EnergyWindowMaterialGlazing, EnergyWindowMaterialShade]
+    materials: List[
+        Union[
+            EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialAirGap,
+            EnergyWindowMaterialSimpleGlazSys, EnergyWindowMaterialBlind,
+            EnergyWindowMaterialGlazing, EnergyWindowMaterialShade
+        ]
+    ] = Schema(
+        ...,
+        description='List of materials. The order of the materials in from outside to'
+        ' inside.',
+        minItems = 1
+    )
 
+    @validator('materials', whole=True)
+    def check_min_items(cls, materials):
+        "Ensure length of material is at least 1."
+        if len(materials) == 0:
+            raise ValidationError(
+                'Energy construction should at least have one material.'
+            )
+        return materials
 
 if __name__ == '__main__':
     print(EnergyConstruction.schema_json(indent=2))
