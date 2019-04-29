@@ -4,6 +4,7 @@ from typing import List, Union
 from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
+from .energy.construction import EnergyConstruction
 
 
 class FaceType(str, Enum):
@@ -174,6 +175,11 @@ class FaceBase(BaseModel):
     rad_modifier_dir: Union[Opaque, Transparent, Plastic, Glass] = Schema(
         default=None,
         description='Radiance material for direct sunlight simulation.'
+    )
+
+    energy_construction: EnergyConstruction = Schema(
+        default=None,
+        description='Face construction for energy simulation.'
     )
 
 
