@@ -6,11 +6,11 @@ import pytest
 
 
 def test_material():
-    material = EnergyMaterial.parse_obj(in_material)
+    EnergyMaterial.parse_obj(in_material)
 
 
 def test_construction():
-    const = EnergyConstruction.parse_obj(in_const)
+    EnergyConstruction.parse_obj(in_const)
 
 
 def test_construction_no_material():
