@@ -14,15 +14,3 @@ jobs:
     before_script:
     - pip install -r requirements.txt
     script: python -m pytest
-  - stage: deploy
-    if: branch = master AND (NOT type IN (pull_request))
-    services:
-    - docker
-    before_install:
-    - npm i -g npm@6.6.0
-    language: node_js
-    node_js:
-    - '8'
-    script:
-    - npm install @semantic-release/exec
-    - npx semantic-release
