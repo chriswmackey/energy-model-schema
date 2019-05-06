@@ -283,12 +283,7 @@ class EnergyWindowMaterialBlind(BaseModel):
         regex=r'^[\s.A-Za-z0-9_-]*$',
     )
 
-    slat_orientation: str = Schema(
-        ...,
-        description='Choices including Horizontal and Vertical. Horizontal means the'
-        ' slats are parallel to the X-axis of the window. Vertical means the slats are'
-        ' parallel to the Y-axis of the window.'
-    )
+    slat_orientation: SlatOrientation
 
     slat_width: float = Schema(
         0.025,
@@ -767,14 +762,13 @@ class EnergyWindowMaterialShade (BaseModel):
         ' Default value is 0.'
     )
 
-
-class EnergyConstruction(BaseModel):
+class EnergyConstructionWindow(BaseModel):
     """
     Group of objects to describe the physical properties and configuration for 
-    the building envelope and interior elements that is the walls, roofs, floors, windows
-    and doors of the building.
+    the building envelope and interior elements that is the windows of the building.
+
     """
-    type: Enum('EnergyConstruction', {'type': 'EnergyConstruction'})
+    type: Enum('EnergyConstructionWindow', {'type': 'EnergyConstructionWindow'})
 
     name: str = Schema(
         ...,
@@ -783,13 +777,52 @@ class EnergyConstruction(BaseModel):
 
     materials: List[
         Union[
-            EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialAirGap,
+            EnergyWindowMaterialAirGap,
             EnergyWindowMaterialSimpleGlazSys, EnergyWindowMaterialBlind,
             EnergyWindowMaterialGlazing, EnergyWindowMaterialShade
         ]
     ] = Schema(
+            ...,
+            description='List of materials. The order of the materials is from outside to'
+            ' inside.',
+            minItems = 1
+        )        
+
+    @validator('materials', whole=True)
+    def check_min_items(cls, materials):
+        "Ensure length of material is at least 1."
+        if len(materials) == 0:
+            raise ValidationError(
+                'Window construction should at least have one material.'
+            )
+
+        elif len(materials) > 8:
+            raise ValidationError(
+                'Window construction cannot have more than 8 materials.'
+            )
+        return materials
+
+class EnergyConstructionOpaque(BaseModel):
+    """
+    Group of objects to describe the physical properties and configuration for 
+    the building envelope and interior elements that is the walls, roofs, floors, 
+    and doors of the building.
+    """
+    type: Enum('EnergyConstructionOpaque', {'type': 'EnergyConstructionOpaque'})
+
+    
+    name: str = Schema(
         ...,
-        description='List of materials. The order of the materials in from outside to'
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+    )
+
+    materials: List[
+        Union[
+            EnergyMaterial, EnergyMaterialNoMass
+        ]
+    ] = Schema(
+        ...,
+        description='List of materials. The order of the materials is from outside to'
         ' inside.',
         minItems = 1
     )
@@ -799,9 +832,16 @@ class EnergyConstruction(BaseModel):
         "Ensure length of material is at least 1."
         if len(materials) == 0:
             raise ValidationError(
-                'Energy construction should at least have one material.'
+                'Opaque construction should at least have one material.'
+            )
+        elif len(materials) > 10:
+            raise ValidationError(
+                'Opaque construction cannot have more than 10 materials.'
             )
         return materials
 
 if __name__ == '__main__':
-    print(EnergyConstruction.schema_json(indent=2))
+    print(EnergyConstructionWindow.schema_json(indent=2))
+
+if __name__ == '__main__':
+    print(EnergyConstructionOpaque.schema_json(indent=2))
