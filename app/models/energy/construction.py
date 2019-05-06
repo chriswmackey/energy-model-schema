@@ -762,13 +762,13 @@ class EnergyWindowMaterialShade (BaseModel):
         ' Default value is 0.'
     )
 
-class EnergyConstructionWindow(BaseModel):
+class EnergyConstructionTransparent(BaseModel):
     """
     Group of objects to describe the physical properties and configuration for 
     the building envelope and interior elements that is the windows of the building.
 
     """
-    type: Enum('EnergyConstructionWindow', {'type': 'EnergyConstructionWindow'})
+    type: Enum('EnergyConstructionTransparent', {'type': 'EnergyConstructionTransparent'})
 
     name: str = Schema(
         ...,
@@ -802,6 +802,15 @@ class EnergyConstructionWindow(BaseModel):
             )
         return materials
 
+    @validator('materials', whole=True)
+    def check_item_sequence(cls, materials):
+        "Ensure Air Gap is not the outermost layer."
+        if (materials[0]).type or (materials[-1]).type == 'EnergyWindowMaterialAirGap':
+            raise ValidationError(
+                'Air Gap can not be outermost layer'
+            )
+        return materials
+
 class EnergyConstructionOpaque(BaseModel):
     """
     Group of objects to describe the physical properties and configuration for 
@@ -810,7 +819,7 @@ class EnergyConstructionOpaque(BaseModel):
     """
     type: Enum('EnergyConstructionOpaque', {'type': 'EnergyConstructionOpaque'})
 
-    
+
     name: str = Schema(
         ...,
         regex=r'^[\s.A-Za-z0-9_-]*$',
@@ -840,8 +849,10 @@ class EnergyConstructionOpaque(BaseModel):
             )
         return materials
 
+
 if __name__ == '__main__':
-    print(EnergyConstructionWindow.schema_json(indent=2))
+    print(EnergyConstructionTransparent.schema_json(indent=2))
 
 if __name__ == '__main__':
     print(EnergyConstructionOpaque.schema_json(indent=2))
+

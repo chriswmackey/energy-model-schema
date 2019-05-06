@@ -30,7 +30,8 @@ in_material_no_mass = {
     'r_value': 0.9,
     'roughness': 'Smooth',
     'thermal_absorptance': 0.8,
-    'solar_abosrptance': 0.8
+    'solar_abosrptance': 0.8,
+    'visible_absorptance': 0.8
 }
 
 in_window_air_gap = {
@@ -133,7 +134,7 @@ def trial():
 trial()
 
 construction_window = {
-    'type': 'EnergyConstructionWindow',
+    'type': 'EnergyConstructionTransparent',
     'name': 'Exterior Window',
     'materials': [in_window_glazing, in_window_air_gap, in_window_glazing]
 }
