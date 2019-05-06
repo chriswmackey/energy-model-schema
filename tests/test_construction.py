@@ -1,5 +1,5 @@
-from models.energy.construction import EnergyConstructionOpaque, EnergyConstructionWindow, EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialAirGap, EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing, EnergyWindowMaterialShade, EnergyWindowMacterialSimpleGlazSys
-from models.samples.energyconstruction import in_material_internalsource, in_material_concrete, in_material_no_mass, in_window_air_gap, in_window_simpleglazing, in_window_blind, in_window_glazing, in_window_shade, construction_internal_floor, construction_window, construction_window_blind
+from app.models.energy.construction import EnergyConstructionOpaque, EnergyConstructionWindow, EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialAirGap, EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing, EnergyWindowMaterialShade, EnergyWindowMaterialSimpleGlazSys
+from app.models.samples.energyconstruction import in_material_internalsource, in_material_concrete, in_material_no_mass, in_window_air_gap, in_window_simpleglazing, in_window_blind, in_window_glazing, in_window_shade, construction_internal_floor, construction_window, construction_window_blind
 from copy import copy
 from pydantic import ValidationError
 import pytest
