@@ -7,6 +7,9 @@ from datetime import datetime
 
 
 class Roughness(str, Enum):
+    """
+    Relative roughness of a particular material layer.
+    """
     very_rough = 'VeryRough'
     rough = 'Rough'
     medium_rough = 'MediumRough'
@@ -24,10 +27,7 @@ class EnergyMaterial(BaseModel):
         regex=r'^[\s.A-Za-z0-9_-]*$'
     )
 
-    roughness: Roughness = Schema(
-        ...,
-        description='Relative roughness of a particular material layer.'
-    )
+    roughness: Roughness = Roughness.medium_rough
 
     thickness: float = Schema(
         ...,
@@ -89,14 +89,14 @@ class EnergyMaterialNoMass(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
+        regex=r'^[\s.A-Za-z0-9_-]*$'
     )
 
     r_value: float = Schema(
         ...,
         ge=0.001,
         description='Used to enter the thermal resistance (R-value) of the material'
-        ' layer in (m2-K)/W.',
+        ' layer in (m2-K)/W.'
     )
 
     roughness: Roughness = Roughness.medium_rough
@@ -155,73 +155,73 @@ class EnergyWindowMaterialAirGap(BaseModel):
         gt=0,
         description='Thickness of the air gap in meters. Default value is 0.0125.'
     )
-
+    # The following properties are used only when the gas type is custom.
     conductivity_coeff_A: float = Schema(
-        ...,
+        0,
         description='The A coefficient for gas conductivity in W/(m-K). Used only if Gas'
         ' Type is Custom.'
     )
 
     conductivity_coeff_B: float = Schema(
-        ...,
+        0,
         description='The A coefficient for gas conductivity in W/(m-K2). Used only if'
         ' Gas Type is Custom.'
     )
 
     conductivity_coeff_C: float = Schema(
-        ...,
+        0,
         description='The A coefficient for gas conductivity in W/(m-K3). Used only if'
         ' Gas Type is Custom.'
     )
 
     viscosity_coeff_A: float = Schema(
-        ...,
+        0,
         gt=0,
         description='The A coefficient for gas viscosity in kg/(m-s). Used only if Gas'
         ' Type is Custom.'
     )
 
     viscosity_coeff_B: float = Schema(
-        ...,
+        0,
         description='The B coefficient for gas viscosity in kg/(m-s-K). Used only if Gas'
         ' Type is Custom.'
     )
 
     viscosity_coeff_C: float = Schema(
-        ...,
+        0,
         description='The C coefficient for gas viscosity in kg/(m-s-K2). Used only if'
         ' Gas Type is Custom.'
     )
 
     specific_heat_coeff_A: float = Schema(
-        ...,
+        0,
         gt=0,
         description='The A coefficient for gas specific heat in J/(kg-K). Used only if'
         ' Gas Type is Custom.'
     )
 
     specific_heat_coeff_B: float = Schema(
-        ...,
+        0,
         gt=0,
         description='The B coefficient for gas specific heat in J/(kg-K2). Used only if'
         ' Gas Type is Custom.'
     )
 
     specific_heat_coeff_C: float = Schema(
-        ...,
+        0,
         gt=0,
         description='The C coefficient for gas specific heat in J/(kg-K3). Used only if'
         ' Gas Type is Custom.'
     )
 
     specific_heat_ratio: float = Schema(
-        ...,
+        1,
         gt=1,
         description='The specific heat ratio for gas. Used only if Gas Type is Custom.'
     )
 
     molecular_weight: float = Schema(
-        ...,
+        20,
         ge=20,
         le=200,
         description='The molecular weight for gas in g/mol. Used only if Gas Type is'
@@ -762,13 +762,15 @@ class EnergyWindowMaterialShade (BaseModel):
         ' Default value is 0.'
     )
 
+
 class EnergyConstructionTransparent(BaseModel):
     """
     Group of objects to describe the physical properties and configuration for 
     the building envelope and interior elements that is the windows of the building.
 
     """
-    type: Enum('EnergyConstructionTransparent', {'type': 'EnergyConstructionTransparent'})
+    type: Enum('EnergyConstructionTransparent', {
+               'type': 'EnergyConstructionTransparent'})
 
     name: str = Schema(
         ...,
@@ -782,11 +784,11 @@ class EnergyConstructionTransparent(BaseModel):
             EnergyWindowMaterialGlazing, EnergyWindowMaterialShade
         ]
     ] = Schema(
-            ...,
-            description='List of materials. The order of the materials is from outside to'
-            ' inside.',
-            minItems = 1
-        )        
+        ...,
+        description='List of materials. The order of the materials is from outside to'
+        ' inside.',
+        minItems=1
+    )
 
     @validator('materials', whole=True)
     def check_min_items(cls, materials):
@@ -801,15 +803,16 @@ class EnergyConstructionTransparent(BaseModel):
                 'Window construction cannot have more than 8 materials.'
             )
         return materials
+# check
+    # @validator('materials', whole=True)
+    # def check_item_sequence(cls, materials):
+    #    "Ensure Air Gap is not the outermost layer."
+    #    if (materials[0]).type or (materials[-1]).type == 'EnergyWindowMaterialAirGap':
+    #        raise ValidationError(
+    #            'Air Gap can not be outermost layer'
+    #        )
+    #    return materials
 
-    @validator('materials', whole=True)
-    def check_item_sequence(cls, materials):
-        "Ensure Air Gap is not the outermost layer."
-        if (materials[0]).type or (materials[-1]).type == 'EnergyWindowMaterialAirGap':
-            raise ValidationError(
-                'Air Gap can not be outermost layer'
-            )
-        return materials
 
 class EnergyConstructionOpaque(BaseModel):
     """
@@ -817,8 +820,8 @@ class EnergyConstructionOpaque(BaseModel):
     the building envelope and interior elements that is the walls, roofs, floors, 
     and doors of the building.
     """
-    type: Enum('EnergyConstructionOpaque', {'type': 'EnergyConstructionOpaque'})
-
+    type: Enum('EnergyConstructionOpaque', {
+               'type': 'EnergyConstructionOpaque'})
 
     name: str = Schema(
         ...,
@@ -833,7 +836,7 @@ class EnergyConstructionOpaque(BaseModel):
         ...,
         description='List of materials. The order of the materials is from outside to'
         ' inside.',
-        minItems = 1
+        minItems=1
     )
 
     @validator('materials', whole=True)
@@ -855,4 +858,3 @@ if __name__ == '__main__':
 
 if __name__ == '__main__':
     print(EnergyConstructionOpaque.schema_json(indent=2))
-

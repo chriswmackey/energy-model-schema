@@ -21,7 +21,7 @@ in_material_concrete = {
     'specific_heat': 836,
     'thermal_abosrptance': 0.9,
     'solar_absorptance': 0.65,
-    'visible_abosrptance': 0.65
+    'visible_absorptance': 0.65
 }
 
 in_material_no_mass = {
@@ -43,7 +43,7 @@ in_window_air_gap = {
 
 in_window_simpleglazing = {
     'type': 'EnergyWindowMaterialSimpleGlazSys',
-    'name': 'Fixed Window 2.00/0.40/0.31',
+    'name': 'Fixed Window 2.00 0.40 0.31',
     'u_factor': 1.98,
     'SHGC': 0.4
 }
@@ -52,38 +52,11 @@ in_window_blind = {
     'type': 'EnergyWindowMaterialBlind',
     'name': 'Window Material Blind 1',
     'slat_orientation': 'Horizontal',
-    'slat_width': 0.025,
-    'slat_separation': 0.1875,
-    'slat_thickness': 0.001,
-    'slat_angle': 45,
-    'slat_conductivity': 221,
-    'beam_solar_transmittance': 0,
-    'front_beam_solar_reflectance': 0.5,
-    'back_beam_solar_reflectance': 0.5,
-    'diffuse_solar_transmittance': 0,
-    'front_diffuse_solar_reflectance': 0.5,
-    'back_diffuse_solar_reflectance': 0.5,
-    'beam_visible_transmittance': 0,
-    'front_beam_visible_reflectance': 0.5,
-    'back_beam_visible_reflectance': 0.5,
-    'diffuse_visible_transmittance': 0,
-    'front_diffuse_visible_reflectance': 0.5,
-    'back_diffuse_visible_reflectance': 0.5,
-    'infrared_hemispherical_transmittance': 0,
-    'front_infrared_hemispherical_emissivity': 0.9,
-    'back_infrared_hemispherical_emissivity': 0.9,
-    'blind_toglass_distance': 0.05,
-    'top_opening_multiplier': 0.5,
-    'bottom_opening_multiplier': 0.5,
-    'left_opening_multiplier': 0.5,
-    'right_opening_multiplier': 0.5,
-    'minimum_slat_angle': 0,
-    'maximum_slat_angle': 180
 }
 
 in_window_glazing = {
     'type': 'EnergyWindowMaterialGlazing',
-    'name': 'Theoretical Glass [167]',
+    'name': 'Theoretical Glass 167',
     'optical_datatype': 'SpectralAverage',
     'spectral_dataset_name': '',
     'thickness_glass': 0.029,
@@ -121,17 +94,10 @@ in_window_shade = {
 }
 
 construction_internal_floor = {
-    'type': 'EnergyConstruction',
-    'name': 'sample1',
+    'type': 'EnergyConstructionOpaque',
+    'name': 'Internal Floor',
     'materials': [in_material_no_mass, in_material_internalsource, in_material_concrete]
 }
-
-def trial():
-    construction = len(construction_internal_floor['materials'])
-    print (construction)
-    if construction > 1:
-        print ('error')
-trial()
 
 construction_window = {
     'type': 'EnergyConstructionTransparent',
@@ -144,11 +110,3 @@ construction_window_blind = {
     'name': 'Window with Blinds',
     'materials': [in_window_blind, in_window_simpleglazing]
 }
-
-def construction():
-    if ((construction_window['materials'])[0])['type'] or ((construction_window['materials'])[0])['type'] == 'EnergyWindowMaterialAirGap': 
-        print ('error')
-    else: 
-        print ('good')
-
-construction()
