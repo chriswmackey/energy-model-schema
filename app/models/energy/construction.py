@@ -28,6 +28,7 @@ class EnergyMaterial(BaseModel):
     )
 
     roughness: Roughness = Roughness.medium_rough
+    
 
     thickness: float = Schema(
         ...,

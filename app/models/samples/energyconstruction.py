@@ -11,6 +11,45 @@ in_material_internalsource = {
     'visible_absorptance': 0.7
 }
 
+in_material_gypsum = {
+    'type': 'EnergyMaterial',
+    'name': '1.5 in Gypsum',
+    'roughness': 'Smooth',
+    'thickness': 0.012,
+    'conductivity': 0.16,
+    'density': 784.9,
+    'specific_heat': 830,
+    'thermal_absorptance': 0.9,
+    'solar_absroptance': 0.4,
+    'visible_absorptance': 0.4
+}
+
+in_material_stucco = {
+    'type': 'EnergyMaterial',
+    'name': '1 in Gypsum',
+    'roughness': 'Smooth',
+    'thickness': 0.025,
+    'conductivity': 0.69,
+    'density': 1858,
+    'specific_heat': 836.9,
+    'thermal_absorptance': 0.9,
+    'solar_absorptance': 0.92,
+    'visible_absorptance': 0.92
+}
+
+in_material_insulation = {
+    'type': 'EnergyMaterial',
+    'name': 'Wall Insulation',
+    'roughness': 'MediumRough',
+    'thickness': 0.033,
+    'conductivity': 0.0432,
+    'density': 91,
+    'specific_heat': 836.9,
+    'thermal_absorptance': 0.9,
+    'solar_absorptance': 0.5,
+    'visible_absorptance': 0.5
+}
+
 in_material_concrete = {
     'type': 'EnergyMaterial',
     'name': '8in Concrete HW',
@@ -19,7 +58,7 @@ in_material_concrete = {
     'conductivity': 1.72,
     'density': 2242,
     'specific_heat': 836,
-    'thermal_abosrptance': 0.9,
+    'thermal_absorptance': 0.9,
     'solar_absorptance': 0.65,
     'visible_absorptance': 0.65
 }
@@ -30,8 +69,47 @@ in_material_no_mass = {
     'r_value': 0.9,
     'roughness': 'Smooth',
     'thermal_absorptance': 0.8,
-    'solar_abosrptance': 0.8,
+    'solar_absorptance': 0.8,
     'visible_absorptance': 0.8
+}
+
+in_material_roof_membrane = {
+    'type': 'EnergyMaterial',
+    'name': 'Roof Membrane',
+    'roughness': 'VeryRough',
+    'thickness': 0.0095,
+    'conductivity': 0.16,
+    'density': 1121.29,
+    'specific_heat': 1460,
+    'thermal_absorptance': 0.9,
+    'solar_absorptance': 0.7,
+    'visible_absorptance': 0.7
+}
+
+in_material_roof_insulation = {
+    'type': 'EnergyMaterial',
+    'name': 'Roof Insulation',
+    'roughness': 'MediumRough',
+    'thickness': 0.1693,
+    'conductivity': 0.049,
+    'density': 265,
+    'specific_heat': 836.8,
+    'thermal_absorptance': 0.9,
+    'solar_absorptance': 0.7,
+    'visible_absorptance': 0.7
+}
+
+in_material_metal_decking = {
+    'type': 'EnergyMaterial',
+    'name': 'Metal Decking',
+    'roughness': 'MediumSmooth',
+    'thickness': 0.0015,
+    'conductivity': 45,
+    'density': 7680,
+    'specific_heat': 418.4,
+    'thermal_absorptance': 0.9,
+    'solar_absorptance': 0.6,
+    'visible_absorptance': 0.6
 }
 
 in_window_air_gap = {
@@ -70,7 +148,7 @@ in_window_glazing = {
     'front_emissivity': 0.985,
     'back_emissivity': 0.985,
     'conductivity_glass': 2.1073,
-    'dirt_correlation': 1,
+    'dirt_correction': 1,
     'solar_diffusing': 'No'
 }
 
@@ -109,4 +187,22 @@ construction_window_blind = {
     'type': 'EnergyConstruction',
     'name': 'Window with Blinds',
     'materials': [in_window_blind, in_window_simpleglazing]
+}
+
+construction_wall = {
+    'type': 'EnergyConstructionOpaque',
+    'name': 'Exterior Wall ASHRAE 2009',
+    'materials': [in_material_stucco, in_material_concrete, in_material_insulation, in_material_gypsum]
+}
+
+construction_roof = {
+    'type': 'EnergyConstructionOpaque',
+    'name': 'Exterior Roof ASHRAE 2009',
+    'materials': [in_material_roof_membrane, in_material_roof_insulation, in_material_metal_decking]
+}
+
+construction_window_wrong = {
+    'type': 'EnergyConstructionTransparent',
+    'name': 'Wrong Window',
+    'materials': [in_window_air_gap, in_window_glazing, in_window_glazing]
 }
