@@ -96,7 +96,7 @@ class ScheduleDay(BaseModel):
     hour: int = Schema(
         ...,
         ge=0,
-        le=21,
+        le=23,
     )
 
     minute: int = Schema(
