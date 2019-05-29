@@ -43,6 +43,7 @@ class ScheduleFile(BaseModel):
 
     values: List[int] = Schema(
         ...,
+        ge=8760,
         le=8784,
         description='A list of hourly values for the simulation.'
     )
