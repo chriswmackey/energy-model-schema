@@ -96,7 +96,7 @@ class ScheduleDay(BaseModel):
     hour: int = Schema(
         ...,
         ge=0,
-        le=21,
+        le=23,
     )
 
     minute: int = Schema(
@@ -122,11 +122,11 @@ class ScheduleRuleset (BaseModel):
 
     schedule_type_limits: ScheduleTypeLimits
 
-    default_day_schedule: ScheduleDay
+    default_day_schedule: List[ScheduleDay]
 
-    summer_designday_schedule: ScheduleDay
+    summer_designday_schedule: List[ScheduleDay]
 
-    winter_designday_schedule: ScheduleDay
+    winter_designday_schedule: List[ScheduleDay]
 
 
 class ScheduleRule(BaseModel):
@@ -137,14 +137,17 @@ class ScheduleRule(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
+        regex=r'^[\s.A-Za-z0-9_-]*$'
     )
 
-    schedule_rule_set: ScheduleRuleset
+    schedule_rule_set: List[ScheduleRuleset]
 
-    rule_order: float 
+    rule_order: int = Schema(
+        ...,
+        ge=0
+    )
 
-    schedule_day: ScheduleDay
+    schedule_day: List[ScheduleDay]
 
     apply_sunday: YesOrNo = YesOrNo.no
 
@@ -173,7 +176,7 @@ class ScheduleRule(BaseModel):
     start_day: int = Schema(
         1,
         ge=1,
-        le=31,
+        le=31
     )
 
     end_month: int = Schema(
