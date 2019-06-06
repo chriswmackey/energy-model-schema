@@ -9,6 +9,7 @@ from .energy.ScheduleRuleset import DateTime, UnitType, ScheduleContinuous, Sche
 from .energy.ScheduleFile import ScheduleFile
 from .energy.ScheduleBase import UnitType, DateTime
 
+
 class FaceType(str, Enum):
     wall = 'Wall'
     roof_ceiling = 'RoofCeiling'
@@ -199,6 +200,7 @@ class FaceBase(BaseModel):
         description='Face transparent construction for energy simulation'
     )
 
+
 class ShadeFace(FaceBase):
     """ShadeFace Schema"""
     type: Enum('ShadeFace', {'type': 'ShadeFace'})
@@ -291,6 +293,7 @@ class ModelOut(BaseModel):
         description='URL to get faces from this model.',
         example='https://api.pollination.cloud/models/7bd00d58-6485-4ca6-b889-3da6d8df3ee4/faces'
     )
+
 
 if __name__ == '__main__':
     print(Model.schema_json(indent=2))

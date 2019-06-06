@@ -803,15 +803,6 @@ class EnergyConstructionTransparent(BaseModel):
                 'Window construction cannot have more than 8 materials.'
             )
         return materials
-# check
-    # @validator('materials', whole=True)
-    # def check_item_sequence(cls, materials):
-    #    "Ensure Air Gap is not the outermost layer."
-    #    if (materials[0]).type or (materials[-1]).type == 'EnergyWindowMaterialAirGap':
-    #        raise ValidationError(
-    #            'Air Gap can not be outermost layer'
-    #        )
-    #    return materials
 
 
 class EnergyConstructionOpaque(BaseModel):
