@@ -5,7 +5,6 @@ from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
 
-
 class Roughness(str, Enum):
     """
     Relative roughness of a particular material layer.
@@ -792,8 +791,8 @@ class EnergyConstructionTransparent(BaseModel):
     )
 
     @validator('materials', whole=True)
-    def check_min_items(cls, materials):
-        "Ensure length of material is at least 1."
+    def check_num_items(cls, materials):
+        "Ensure length of material is at least 1 and not more than 8."
         if len(materials) == 0:
             raise ValidationError(
                 'Window construction should at least have one material.'
@@ -841,8 +840,8 @@ class EnergyConstructionOpaque(BaseModel):
     )
 
     @validator('materials', whole=True)
-    def check_min_items(cls, materials):
-        "Ensure length of material is at least 1."
+    def check_num_items(cls, materials):
+        "Ensure length of material is at least 1 and not more than 10."
         if len(materials) == 0:
             raise ValidationError(
                 'Opaque construction should at least have one material.'
@@ -853,9 +852,14 @@ class EnergyConstructionOpaque(BaseModel):
             )
         return materials
 
+try:
+    EnergyConstructionOpaque(type = 'EnergyConstructionTransparent', name = 'construction_internal_floor')
+except ValidationError as e:
+    print(e.json())
 
-if __name__ == '__main__':
-    print(EnergyConstructionTransparent.schema_json(indent=2))
 
-if __name__ == '__main__':
-    print(EnergyConstructionOpaque.schema_json(indent=2))
+#if __name__ == '__main__':
+#    print(EnergyConstructionTransparent.schema_json(indent=2))
+
+#if __name__ == '__main__':
+#    print(EnergyConstructionOpaque.schema_json(indent=2))

@@ -4,23 +4,7 @@ from typing import List, Union
 from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
-
-
-class UnitType (str, Enum):
-    dimensionless: 'Dimensionless'
-    temperature: 'Temperature'
-    delta_temperature: 'DeltaTemperature'
-    precipitation_rate: 'PrecipitationRate'
-    angle: 'Angle'
-    convection_coefficient: 'ConvectionCoefficient'
-    activity_level: 'ActivityLevel'
-    velocity: 'Velocity'
-    capacity: 'Capacity'
-    power: 'Power'
-    availability: 'Availability'
-    percent: 'Percent'
-    control: 'Control'
-    mode: 'Mode'
+from app.models.energy.ScheduleBase import UnitType
 
 
 class ScheduleFile(BaseModel):
@@ -43,9 +27,24 @@ class ScheduleFile(BaseModel):
 
     values: List[int] = Schema(
         ...,
-        le=8784,
+        minItems=24,
+        maxItems=8784,
         description='A list of hourly values for the simulation.'
     )
+
+    @validator('values', whole=True)
+    def check_num_items(cls, values):
+        "Ensure the number of values are not less than 24 and greater than 8784."
+        if len(values)<24:
+            raise ValidationError(
+                'Number of values must be atleast 24.'
+            )
+        elif len(values)>8784:
+            raise ValidationError(
+                'Number of values should not be greater than 8784.'
+            )
+        return values
+    
 
     units: UnitType = Schema(
         'Dimensionless',
@@ -53,4 +52,6 @@ class ScheduleFile(BaseModel):
          'Dimensionless for a fractional schedule.'
     )
 
-print(ScheduleFile.schema_json(indent=2))
+if __name__ == '__main__':
+    print(ScheduleFile.schema_json(indent=2))
+    

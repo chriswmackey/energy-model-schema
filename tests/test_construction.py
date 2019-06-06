@@ -1,4 +1,4 @@
-from app.models.energy.construction import EnergyConstructionOpaque, EnergyConstructionTransparent, EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialAirGap, EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing, EnergyWindowMaterialShade, EnergyWindowMaterialSimpleGlazSys
+from app.models.energy.Construction import EnergyConstructionOpaque, EnergyConstructionTransparent, EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialAirGap, EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing, EnergyWindowMaterialShade, EnergyWindowMaterialSimpleGlazSys
 from app.models.samples.energyconstruction import in_material_internalsource, in_material_gypsum, in_material_stucco, in_material_insulation, in_material_roof_insulation, in_material_metal_decking, in_material_concrete, in_material_no_mass, in_window_air_gap, in_window_simpleglazing, in_window_blind, in_window_glazing, in_window_shade, construction_internal_floor, construction_window, construction_window_blind, construction_roof, construction_wall
 from copy import copy
 from pydantic import ValidationError
@@ -53,9 +53,16 @@ def test_cons_transparent():
     EnergyConstructionTransparent.parse_obj(construction_window)
 
 
-def test_cons_opaque():
-    EnergyConstructionOpaque.parse_obj(construction_internal_floor)
+#def test_cons_opaque():
+#    with pytest.raises(ValidationError):
+#        EnergyConstructionOpaque.parse_obj(construction_internal_floor)
 
+#print(ValidationError.errors)
+
+#try:
+#    EnergyConstructionOpaque(len(materials) == 0)
+#except ValidationError as e:
+#    print(e.json())
 
 def test_cons_opaqueroof():
     EnergyConstructionOpaque.parse_obj(construction_roof)
@@ -75,14 +82,29 @@ def test_material_wrong():
     with pytest.raises(ValidationError):
         EnergyMaterial.parse_obj(wrong_specificheat)
 
+def test_materialnomass_wrong():
+    wrong_r_value = copy(in_material_no_mass)
+    wrong_r_value['r_value'] = 0
+    with pytest.raises(ValidationError): EnergyMaterialNoMass.parse_obj(wrong_r_value)
+    wrong_solar_absorptance = copy(in_material_no_mass)
+    wrong_solar_absorptance['solar_absorptance'] = 2
+    with pytest.raises(ValidationError):EnergyMaterialNoMass.parse_obj(wrong_solar_absorptance)
+        
+def test_window_simpleglaz_wrong():
+    wrong_values = copy(in_window_simpleglazing)
+    wrong_values['u_factor'] =  6
+    with pytest.raises(ValidationError): EnergyWindowMaterialSimpleGlazSys.parse_obj(wrong_values)
+    wrong_values['SHGC'] = 2
+    with pytest.raises(ValidationError): EnergyWindowMaterialSimpleGlazSys.parse_obj(wrong_values)
+
 
 def test_windowshade_wrong():
     wrong_type = copy(in_window_shade)
-    wrong_type['type'] = 'NotEnergyWindowMaterialShade'
+    wrong_type['type'] = 'EnergyWindowMaterial'
     with pytest.raises(ValidationError):
         EnergyWindowMaterialShade.parse_obj(wrong_type)
     wrong_shadedistance = copy(in_window_shade)
-    wrong_shadedistance['shade_toglass_distance'] = 0
+    wrong_shadedistance['shade_toglass_distance'] = 5
     with pytest.raises(ValidationError):
         EnergyWindowMaterialShade.parse_obj(wrong_shadedistance)
     wrong_airflow = copy(in_window_shade)

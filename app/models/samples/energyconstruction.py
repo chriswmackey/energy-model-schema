@@ -174,7 +174,7 @@ in_window_shade = {
 construction_internal_floor = {
     'type': 'EnergyConstructionOpaque',
     'name': 'Internal Floor',
-    'materials': [in_material_no_mass, in_material_internalsource, in_material_concrete]
+    'materials': []
 }
 
 construction_window = {
