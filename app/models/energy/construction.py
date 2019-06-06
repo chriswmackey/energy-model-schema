@@ -852,14 +852,9 @@ class EnergyConstructionOpaque(BaseModel):
             )
         return materials
 
-try:
-    EnergyConstructionOpaque(type = 'EnergyConstructionTransparent', name = 'construction_internal_floor')
-except ValidationError as e:
-    print(e.json())
 
+if __name__ == '__main__':
+    print(EnergyConstructionTransparent.schema_json(indent=2))
 
-#if __name__ == '__main__':
-#    print(EnergyConstructionTransparent.schema_json(indent=2))
-
-#if __name__ == '__main__':
-#    print(EnergyConstructionOpaque.schema_json(indent=2))
+if __name__ == '__main__':
+    print(EnergyConstructionOpaque.schema_json(indent=2))

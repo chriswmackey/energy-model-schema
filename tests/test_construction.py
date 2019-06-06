@@ -53,17 +53,6 @@ def test_cons_transparent():
     EnergyConstructionTransparent.parse_obj(construction_window)
 
 
-#def test_cons_opaque():
-#    with pytest.raises(ValidationError):
-#        EnergyConstructionOpaque.parse_obj(construction_internal_floor)
-
-#print(ValidationError.errors)
-
-#try:
-#    EnergyConstructionOpaque(len(materials) == 0)
-#except ValidationError as e:
-#    print(e.json())
-
 def test_cons_opaqueroof():
     EnergyConstructionOpaque.parse_obj(construction_roof)
 
