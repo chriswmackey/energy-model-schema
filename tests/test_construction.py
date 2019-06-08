@@ -1,5 +1,10 @@
-from app.models.energy.Construction import EnergyConstructionOpaque, EnergyConstructionTransparent, EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialAirGap, EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing, EnergyWindowMaterialShade, EnergyWindowMaterialSimpleGlazSys
-from app.models.samples.energyconstruction import in_material_internalsource, in_material_gypsum, in_material_stucco, in_material_insulation, in_material_roof_insulation, in_material_metal_decking, in_material_concrete, in_material_no_mass, in_window_air_gap, in_window_simpleglazing, in_window_blind, in_window_glazing, in_window_shade, construction_internal_floor, construction_window, construction_window_blind, construction_roof, construction_wall
+from app.models.energy.construction import EnergyConstructionOpaque, EnergyConstructionTransparent, EnergyMaterial, \
+    EnergyMaterialNoMass, EnergyWindowMaterialAirGap, EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing, \
+    EnergyWindowMaterialShade, EnergyWindowMaterialSimpleGlazSys
+from app.models.samples.energyconstruction import in_material_internalsource, in_material_gypsum, in_material_stucco, \
+    in_material_insulation, in_material_roof_insulation, in_material_metal_decking, in_material_concrete, \
+    in_material_no_mass, in_window_air_gap, in_window_simpleglazing, in_window_blind, in_window_glazing, in_window_shade, \
+    construction_internal_floor, construction_window, construction_window_blind, construction_roof, construction_wall
 from copy import copy
 from pydantic import ValidationError
 import pytest
