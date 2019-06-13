@@ -4,7 +4,7 @@ from typing import List, Union
 from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
-from app.models.energy.ScheduleBase import UnitType, DateTime
+from app.models.energy.ScheduleBase import ScheduleUnitType, DateTime, Date, Time, YesOrNo
 
 
 class ScheduleContinuous(BaseModel):
@@ -53,12 +53,15 @@ class ScheduleTypeLimits (BaseModel):
 
     numeric_type: NumericType
 
-    unit_type: UnitType
+    unit_type: ScheduleUnitType
 
 
-class YesOrNo (str, Enum):
-    no = 'No'
-    yes = 'Yes'
+class DayValue(BaseModel):
+    """Values for daily schedule"""
+
+    time: Time
+    
+    value_until_time: float 
 
 
 class ScheduleDay(BaseModel):
@@ -72,22 +75,8 @@ class ScheduleDay(BaseModel):
 
     interpolate_to_timestep: YesOrNo = YesOrNo.no
 
-    hour: int = Schema(
-        ...,
-        ge=0,
-        le=23,
-    )
-
-    minute: int = Schema(
-        ...,
-        ge=0,
-        le=59
-    )
-
-    value_until_time: float = Schema(
-        ...
-    )
-
+    day_values = List[DayValue]
+    
 
 class ScheduleRule(BaseModel):
     """A set of rules assigned to schedule ruleset for specific periods of time and for
@@ -100,7 +89,7 @@ class ScheduleRule(BaseModel):
         regex=r'^[\s.A-Za-z0-9_-]*$'
     )
 
-    schedule_day: List[ScheduleDay]
+    schedule_day: ScheduleDay
 
     apply_sunday: YesOrNo = YesOrNo.no
 
@@ -123,6 +112,8 @@ class ScheduleRule(BaseModel):
     end_period: DateTime
 
 
+
+
 class ScheduleRuleset (BaseModel):
     """Used to define a schedule for a default day, further described by ScheduleRule."""
 
@@ -135,13 +126,13 @@ class ScheduleRuleset (BaseModel):
 
     schedule_type_limits: ScheduleTypeLimits
 
-    default_day_schedule: List[ScheduleDay]
+    default_day_schedule: ScheduleDay
 
-    summer_designday_schedule: List[ScheduleDay]
+    summer_designday_schedule: ScheduleDay
 
-    winter_designday_schedule: List[ScheduleDay]
+    winter_designday_schedule: ScheduleDay
 
-    schedule_rule: List[ScheduleRule]
+    schedule_rules: List[ScheduleRule]
 
 if __name__== '__main__': 
     print(ScheduleRuleset.schema_json(indent=2))

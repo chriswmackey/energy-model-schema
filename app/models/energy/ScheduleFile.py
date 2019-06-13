@@ -4,7 +4,7 @@ from typing import List, Union
 from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
-from app.models.energy.ScheduleBase import UnitType
+from app.models.energy.ScheduleBase import ScheduleUnitType
 
 
 class ScheduleFile(BaseModel):
@@ -46,7 +46,7 @@ class ScheduleFile(BaseModel):
         return values
     
 
-    units: UnitType = Schema(
+    units: ScheduleUnitType = Schema(
         'Dimensionless',
         description='Units for the hourly values for simulation. The default value is'
          'Dimensionless for a fractional schedule.'

@@ -4,7 +4,7 @@ from typing import List, Union
 from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
-from .energy.construction import EnergyConstructionOpaque, EnergyConstructionTransparent
+from .app.models.energy.construction import EnergyConstructionOpaque, EnergyConstructionTransparent
 from .energy.ScheduleRuleset import DateTime, UnitType, ScheduleContinuous, ScheduleDiscrete, \
     NumericType, ScheduleTypeLimits, YesOrNo, ScheduleDay, ScheduleRule, ScheduleRuleset
 from .energy.ScheduleFile import ScheduleFile
@@ -296,5 +296,4 @@ class ModelOut(BaseModel):
     )
 
 
-if __name__ == '__main__':
-    print(Model.schema_json(indent=2))
+print(Model.schema_json(indent=2))
