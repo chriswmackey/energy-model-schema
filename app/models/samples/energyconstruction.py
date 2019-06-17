@@ -20,7 +20,7 @@ in_material_gypsum = {
     'density': 784.9,
     'specific_heat': 830,
     'thermal_absorptance': 0.9,
-    'solar_absroptance': 0.4,
+    'solar_absorptance': 0.4,
     'visible_absorptance': 0.4
 }
 
@@ -178,7 +178,7 @@ in_window_glazing = {
     'emissivity_back': 0.985,
     'conductivity': 2.1073,
     'dirt_correction': 1,
-    'solar_diffusing': 'No'
+    'solar_diffusing': False
 }
 
 in_window_shade = {

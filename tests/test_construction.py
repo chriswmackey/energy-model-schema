@@ -93,7 +93,7 @@ def test_windowshade_wrong():
     with pytest.raises(ValidationError):
         EnergyWindowMaterialShade.parse_obj(wrong_type)
     wrong_shadedistance = copy(in_window_shade)
-    wrong_shadedistance['shade_to_glass_distance'] = 0
+    wrong_shadedistance['distance_to_glass'] = 0
     with pytest.raises(ValidationError):
         EnergyWindowMaterialShade.parse_obj(wrong_shadedistance)
     wrong_airflow = copy(in_window_shade)
