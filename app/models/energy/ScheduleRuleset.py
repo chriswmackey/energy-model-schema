@@ -28,7 +28,7 @@ class ScheduleDiscrete(BaseModel):
 class NumericType (BaseModel):
     """Designates how the range values are validated."""
 
-    numerictype:  Union[ScheduleContinuous, ScheduleDiscrete] #Should be oneOf 
+    numerictype:  Union[ScheduleContinuous, ScheduleDiscrete] 
 
 
 class ScheduleTypeLimits (BaseModel):
@@ -75,7 +75,7 @@ class ScheduleDay(BaseModel):
 
     interpolate_to_timestep: YesOrNo = YesOrNo.no
 
-    day_values = List[DayValue]
+    day_values:  List[DayValue]
     
 
 class ScheduleRule(BaseModel):
