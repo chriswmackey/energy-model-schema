@@ -27,11 +27,7 @@ class ScheduleDiscrete(BaseModel):
 class numeric_type (BaseModel):
     """Designates how the range values are validated."""
 
-<<<<<<< Updated upstream
-    numerictype:  Union[ScheduleContinuous, ScheduleDiscrete] 
-=======
     numeric_type:  Union[ScheduleContinuous, ScheduleDiscrete]
->>>>>>> Stashed changes
 
 
 class ScheduleTypeLimits (BaseModel):
@@ -80,11 +76,6 @@ class ScheduleDay(BaseModel):
 
     day_values: List[DayValue]
 
-<<<<<<< Updated upstream
-    day_values:  List[DayValue]
-    
-=======
->>>>>>> Stashed changes
 
 class ScheduleRule(BaseModel):
     """A set of rules assigned to schedule ruleset for specific periods of time and for
