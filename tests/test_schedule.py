@@ -1,6 +1,6 @@
-from app.models.energy.ScheduleRuleset import ScheduleContinuous, ScheduleDiscrete, NumericType, ScheduleTypeLimits, DayValue, ScheduleDay, ScheduleRuleset, ScheduleRule
+from app.models.energy.ScheduleRuleset import ScheduleContinuous, ScheduleDiscrete, numeric_type, ScheduleTypeLimits, DayValue, ScheduleDay, ScheduleRuleset, ScheduleRule
 from app.models.energy.ScheduleFile import ScheduleFile
-from app.models.energy.ScheduleBase import ScheduleUnitType, Date, Time, DateTime, YesOrNo
+from app.models.energy.ScheduleBase import ScheduleUnitType, Date, Time, DateTime
 from app.models.samples.schedule_ruleset import schedule_ruleset, schedule_ruleset_1
 from app.models.samples.schedule_file import schedule_file
 from copy import copy
@@ -26,19 +26,19 @@ def test_schedule_rule_wrong():
     with pytest.raises(ValidationError):
         ScheduleRuleset.parse_obj(wrong_lower_limit)
     wrong_default_day = copy(schedule_ruleset_1)
-    wrong_default_day['default_day_schedule'][0]['hour'] = 25
+    wrong_default_day['default_day_schedule']['day_values'][0]['time']['hour'] = 25
     with pytest.raises(ValidationError):
         ScheduleRuleset.parse_obj(wrong_default_day)
     wrong_default_day_minute = copy(schedule_ruleset_1)
-    wrong_default_day_minute['default_day_schedule'][2]['minute'] = 60
+    wrong_default_day_minute['default_day_schedule']['day_values'][2]['time']['minute'] = 59.5
     with pytest.raises(ValidationError):
         ScheduleRuleset.parse_obj(wrong_default_day_minute)
     wrong_schedule_rule = copy(schedule_ruleset_1)
-    wrong_schedule_rule['schedule_rule'][0]['start_period']['month'] = 24
+    wrong_schedule_rule['schedule_rules'][0]['start_period']['date']['month'] = 24
     with pytest.raises(ValidationError):
         ScheduleRuleset.parse_obj(wrong_schedule_rule)
     wrong_leap_year = copy(schedule_ruleset_1)
-    wrong_leap_year['schedule_rule'][0]['start_period']['is_leap_year'] = 'Yes'
+    wrong_leap_year['schedule_rules'][0]['start_period']['is_leap_year'] = 'Yes'
     with pytest.raises(ValidationError):
         ScheduleRuleset.parse_obj(wrong_leap_year)
 

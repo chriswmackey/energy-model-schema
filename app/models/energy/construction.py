@@ -235,6 +235,13 @@ class EnergyWindowMaterialAirGap(BaseModel):
             raise ValueError('Sum of gas fractions must be 1.')
         return v
 
+    @validator('gas_type_fraction')
+    def check_sum(cls, v):
+        total = sum(f.gas_fraction for f in v)
+        if total !=1:
+            raise ValueError('Sum of gas fractions must be 1.')
+        return v
+
 
 class EnergyWindowMaterialSimpleGlazSys(BaseModel):
     """Describe an entire glazing system rather than individual layers.

@@ -35,23 +35,22 @@ class ScheduleFile(BaseModel):
     @validator('values', whole=True)
     def check_num_items(cls, values):
         "Ensure the number of values are not less than 24 and greater than 8784."
-        if len(values)<24:
+        if len(values) < 24:
             raise ValidationError(
                 'Number of values must be atleast 24.'
             )
-        elif len(values)>8784:
+        elif len(values) > 8784:
             raise ValidationError(
                 'Number of values should not be greater than 8784.'
             )
         return values
-    
 
     units: ScheduleUnitType = Schema(
         'Dimensionless',
         description='Units for the hourly values for simulation. The default value is'
-         'Dimensionless for a fractional schedule.'
+        'Dimensionless for a fractional schedule.'
     )
+
 
 if __name__ == '__main__':
     print(ScheduleFile.schema_json(indent=2))
-    

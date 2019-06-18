@@ -4,7 +4,7 @@ from typing import List, Union
 from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
-from app.models.energy.ScheduleBase import ScheduleUnitType, DateTime, Date, Time, YesOrNo
+from app.models.energy.ScheduleBase import ScheduleUnitType, DateTime, Date, Time
 
 
 class ScheduleContinuous(BaseModel):
@@ -21,14 +21,17 @@ class ScheduleDiscrete(BaseModel):
 
     type: Enum('ScheduleDiscrete', {'type': 'ScheduleDiscrete'})
 
-
     schedule_discrete: int = None
 
 
-class NumericType (BaseModel):
+class numeric_type (BaseModel):
     """Designates how the range values are validated."""
 
+<<<<<<< Updated upstream
     numerictype:  Union[ScheduleContinuous, ScheduleDiscrete] 
+=======
+    numeric_type:  Union[ScheduleContinuous, ScheduleDiscrete]
+>>>>>>> Stashed changes
 
 
 class ScheduleTypeLimits (BaseModel):
@@ -51,7 +54,7 @@ class ScheduleTypeLimits (BaseModel):
         description='Upper limit for the schedule type is entered.'
     )
 
-    numeric_type: NumericType
+    numeric_type: numeric_type
 
     unit_type: ScheduleUnitType
 
@@ -60,8 +63,8 @@ class DayValue(BaseModel):
     """Values for daily schedule"""
 
     time: Time
-    
-    value_until_time: float 
+
+    value_until_time: float
 
 
 class ScheduleDay(BaseModel):
@@ -73,10 +76,15 @@ class ScheduleDay(BaseModel):
         regex=r'^[\s.A-Za-z0-9_-]*$',
     )
 
-    interpolate_to_timestep: YesOrNo = YesOrNo.no
+    interpolate_to_timestep: bool
 
+    day_values: List[DayValue]
+
+<<<<<<< Updated upstream
     day_values:  List[DayValue]
     
+=======
+>>>>>>> Stashed changes
 
 class ScheduleRule(BaseModel):
     """A set of rules assigned to schedule ruleset for specific periods of time and for
@@ -91,27 +99,25 @@ class ScheduleRule(BaseModel):
 
     schedule_day: ScheduleDay
 
-    apply_sunday: YesOrNo = YesOrNo.no
+    apply_sunday: bool
 
-    apply_monday: YesOrNo = YesOrNo.no
+    apply_monday: bool
 
-    apply_tuesday: YesOrNo = YesOrNo.no
+    apply_tuesday: bool
 
-    apply_wednesday: YesOrNo = YesOrNo.no
+    apply_wednesday: bool
 
-    apply_thursday: YesOrNo = YesOrNo.no
+    apply_thursday: bool
 
-    apply_friday: YesOrNo = YesOrNo.no
+    apply_friday: bool
 
-    apply_saturday: YesOrNo = YesOrNo.no
+    apply_saturday: bool
 
-    apply_holiday: YesOrNo = YesOrNo.no
+    apply_holiday: bool
 
     start_period: DateTime
 
     end_period: DateTime
-
-
 
 
 class ScheduleRuleset (BaseModel):
@@ -134,5 +140,6 @@ class ScheduleRuleset (BaseModel):
 
     schedule_rules: List[ScheduleRule]
 
-if __name__== '__main__': 
+
+if __name__ == '__main__':
     print(ScheduleRuleset.schema_json(indent=2))

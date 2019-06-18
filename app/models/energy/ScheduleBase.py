@@ -14,30 +14,32 @@ class ScheduleUnitType (str, Enum):
     angle = 'Angle'
     convection_coefficient = 'ConvectionCoefficient'
     activity_level = 'ActivityLevel'
-    velocity =  'Velocity'
-    capacity =  'Capacity'
-    power =  'Power'
-    availability =  'Availability'
+    velocity = 'Velocity'
+    capacity = 'Capacity'
+    power = 'Power'
+    availability = 'Availability'
     percent = 'Percent'
     control = 'Control'
     mode = 'Mode'
 
+
 class Date(BaseModel):
     """Date."""
-    
+
     month: int = Schema(
         1,
         description='A value for month between `1`-`12`. Default is `1`.',
         ge=1,
         le=12
     )
-    
+
     day: int = Schema(
         1,
         description='A value for day between `1`-`31`. Default is `1`.',
         ge=1,
         le=31
     )
+
 
 class Time(BaseModel):
     """Time."""
@@ -48,21 +50,21 @@ class Time(BaseModel):
         ge=0,
         le=24,
     )
-    
+
     minute: int = Schema(
         0,
         description='A value for month between `0`-`60`. Default is `0`.',
         ge=0,
         le=60,
     )
-    
+
 
 class DateTime(BaseModel):
     """DateTime."""
 
     date: Date
 
-    time: Time  
+    time: Time
 
     is_leap_year: bool = Schema(
         False,
@@ -71,6 +73,6 @@ class DateTime(BaseModel):
     )
 
 
-class YesOrNo (str, Enum):
-    no = 'No'
-    yes = 'Yes'
+
+
+
