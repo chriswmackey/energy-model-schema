@@ -1,6 +1,6 @@
-from app.models.energy.ScheduleRuleset import ScheduleContinuous, ScheduleDiscrete, numeric_type, ScheduleTypeLimits, DayValue, ScheduleDay, ScheduleRuleset, ScheduleRule
+from app.models.energy.ScheduleRuleset import ScheduleTypeLimits, DayValue, ScheduleDay, ScheduleRuleset, ScheduleRule
 from app.models.energy.ScheduleFile import ScheduleFile
-from app.models.energy.ScheduleBase import ScheduleUnitType, Date, Time, DateTime
+from app.models.energy.ScheduleBase import ScheduleContinuous, ScheduleDiscrete, ScheduleNumericType, ScheduleUnitType, Date, Time, DateTime
 from app.models.samples.schedule_ruleset import schedule_ruleset, schedule_ruleset_1
 from app.models.samples.schedule_file import schedule_file
 from copy import copy
@@ -57,6 +57,6 @@ def test_schedule_file_wrong():
     with pytest.raises(ValidationError):
         ScheduleFile.parse_obj(wrong_start)
     wrong_unit = copy(schedule_file)
-    wrong_unit['units'] = 'Nil'
+    wrong_unit['unit_type'] = 'Nil'
     with pytest.raises(ValidationError):
         ScheduleFile.parse_obj(wrong_unit)

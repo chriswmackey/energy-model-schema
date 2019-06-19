@@ -6,6 +6,28 @@ from uuid import UUID, uuid4
 from datetime import datetime
 
 
+class ScheduleContinuous(BaseModel):
+    """This Numeric Type allows all numbers, including fractional amounts, within the range to
+  be valid."""
+
+    type: Enum('ScheduleContinuous', {'type': 'ScheduleContinuous'})
+
+    schedule_continuous: float = None
+
+
+class ScheduleDiscrete(BaseModel):
+    """This Numeric Type allows all only integers within the range to be valid."""
+
+    type: Enum('ScheduleDiscrete', {'type': 'ScheduleDiscrete'})
+
+    schedule_discrete: int = None
+
+class ScheduleNumericType (BaseModel):
+    """Designates how the range values are validated."""
+
+    numeric_type:  Union[ScheduleContinuous, ScheduleDiscrete]
+
+
 class ScheduleUnitType (str, Enum):
     dimensionless = 'Dimensionless'
     temperature = 'Temperature'

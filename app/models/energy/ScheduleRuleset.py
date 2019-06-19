@@ -4,30 +4,7 @@ from typing import List, Union
 from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
-from app.models.energy.ScheduleBase import ScheduleUnitType, DateTime, Date, Time
-
-
-class ScheduleContinuous(BaseModel):
-    """This Numeric Type allows all numbers, including fractional amounts, within the range to
-  be valid."""
-
-    type: Enum('ScheduleContinuous', {'type': 'ScheduleContinuous'})
-
-    schedule_continuous: float = None
-
-
-class ScheduleDiscrete(BaseModel):
-    """This Numeric Type allows all only integers within the range to be valid."""
-
-    type: Enum('ScheduleDiscrete', {'type': 'ScheduleDiscrete'})
-
-    schedule_discrete: int = None
-
-
-class numeric_type (BaseModel):
-    """Designates how the range values are validated."""
-
-    numeric_type:  Union[ScheduleContinuous, ScheduleDiscrete]
+from app.models.energy.ScheduleBase import ScheduleContinuous, ScheduleDiscrete, ScheduleNumericType, ScheduleUnitType, DateTime, Date, Time
 
 
 class ScheduleTypeLimits (BaseModel):
@@ -50,7 +27,7 @@ class ScheduleTypeLimits (BaseModel):
         description='Upper limit for the schedule type is entered.'
     )
 
-    numeric_type: numeric_type
+    numeric_type: ScheduleNumericType
 
     unit_type: ScheduleUnitType
 
