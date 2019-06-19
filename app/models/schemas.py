@@ -4,7 +4,7 @@ from typing import List, Union
 from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
-from .energy.construction import EnergyConstruction
+from .energy.construction import EnergyConstructionOpaque, EnergyConstructionTransparent
 
 
 class FaceType(str, Enum):
@@ -177,11 +177,15 @@ class FaceBase(BaseModel):
         description='Radiance material for direct sunlight simulation.'
     )
 
-    energy_construction: EnergyConstruction = Schema(
+    energy_construction_opaque: EnergyConstructionOpaque = Schema(
         default=None,
-        description='Face construction for energy simulation.'
+        description='Face opaque construction for energy simulation.'
     )
 
+    energy_construction_transparent: EnergyConstructionTransparent = Schema(
+        default=None,
+        description='Face transparent construction for energy simulation'
+    )
 
 class ShadeFace(FaceBase):
     """ShadeFace Schema"""
@@ -275,3 +279,6 @@ class ModelOut(BaseModel):
         description='URL to get faces from this model.',
         example='https://api.pollination.cloud/models/7bd00d58-6485-4ca6-b889-3da6d8df3ee4/faces'
     )
+
+if __name__ == '__main__':
+    print(Model.schema_json(indent=2))

@@ -16,6 +16,7 @@ def test_transparent(transparent_material):
 def test_plastic(plastic_material):
     res = Plastic.parse_obj(plastic_material)
 
+   
 
 def test_glass(glass_material):
     res = Glass.parse_obj(glass_material)
