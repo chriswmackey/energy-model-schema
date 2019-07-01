@@ -21,7 +21,7 @@ schedule_ruleset = {
                 {
                     'time': {
                         'hour': 24,
-                        'minute': 60
+                        'minute': 00
                     },
                     'value_until_time': 20
                 }
@@ -35,7 +35,7 @@ schedule_ruleset = {
                 {
                     'time': {
                         'hour': 24,
-                        'minute': 60
+                        'minute': 00
                     },
                     'value_until_time': 20
                 }
@@ -49,7 +49,7 @@ schedule_ruleset = {
                 {
                     'time': {
                         'hour': 24,
-                        'minute': 60
+                        'minute': 00
                     },
                     'value_until_time': 20
                 }
@@ -66,7 +66,7 @@ schedule_ruleset = {
                         {
                             'time': {
                                 'hour': 24,
-                                'minute': 60
+                                'minute': 00
                             },
                             'value_until_time': 20
                         }
@@ -74,12 +74,12 @@ schedule_ruleset = {
             },
             'start_period': {
                 'date': {
-                    'month': 1,
-                    'day': 1
+                    'month': 2,
+                    'day': 45
                 },
                 'time': {
                     'hour': 0,
-                    'minute': 0
+                    'minute': 00
                 },
                 'is_leap_year': False
             },
@@ -90,7 +90,7 @@ schedule_ruleset = {
                 },
                 'time': {
                     'hour': 24,
-                    'minute': 60
+                    'minute': 59
                 },
                 'is_leap_year': False
             },
@@ -130,21 +130,21 @@ schedule_ruleset_1 = {
                 {
                     'time': {
                         'hour': 7,
-                        'minute': 0
+                        'minute': 00
                     },
                     'value_until_time': 0
                 },
             {
                     'time': {
                         'hour': 19,
-                        'minute': 0
+                        'minute': 00
                     },
                     'value_until_time': 1
             },
             {
                     'time': {
                         'hour': 24,
-                        'minute': 60
+                        'minute': 00
                     },
                     'value_until_time': 0
             }
@@ -158,7 +158,7 @@ schedule_ruleset_1 = {
                 {
                     'time': {
                         'hour': 24,
-                        'minute': 60
+                        'minute': 00
                     },
                     'value_until_time': 0
                 }
@@ -172,7 +172,7 @@ schedule_ruleset_1 = {
                 {
                     'time': {
                         'hour': 24,
-                        'minute': 60
+                        'minute': 00
                     },
                     'value_until_time': 0
                 }
@@ -189,7 +189,7 @@ schedule_ruleset_1 = {
                         {
                             'time': {
                                 'hour': 24,
-                                'minute': 60
+                                'minute': 00
                             },
                             'value_until_time': 0
                         }
@@ -202,7 +202,7 @@ schedule_ruleset_1 = {
                 },
                 'time': {
                     'hour': 0,
-                    'minute': 0
+                    'minute': 00
                 },
                 'is_leap_year': False
             },
@@ -213,7 +213,7 @@ schedule_ruleset_1 = {
                 },
                 'time': {
                     'hour': 24,
-                    'minute': 60
+                    'minute': 00
                 },
                 'is_leap_year': False
             },
@@ -237,21 +237,21 @@ schedule_ruleset_1 = {
                         {
                             'time': {
                                 'hour': 7,
-                                'minute': 0
+                                'minute': 00
                             },
                             'value_until_time': 0
                         },
                         {
                             'time': {
                                 'hour': 16,
-                                'minute': 0
+                                'minute': 00
                             },
                             'value_until_time': 0.3
                         },
                         {
                             'time': {
                                 'hour': 24,
-                                'minute': 60
+                                'minute': 00
                             },
                             'value_until_time': 0
                         }
@@ -264,7 +264,7 @@ schedule_ruleset_1 = {
                 },
                 'time': {
                     'hour': 0,
-                    'minute': 0
+                    'minute': 00
                 },
                 'is_leap_year': False
             },
@@ -275,7 +275,7 @@ schedule_ruleset_1 = {
                 },
                 'time': {
                     'hour': 24,
-                    'minute': 60
+                    'minute': 00
                 },
                 'is_leap_year': False
             },
@@ -299,21 +299,21 @@ schedule_ruleset_1 = {
                         {
                             'time': {
                                 'hour': 7,
-                                'minute': 0
+                                'minute': 00
                             },
                             'value_until_time': 0
                         },
                         {
                             'time': {
                                 'hour': 19,
-                                'minute': 0
+                                'minute': 00
                             },
                             'value_until_time': 1
                         },
                         {
                             'time': {
                                 'hour': 24,
-                                'minute': 60,
+                                'minute': 00,
                             },
                             'value_until_time': 0
                         }
@@ -326,7 +326,7 @@ schedule_ruleset_1 = {
                 },
                 'time': {
                     'hour': 0,
-                    'minute': 0
+                    'minute': 00
                 },
                 'is_leap_year': False
             },
@@ -337,7 +337,7 @@ schedule_ruleset_1 = {
                 },
                 'time': {
                     'hour': 24,
-                    'minute': 60,
+                    'minute': 00
                 },
                 'is_leap_year': False
             },
@@ -361,7 +361,7 @@ schedule_ruleset_1 = {
                         {
                             'time': {
                                 'hour': 24,
-                                'minute': 60
+                                'minute': 00
                             },
                             'value_until_time': 0
                         }
@@ -374,7 +374,7 @@ schedule_ruleset_1 = {
                 },
                 'time': {
                     'hour': 0,
-                    'minute': 0
+                    'minute': 00
                 },
                 'is_leap_year': False
             },
@@ -385,7 +385,7 @@ schedule_ruleset_1 = {
                 },
                 'time': {
                     'hour': 24,
-                    'minute': 60,
+                    'minute': 00,
                 },
                 'is_leap_year': False
             },
@@ -409,21 +409,21 @@ schedule_ruleset_1 = {
                         {
                             'time': {
                                 'hour': 7,
-                                'minute': 0
+                                'minute': 00
                             },
                             'value_until_time': 0,
                         },
                         {
                             'time': {
                                 'hour': 16,
-                                'minute': 0
+                                'minute': 00
                             },
                             'value_until_time': 0.29
                         },
                         {
                             'time': {
                                 'hour': 24,
-                                'minute': 60
+                                'minute': 00
                             },
                             'value_until_time': 0
                         }
@@ -436,7 +436,7 @@ schedule_ruleset_1 = {
                 },
                 'time': {
                     'hour': 0,
-                    'minute': 0,
+                    'minute': 00,
                 },
                 'is_leap_year': False
             },
@@ -447,7 +447,7 @@ schedule_ruleset_1 = {
                 },
                 'time': {
                     'hour': 24,
-                    'minute': 60,
+                    'minute': 00,
                 },
                 'is_leap_year': False
             },
@@ -471,21 +471,21 @@ schedule_ruleset_1 = {
                         {
                             'time': {
                                 'hour': 7,
-                                'minute': 0
+                                'minute': 00
                             },
                             'value_until_time': 0
                         },
                         {
                             'time': {
                                 'hour': 20,
-                                'minute': 0
+                                'minute': 00
                             },
                             'value_until_time': 0.57
                         },
                         {
                             'time': {
                                 'hour': 24,
-                                'minute': 60,
+                                'minute': 00
                             },
                             'value_until_time': 0
                         }
@@ -498,7 +498,7 @@ schedule_ruleset_1 = {
                 },
                 'time': {
                     'hour': 0,
-                    'minute': 0,
+                    'minute': 00,
                 },
                 'is_leap_year': False
             },
@@ -509,7 +509,7 @@ schedule_ruleset_1 = {
                 },
                 'time': {
                     'hour': 24,
-                    'minute': 60,
+                    'minute': 00,
                 },
                 'is_leap_year': False
             },
@@ -533,7 +533,7 @@ schedule_ruleset_1 = {
                         {
                             'time': {
                                 'hour': 24,
-                                'minute': 60
+                                'minute': 00
                             },
                             'value_until_time': 0
                         }
@@ -546,7 +546,7 @@ schedule_ruleset_1 = {
                 },
                 'time': {
                     'hour': 0,
-                    'minute': 0,
+                    'minute': 00,
                 },
                 'is_leap_year': False
             },
@@ -557,7 +557,7 @@ schedule_ruleset_1 = {
                 },
                 'time': {
                     'hour': 24,
-                    'minute': 60,
+                    'minute': 00,
                 },
                 'is_leap_year': False
             },
@@ -581,21 +581,21 @@ schedule_ruleset_1 = {
                         {
                             'time': {
                                 'hour': 7,
-                                'minute': 0
+                                'minute': 00
                             },
                             'value_until_time': 0
                         },
                         {
                             'time': {
                                 'hour': 16,
-                                'minute': 0
+                                'minute': 00
                             },
                             'value_until_time': 0.29
                         },
                         {
                             'time': {
                                 'hour': 24,
-                                'minute': 60
+                                'minute': 00
                             },
                             'value_until_time': 0
                         }
@@ -608,7 +608,7 @@ schedule_ruleset_1 = {
                 },
                 'time': {
                     'hour': 0,
-                    'minute': 0,
+                    'minute': 00,
                 },
                 'is_leap_year': False
             },
@@ -618,8 +618,8 @@ schedule_ruleset_1 = {
                     'day': 3,
                 },
                 'time': {
-                    'hour': 23,
-                    'minute': 59,
+                    'hour': 24,
+                    'minute': 00,
                 },
                 'is_leap_year': False
             },
@@ -643,21 +643,21 @@ schedule_ruleset_1 = {
                         {
                             'time': {
                                 'hour': 7,
-                                'minute': 0
+                                'minute': 00
                             },
                             'value_until_time': 0
                         },
                         {
                             'time': {
                                 'hour': 18,
-                                'minute': 0
+                                'minute': 00
                             },
                             'value_until_time': 0.57
                         },
                         {
                             'time': {
                                 'hour': 24,
-                                'minute': 60
+                                'minute': 00
                             },
                             'value_until_time': 0
                         }
@@ -670,7 +670,7 @@ schedule_ruleset_1 = {
                 },
                 'time': {
                     'hour': 0,
-                    'minute': 0,
+                    'minute': 00,
                 },
                 'is_leap_year': False
             },
@@ -680,8 +680,8 @@ schedule_ruleset_1 = {
                     'day': 3
                 },
                 'time': {
-                    'hour': 23,
-                    'minute': 59,
+                    'hour': 24,
+                    'minute': 00,
                 },
                 'is_leap_year': False
             },

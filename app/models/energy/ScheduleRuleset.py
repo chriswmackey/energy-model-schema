@@ -4,7 +4,7 @@ from typing import List, Union
 from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
-from app.models.energy.ScheduleBase import ScheduleContinuous, ScheduleDiscrete, ScheduleNumericType, ScheduleUnitType, DateTime, Date, Time
+from app.models.energy.ScheduleBase import ScheduleContinuous, ScheduleDiscrete, ScheduleNumericType, ScheduleUnitType, Date, Time
 
 
 class ScheduleTypeLimits (BaseModel):
@@ -49,7 +49,9 @@ class ScheduleDay(BaseModel):
         regex=r'^[\s.A-Za-z0-9_-]*$',
     )
 
-    interpolate_to_timestep: bool
+    interpolate_to_timestep: bool = Schema(
+        False
+    )
 
     day_values: List[DayValue]
 
@@ -67,25 +69,42 @@ class ScheduleRule(BaseModel):
 
     schedule_day: ScheduleDay
 
-    apply_sunday: bool
+    apply_sunday: bool = Schema(
+        False
+    )
 
-    apply_monday: bool
+    apply_monday: bool = Schema(
+        False
+    )
 
-    apply_tuesday: bool
+    apply_tuesday: bool = Schema(
+        False
+    )
 
-    apply_wednesday: bool
+    apply_wednesday: bool = Schema(
+        False
+    )
 
-    apply_thursday: bool
+    apply_thursday: bool = Schema(
+        False
+    )
 
-    apply_friday: bool
+    apply_friday: bool = Schema(
+        False
+    )
 
-    apply_saturday: bool
+    apply_saturday: bool = Schema(
+        False
+    )
 
-    apply_holiday: bool
+    apply_holiday: bool = Schema(
+        False
+    )
 
-    start_period: DateTime
+    start_period: Date
 
-    end_period: DateTime
+    end_period: Date
+    
 
 
 class ScheduleRuleset (BaseModel):

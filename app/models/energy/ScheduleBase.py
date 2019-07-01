@@ -3,7 +3,59 @@ from pydantic import BaseModel, Schema, validator, ValidationError, UrlStr, Cons
 from typing import List, Union
 from enum import Enum
 from uuid import UUID, uuid4
-from datetime import datetime
+import datetime
+
+class Date(BaseModel):
+    """Date."""
+
+    month: int = Schema(
+        1,
+        description='A value for month between `1`-`12`. Default is `1`.',
+        ge=1,
+        le=12
+    )
+
+    day: int = Schema(
+        1,
+        description='A value for day between `1`-`31`. Default is `1`.',
+        ge=1,
+        le=31
+    )
+    @validator('day')
+    def check_date(cls, v, values):
+        try:
+            datetime.date(2016, values['month'], v)
+        except ValidationError:
+            raise ValidationError('{}/{} is not a valid date.'.format(values['month'], v))
+        else: 
+            return v
+
+class Time(BaseModel):
+    """Time."""
+
+    hour: int = Schema(
+        0,
+        description='A value for hour between `0`-`24`. Default is `0`.',
+        ge=0,
+        le=24
+    )
+
+    minute: int = Schema(
+        0,
+        description='A value for minutes between `0`-`59`. Default is `0`.',
+        ge=0,
+        le=59
+    )
+
+    @validator('minute')
+    def check_time(cls, v, values):
+        try: 
+            datetime.time(v, values['hour'], 0)
+        except ValidationError:
+            raise ValidationError('{}/{} is not a valid time.'.format(values['hour'], v))
+        else:
+            return v
+
 
 
 class ScheduleContinuous(BaseModel):
@@ -16,7 +68,7 @@ class ScheduleContinuous(BaseModel):
 
 
 class ScheduleDiscrete(BaseModel):
-    """This Numeric Type allows all only integers within the range to be valid."""
+    """This Numeric Type allows only integers within the range to be valid."""
 
     type: Enum('ScheduleDiscrete', {'type': 'ScheduleDiscrete'})
 
@@ -43,58 +95,3 @@ class ScheduleUnitType (str, Enum):
     percent = 'Percent'
     control = 'Control'
     mode = 'Mode'
-
-
-class Date(BaseModel):
-    """Date."""
-
-    month: int = Schema(
-        1,
-        description='A value for month between `1`-`12`. Default is `1`.',
-        ge=1,
-        le=12
-    )
-
-    day: int = Schema(
-        1,
-        description='A value for day between `1`-`31`. Default is `1`.',
-        ge=1,
-        le=31
-    )
-
-
-class Time(BaseModel):
-    """Time."""
-
-    hour: int = Schema(
-        0,
-        description='A value for hour between `0`-`24`. Default is `0`.',
-        ge=0,
-        le=24,
-    )
-
-    minute: int = Schema(
-        0,
-        description='A value for month between `0`-`60`. Default is `0`.',
-        ge=0,
-        le=60,
-    )
-
-
-class DateTime(BaseModel):
-    """DateTime."""
-
-    date: Date
-
-    time: Time
-
-    is_leap_year: bool = Schema(
-        False,
-        description='A boolean to indicate if datetime is for a leap year. Default is'
-        ' `false`.'
-    )
-
-
-
-
-

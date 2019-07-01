@@ -6,7 +6,7 @@ from uuid import UUID, uuid4
 from datetime import datetime
 from app.models.energy.construction import EnergyConstructionOpaque, EnergyConstructionTransparent
 from .energy.ScheduleRuleset import ScheduleTypeLimits, DayValue, ScheduleDay, ScheduleRule, ScheduleRuleset
-from .energy.ScheduleFile import ScheduleFile
+from .energy.ScheduleFixedInterval import ScheduleFixedInterval
 from .energy.ScheduleBase import ScheduleUnitType, DateTime, ScheduleContinuous, ScheduleDiscrete, ScheduleNumericType
 
 
@@ -32,7 +32,7 @@ class Parent(BaseModel):
         description='Schedule Ruleset for zone for energy simulation.'
     )
 
-    schedule_file: ScheduleFile = Schema(
+    schedule_fixed_interval: ScheduleFixedInterval = Schema(
         default=None,
         description='Schedule File for zone for energy simulation'
     )

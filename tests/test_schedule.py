@@ -1,8 +1,8 @@
 from app.models.energy.ScheduleRuleset import ScheduleTypeLimits, DayValue, ScheduleDay, ScheduleRuleset, ScheduleRule
-from app.models.energy.ScheduleFile import ScheduleFile
-from app.models.energy.ScheduleBase import ScheduleContinuous, ScheduleDiscrete, ScheduleNumericType, ScheduleUnitType, Date, Time, DateTime
+from app.models.energy.ScheduleFixedInterval import ScheduleFixedInterval
+from app.models.energy.ScheduleBase import ScheduleContinuous, ScheduleDiscrete, ScheduleNumericType, ScheduleUnitType, Date, Time
 from app.models.samples.schedule_ruleset import schedule_ruleset, schedule_ruleset_1
-from app.models.samples.schedule_file import schedule_file
+from app.models.samples.schedule_fixed_interval import schedule_fixed_interval, schedule_fixed_interval1
 from copy import copy
 from pydantic import ValidationError
 import pytest
@@ -26,7 +26,7 @@ def test_schedule_rule_wrong():
     with pytest.raises(ValidationError):
         ScheduleRuleset.parse_obj(wrong_lower_limit)
     wrong_default_day = copy(schedule_ruleset_1)
-    wrong_default_day['default_day_schedule']['day_values'][0]['time']['hour'] = 25
+    wrong_default_day['default_day_schedule']['day_values'][0]['time'] = 25
     with pytest.raises(ValidationError):
         ScheduleRuleset.parse_obj(wrong_default_day)
     wrong_default_day_minute = copy(schedule_ruleset_1)
@@ -34,7 +34,7 @@ def test_schedule_rule_wrong():
     with pytest.raises(ValidationError):
         ScheduleRuleset.parse_obj(wrong_default_day_minute)
     wrong_schedule_rule = copy(schedule_ruleset_1)
-    wrong_schedule_rule['schedule_rules'][0]['start_period']['date']['month'] = 24
+    wrong_schedule_rule['schedule_rules'][0]['start_period']['date'] = 24
     with pytest.raises(ValidationError):
         ScheduleRuleset.parse_obj(wrong_schedule_rule)
     wrong_leap_year = copy(schedule_ruleset_1)
@@ -42,21 +42,19 @@ def test_schedule_rule_wrong():
     with pytest.raises(ValidationError):
         ScheduleRuleset.parse_obj(wrong_leap_year)
 
+def test_schedule_fixed_interval():
+    ScheduleFixedInterval.parse_obj(schedule_fixed_interval)
 
-def test_schedule_file():
-    ScheduleFile.parse_obj(schedule_file)
+def test_schedule_fixed_interval1():
+    ScheduleFixedInterval.parse_obj(schedule_fixed_interval1)
 
 
-def test_schedule_file_wrong():
-    wrong_values = copy(schedule_file)
+def test_schedule_fixed_interval_wrong():
+    wrong_values = copy(schedule_fixed_interval)
     wrong_values['values'] = []
     with pytest.raises(ValidationError):
-        ScheduleFile.parse_obj(wrong_values)
-    wrong_start = copy(schedule_file)
-    wrong_start['start_day_of_year'] = 367
-    with pytest.raises(ValidationError):
-        ScheduleFile.parse_obj(wrong_start)
-    wrong_unit = copy(schedule_file)
-    wrong_unit['unit_type'] = 'Nil'
-    with pytest.raises(ValidationError):
-        ScheduleFile.parse_obj(wrong_unit)
+        ScheduleFixedInterval.parse_obj(wrong_values)
+    wrong_start = copy(schedule_fixed_interval)
+    wrong_start = 13
+    with pytest.raises(ValidationError):ScheduleFixedInterval.parse_obj(wrong_start)
+
