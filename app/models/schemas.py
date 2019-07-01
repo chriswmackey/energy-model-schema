@@ -7,7 +7,7 @@ from datetime import datetime
 from app.models.energy.construction import EnergyConstructionOpaque, EnergyConstructionTransparent
 from .energy.ScheduleRuleset import ScheduleTypeLimits, DayValue, ScheduleDay, ScheduleRule, ScheduleRuleset
 from .energy.ScheduleFixedInterval import ScheduleFixedInterval
-from .energy.ScheduleBase import ScheduleUnitType, DateTime, ScheduleContinuous, ScheduleDiscrete, ScheduleNumericType
+from .energy.ScheduleBase import ScheduleUnitType, Date, Time, ScheduleContinuous, ScheduleDiscrete, ScheduleNumericType
 
 
 class FaceType(str, Enum):
