@@ -697,3 +697,5 @@ schedule_ruleset_1 = {
         }
     ]
 }
+
+print(schedule_ruleset_1['schedule_rules'][0])

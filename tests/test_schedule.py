@@ -41,6 +41,12 @@ def test_schedule_rule_wrong():
     wrong_leap_year['schedule_rules'][0]['start_period']['is_leap_year'] = 'Yes'
     with pytest.raises(ValidationError):
         ScheduleRuleset.parse_obj(wrong_leap_year)
+    wrong_time = copy(schedule_ruleset_1)
+    wrong_time['schedule_rules'][0]['start_period']['time']['hour'] = 24
+    wrong_time['schedule_rules'][0]['start_period']['time']['minute'] = 20
+    with pytest.raises(ValidationError):ScheduleRuleset.parse_obj(wrong_time)
+
+
 
 def test_schedule_fixed_interval():
     ScheduleFixedInterval.parse_obj(schedule_fixed_interval)
@@ -54,7 +60,7 @@ def test_schedule_fixed_interval_wrong():
     wrong_values['values'] = []
     with pytest.raises(ValidationError):
         ScheduleFixedInterval.parse_obj(wrong_values)
-    wrong_start = copy(schedule_fixed_interval)
-    wrong_start = 13
-    with pytest.raises(ValidationError):ScheduleFixedInterval.parse_obj(wrong_start)
-
+    wrong_start_date = copy(schedule_fixed_interval)
+    wrong_start_date['start_date']['month'] = 4
+    wrong_start_date['start_date']['day'] = 31
+    with pytest.raises(ValidationError):ScheduleFixedInterval.parse_obj(wrong_start_date) 

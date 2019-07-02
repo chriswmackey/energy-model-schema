@@ -56,7 +56,11 @@ class Time(BaseModel):
         else:
             return v
 
-
+    @validator('minute')
+    def check_time_after24(cls, v, values):
+        if values['hour']==24 and v > 0:
+            raise ValidationError('{}/{} is not a valid time.'.format(values['hour'], v))
+        return v     
 
 class ScheduleContinuous(BaseModel):
     """This Numeric Type allows all numbers, including fractional amounts, within the range to
