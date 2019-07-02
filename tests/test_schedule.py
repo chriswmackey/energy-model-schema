@@ -25,6 +25,10 @@ def test_schedule_rule_wrong():
     wrong_lower_limit['lower_limit_value'] = -1
     with pytest.raises(ValidationError):
         ScheduleRuleset.parse_obj(wrong_lower_limit)
+    #wrong_month = copy(schedule_ruleset_1)
+    #wrong_month['schedule_rules'][0]['start_period']['date']['month'] = 12
+    #with pytest.raises(ValidationError):
+    #    ScheduleRuleset.parse_obj(wrong_month)
     wrong_default_day = copy(schedule_ruleset_1)
     wrong_default_day['default_day_schedule']['day_values'][0]['time'] = 25
     with pytest.raises(ValidationError):
@@ -34,7 +38,7 @@ def test_schedule_rule_wrong():
     with pytest.raises(ValidationError):
         ScheduleRuleset.parse_obj(wrong_default_day_minute)
     wrong_schedule_rule = copy(schedule_ruleset_1)
-    wrong_schedule_rule['schedule_rules'][0]['start_period']['date'] = 24
+    wrong_schedule_rule['schedule_rules'][0]['start_period']['day'] = 32
     with pytest.raises(ValidationError):
         ScheduleRuleset.parse_obj(wrong_schedule_rule)
     wrong_leap_year = copy(schedule_ruleset_1)
@@ -44,12 +48,13 @@ def test_schedule_rule_wrong():
     wrong_time = copy(schedule_ruleset_1)
     wrong_time['schedule_rules'][0]['start_period']['time']['hour'] = 24
     wrong_time['schedule_rules'][0]['start_period']['time']['minute'] = 20
-    with pytest.raises(ValidationError):ScheduleRuleset.parse_obj(wrong_time)
-
+    with pytest.raises(ValidationError):
+        ScheduleRuleset.parse_obj(wrong_time)
 
 
 def test_schedule_fixed_interval():
     ScheduleFixedInterval.parse_obj(schedule_fixed_interval)
+
 
 def test_schedule_fixed_interval1():
     ScheduleFixedInterval.parse_obj(schedule_fixed_interval1)
@@ -60,7 +65,11 @@ def test_schedule_fixed_interval_wrong():
     wrong_values['values'] = []
     with pytest.raises(ValidationError):
         ScheduleFixedInterval.parse_obj(wrong_values)
-    wrong_start_date = copy(schedule_fixed_interval)
-    wrong_start_date['start_date']['month'] = 4
-    wrong_start_date['start_date']['day'] = 31
-    with pytest.raises(ValidationError):ScheduleFixedInterval.parse_obj(wrong_start_date) 
+    wrong_type = copy(schedule_fixed_interval)
+    wrong_type['type'] = 'wrongtype'
+    with pytest.raises(ValidationError):
+        ScheduleFixedInterval.parse_obj(wrong_type)
+    wrong_date = copy(schedule_fixed_interval)
+    #wrong_date['start_date']['month'] = 13
+    #wrong_date['start_date']['day'] = 32
+    #with pytest.raises(ValidationError): ScheduleFixedInterval.parse_obj(wrong_date)

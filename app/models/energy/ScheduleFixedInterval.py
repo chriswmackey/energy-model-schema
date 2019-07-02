@@ -19,7 +19,6 @@ class ScheduleFixedInterval(BaseModel):
 
     start_date: Date
 
-
     is_leap_year: bool = Schema(
         False,
         description='A boolean to indicate if datetime is for a leap year. Default is'
@@ -33,29 +32,32 @@ class ScheduleFixedInterval(BaseModel):
         description='A list of hourly values for the simulation.'
     )
 
-
     @validator('values', whole=True)
     def check_min_items(cls, v, values):
         "Ensure the number of values are not less than 24."
         if len(v) < 24:
-            raise ValidationError(
+            raise ValueError(
                 'Number of values must be atleast 24.'
             )
         return v
 
     @validator('values', whole=True)
-    def check_max_items(cls, v, values): 
+    def check_max_items(cls, v, values):
         if 'is_leap_year' == 'True' and len(v) > 8784:
-            raise ValidationError('Number of values for leap year can not be more than `8784`.') 
+            raise ValueError(
+                'Number of values for leap year can not be more than `8784`.')
         elif 'is_leap_year' == 'False' and len(v) > 8760:
-            raise ValidationError('Number of values for a year can not be more than `8760`.')
+            raise ValueError(
+                'Number of values for a year can not be more than `8760`.')
         return v
 
-    #@validator('is_leap_year')
-    #def check_leap_year(cls, v, values):
-    #    if v == False and values['start_date'].month == 2 and values['start_date'].day == 29:
-    #        raise ValidationError('A non leap year can not have `2`/`29` as the start date.')
-    #    return v
+    @validator('is_leap_year')
+    def check_leap_year(cls, v, values):
+        if values['start_date'].month == 2 and values['start_date'].day == 29 and v == False:
+            raise ValidationError(
+                'A non leap year can not have `2`/`29` as the start date.')
+        return v
+
 
 if __name__ == '__main__':
     print(ScheduleFixedInterval.schema_json(indent=2))
