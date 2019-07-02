@@ -65,7 +65,7 @@ class RoofCeilingSet(BaseModel):
     )
 
 class ApertureSet(BaseModel): 
-    """A set of constructions for apertures assemblies."""
+    """A set of constructions for aperture assemblies."""
 
     type: Enum('ApertureSet', {
                'type': 'ApertureSet'})
@@ -109,7 +109,8 @@ class DoorSet(BaseModel):
         default=None
     )
 
-class ConstructionSet(BaseModel): 
+class ConstructionSet(BaseModel):
+    """A set of constructions for different surface types and boundary conditions."""
 
 
     type: Enum('ConstructionSet', {
