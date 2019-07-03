@@ -1,5 +1,5 @@
 schedule_ruleset = {
-    'type': 'ScheduleRuleset',
+    'type': 'scheduleruleset',
     'name': 'Schedule Ruleset',
     'schedule_type_limits': {
         'type': 'ScheduleTypeLimits',
@@ -75,24 +75,24 @@ schedule_ruleset = {
             'start_period': {
                 'date': {
                     'month': 2,
-                    'day': 45
+                    'day': 45,
+                    'is_leap_year': False
                 },
                 'time': {
                     'hour': 0,
                     'minute': 00
-                },
-                'is_leap_year': False
+                }
             },
             'end_period': {
                 'date': {
                     'month': 12,
-                    'day': 31
+                    'day': 31,
+                    'is_leap_year': False
                 },
                 'time': {
                     'hour': 24,
                     'minute': 59
                 },
-                'is_leap_year': False
             },
             'name': 'Schedule Rule 1',
             'apply_sunday': True,
@@ -108,7 +108,7 @@ schedule_ruleset = {
 }
 
 schedule_ruleset_1 = {
-    'type': 'ScheduleRuleset',
+    'type': 'scheduleruleset',
     'name': 'Schedule Ruleset 1',
     'schedule_type_limits': {
         'type': 'ScheduleTypeLimits',
@@ -198,24 +198,24 @@ schedule_ruleset_1 = {
             'start_period': {
                 'date': {
                     'month': 8,
-                    'day': 17
+                    'day': 17,
+                    'is_leap_year': False
                 },
                 'time': {
                     'hour': 0,
                     'minute': 00
                 },
-                'is_leap_year': False
             },
             'end_period': {
                 'date': {
                     'month': 12,
-                    'day': 11
+                    'day': 11,
+                    'is_leap_year': False
                 },
                 'time': {
                     'hour': 24,
                     'minute': 00
                 },
-                'is_leap_year': False
             },
             'name': 'Schedule Rule 180',
             'apply_sunday': True,
@@ -260,13 +260,12 @@ schedule_ruleset_1 = {
             'start_period': {
                 'date': {
                     'month': 8,
-                    'day': 17
+                    'day': 17,
                 },
                 'time': {
                     'hour': 0,
                     'minute': 00
                 },
-                'is_leap_year': False
             },
             'end_period': {
                 'date': {
@@ -275,9 +274,8 @@ schedule_ruleset_1 = {
                 },
                 'time': {
                     'hour': 24,
-                    'minute': 00
+                    'minute': 00,
                 },
-                'is_leap_year': False
             },
             'name': 'Schedule Rule 181',
             'apply_sunday': False,
@@ -322,24 +320,24 @@ schedule_ruleset_1 = {
             'start_period': {
                 'date': {
                     'month': 8,
-                    'day': 17
+                    'day': 17,
+                    'is_leap_year': False
                 },
                 'time': {
                     'hour': 0,
                     'minute': 00
                 },
-                'is_leap_year': False
             },
             'end_period': {
                 'date': {
                     'month': 12,
                     'day': 11,
+                    'is_leap_year': False
                 },
                 'time': {
                     'hour': 24,
                     'minute': 00
                 },
-                'is_leap_year': False
             },
             'name': 'Schedule Rule 182',
             'apply_sunday': False,
@@ -370,7 +368,8 @@ schedule_ruleset_1 = {
             'start_period': {
                 'date': {
                     'month': 4,
-                    'day': 13
+                    'day': 13,
+                    'is_leap_year': False
                 },
                 'time': {
                     'hour': 0,
@@ -382,6 +381,7 @@ schedule_ruleset_1 = {
                 'date': {
                     'month': 6,
                     'day': 12,
+                    'is_leap_year': False
                 },
                 'time': {
                     'hour': 24,
@@ -433,23 +433,23 @@ schedule_ruleset_1 = {
                 'date': {
                     'month': 4,
                     'day': 13,
+                    'is_leap_year': False
                 },
                 'time': {
                     'hour': 0,
                     'minute': 00,
                 },
-                'is_leap_year': False
             },
             'end_period': {
                 'date': {
                     'month': 6,
                     'day': 12,
+                    'is_leap_year': False
                 },
                 'time': {
                     'hour': 24,
                     'minute': 00,
                 },
-                'is_leap_year': False
             },
             'name': 'Schedule Rule 184',
             'apply_sunday': False,
@@ -495,23 +495,23 @@ schedule_ruleset_1 = {
                 'date': {
                     'month': 4,
                     'day': 13,
+                    'is_leap_year': False
                 },
                 'time': {
                     'hour': 0,
                     'minute': 00,
                 },
-                'is_leap_year': False
             },
             'end_period': {
                 'date': {
                     'month': 6,
                     'day': 12,
+                    'is_leap_year': False
                 },
                 'time': {
                     'hour': 24,
                     'minute': 00,
                 },
-                'is_leap_year': False
             },
             'name': 'Schedule Rule 185',
             'apply_sunday': False,
@@ -543,23 +543,23 @@ schedule_ruleset_1 = {
                 'date': {
                     'month': 1,
                     'day': 5,
+                    'is_leap_year': False
                 },
                 'time': {
                     'hour': 0,
                     'minute': 00,
                 },
-                'is_leap_year': False
             },
             'end_period': {
                 'date': {
                     'month': 4,
                     'day': 3,
+                    'is_leap_year': False
                 },
                 'time': {
                     'hour': 24,
                     'minute': 00,
                 },
-                'is_leap_year': False
             },
             'name': 'Schedule Rule 186',
             'apply_sunday': True,
@@ -605,23 +605,23 @@ schedule_ruleset_1 = {
                 'date': {
                     'month': 1,
                     'day': 5,
+                    'is_leap_year': False
                 },
                 'time': {
                     'hour': 0,
                     'minute': 00,
                 },
-                'is_leap_year': False
             },
             'end_period': {
                 'date': {
                     'month': 4,
                     'day': 3,
+                    'is_leap_year': False
                 },
                 'time': {
                     'hour': 24,
                     'minute': 00,
                 },
-                'is_leap_year': False
             },
             'name': 'Schedule Rule 187',
             'apply_sunday': False,
@@ -667,23 +667,23 @@ schedule_ruleset_1 = {
                 'date': {
                     'month': 1,
                     'day': 5,
+                    'is_leap_year': False
                 },
                 'time': {
                     'hour': 0,
                     'minute': 00,
                 },
-                'is_leap_year': False
             },
             'end_period': {
                 'date': {
                     'month': 4,
-                    'day': 3
+                    'day': 3,
+                    'is_leap_year': False
                 },
                 'time': {
                     'hour': 24,
                     'minute': 00,
                 },
-                'is_leap_year': False
             },
             'name': 'Schedule Rule 188',
             'apply_sunday': False,

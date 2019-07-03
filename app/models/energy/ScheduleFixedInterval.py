@@ -4,25 +4,17 @@ from typing import List, Union
 from enum import Enum
 from uuid import UUID, uuid4
 import datetime
-from app.models.energy.ScheduleBase import ScheduleContinuous, ScheduleDiscrete, ScheduleNumericType, ScheduleUnitType, Date, Time
+from app.models.common.datetime import Date
 
 
 class ScheduleFixedInterval(BaseModel):
     """Used to specify a start date and a list of values for a period of analysis."""
 
-    type: Enum('ScheduleFixedInterval', {'type': 'ScheduleFixedInterval'})
+    type: Enum('schedulefixedinterval', {'type': 'schedulefixedinterval'})
 
     name: str = Schema(
         ...,
         regex=r'^[\s.A-Za-z0-9_-]*$',
-    )
-
-    start_date: Date
-
-    is_leap_year: bool = Schema(
-        False,
-        description='A boolean to indicate if datetime is for a leap year. Default is'
-        ' `false`.'
     )
 
     values: List[int] = Schema(
@@ -32,32 +24,21 @@ class ScheduleFixedInterval(BaseModel):
         description='A list of hourly values for the simulation.'
     )
 
+    start_date: Date
+
     @validator('values', whole=True)
-    def check_min_items(cls, v, values):
+    def check_range(cls, v, values):
         "Ensure the number of values are not less than 24."
-        if len(v) < 24:
+        if not 'start_date' in values:
+            return v
+        if values['start_date'].is_leap_year == False and len(v) < 24 or len(v) > 8760:
             raise ValueError(
-                'Number of values must be atleast 24.'
-            )
-        return v
-
-    @validator('values', whole=True)
-    def check_max_items(cls, v, values):
-        if 'is_leap_year' == 'True' and len(v) > 8784:
+                'Number of values can not be lesser than 24 or greater than 8760 for non-leap year')
+        elif values['start_date'].is_leap_year == True and len(v) < 24 or len(v) > 8784:
             raise ValueError(
-                'Number of values for leap year can not be more than `8784`.')
-        elif 'is_leap_year' == 'False' and len(v) > 8760:
-            raise ValueError(
-                'Number of values for a year can not be more than `8760`.')
-        return v
-
-    @validator('is_leap_year')
-    def check_leap_year(cls, v, values):
-        if values['start_date'].month == 2 and values['start_date'].day == 29 and v == False:
-            raise ValidationError(
-                'A non leap year can not have `2`/`29` as the start date.')
+                'Number of values can not be lesser than 24 or greater than 8784 for leap year')
         return v
 
 
 if __name__ == '__main__':
-    print(ScheduleFixedInterval.schema_json(indent=2))
+    print(schedulefixedinterval.schema_json(indent=2))

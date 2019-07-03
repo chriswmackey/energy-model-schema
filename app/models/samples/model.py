@@ -11,7 +11,7 @@ model_sample = {
                 "name": "south_room",
                 "type": "zone", 
                 "schedule_ruleset": {
-					"type": "ScheduleRuleset",
+					"type": "scheduleruleset",
 					"name": "Schedule Ruleset 1",
 					"schedule_type_limits": {
 						"type": "ScheduleTypeLimits",

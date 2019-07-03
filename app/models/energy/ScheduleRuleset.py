@@ -4,10 +4,11 @@ from typing import List, Union
 from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
-from app.models.energy.ScheduleBase import ScheduleContinuous, ScheduleDiscrete, ScheduleNumericType, ScheduleUnitType, Date, Time
+from app.models.energy.schedulebase import ScheduleNumericType, ScheduleUnitType
+from app.models.common.datetime import Date, Time
 
 
-class ScheduleTypeLimits (BaseModel):
+class ScheduleTypeLimits(BaseModel):
     """Specifies the data types and limits for values contained in schedules."""
 
     type: Enum('ScheduleTypeLimits', {'type': 'ScheduleTypeLimits'})
@@ -104,13 +105,12 @@ class ScheduleRule(BaseModel):
     start_period: Date
 
     end_period: Date
-    
 
 
-class ScheduleRuleset (BaseModel):
+class ScheduleRuleset(BaseModel):
     """Used to define a schedule for a default day, further described by ScheduleRule."""
 
-    type: Enum('ScheduleRuleset', {'type': 'ScheduleRuleset'})
+    type: Enum('scheduleruleset', {'type': 'scheduleruleset'})
 
     name: str = Schema(
         ...,
@@ -129,4 +129,4 @@ class ScheduleRuleset (BaseModel):
 
 
 if __name__ == '__main__':
-    print(ScheduleRuleset.schema_json(indent=2))
+    print(scheduleruleset.schema_json(indent=2))
