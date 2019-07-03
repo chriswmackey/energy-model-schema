@@ -5,8 +5,8 @@ from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
 from app.models.energy.construction import EnergyConstructionOpaque, EnergyConstructionTransparent
-from .energy.scheduleruleset import ScheduleTypeLimits, DayValue, ScheduleDay, ScheduleRule, scheduleruleset
-from .energy.schedulefixedinterval import schedulefixedinterval
+from .energy.scheduleruleset import ScheduleTypeLimits, DayValue, ScheduleDay, ScheduleRule, ScheduleRuleset
+from .energy.schedulefixedinterval import ScheduleFixedInterval
 from .energy.schedulebase import ScheduleUnitType, Date, Time, ScheduleContinuous, ScheduleDiscrete, ScheduleNumericType
 
 
