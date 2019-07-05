@@ -4,7 +4,7 @@ from typing import List, Union
 from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
-from app.models.energy.construction import EnergyConstructionOpaque, EnergyConstructionTransparent
+from app.models.energy.construction import EnergyConstructionOpaque, EnergyConstructionWindow
 
 
 class WallSet(BaseModel):
@@ -70,23 +70,23 @@ class ApertureSet(BaseModel):
     type: Enum('ApertureSet', {
                'type': 'ApertureSet'})
 
-    interior_window: EnergyConstructionTransparent = Schema(
+    interior_window: EnergyConstructionWindow = Schema(
         default=None
     )
 
-    fixed_window: EnergyConstructionTransparent = Schema(
+    fixed_window: EnergyConstructionWindow = Schema(
         default=None
     )    
 
-    skylight: EnergyConstructionTransparent = Schema(
+    skylight: EnergyConstructionWindow = Schema(
         default=None
     )
 
-    operable_window: EnergyConstructionTransparent = Schema(
+    operable_window: EnergyConstructionWindow = Schema(
         default=None
     ) 
 
-    glass_door: EnergyConstructionTransparent = Schema(
+    glass_door: EnergyConstructionWindow = Schema(
         default=None
     )
 

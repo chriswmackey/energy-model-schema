@@ -148,7 +148,7 @@ construction_set = {
     'aperture_set': {
         'type': 'ApertureSet',
         'fixed_window': {
-            'type': 'EnergyConstructionTransparent',
+            'type': 'EnergyConstructionWindow',
             'name': 'Exterior Window',
             'materials': [
                 {

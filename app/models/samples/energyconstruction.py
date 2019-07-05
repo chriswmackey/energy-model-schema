@@ -195,13 +195,13 @@ construction_internal_floor = {
 }
 
 construction_window = {
-    'type': 'EnergyConstructionTransparent',
+    'type': 'EnergyConstructionWindow',
     'name': 'Exterior Window',
     'materials': [in_window_glazing, in_window_gas, in_window_glazing]
 }
 
 construction_window2 = {
-    'type': 'EnergyConstructionTransparent',
+    'type': 'EnergyConstructionWindow',
     'name': 'Exterior Window - Gas Mixture',
     'materials': [in_window_glazing, in_window_gas_mixture, in_window_glazing]
 }
