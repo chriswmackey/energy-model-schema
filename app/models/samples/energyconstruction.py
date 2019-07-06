@@ -50,6 +50,32 @@ in_material_insulation = {
     'visible_absorptance': 0.5
 }
 
+in_material_metal = {
+    'type': 'EnergyMaterial',
+    'name': 'Metal Surface',
+    'roughness': 'Smooth',
+    'thickness': '0.0008',
+    'conductivity': 45.28, 
+    'density': 7824,
+    'specific_heat': 500,
+    'thermal_absorptance': 0.9,
+    'solar_absorptance': 0.7,
+    'visible_absorptance': 0.7
+}
+
+in_material_insulation_board = {
+    'type': 'EnergyMaterial',
+    'name': 'Insulation Board',
+    'roughness': 'MediumRough',
+    'thickness': '0.0254',
+    'conductivity': 0.03, 
+    'density': 43,
+    'specific_heat': 1210,
+    'thermal_absorptance': 0.9,
+    'solar_absorptance': 0.6,
+    'visible_absorptance': 0.6
+}
+
 in_material_concrete = {
     'type': 'EnergyMaterial',
     'name': '8in Concrete HW',
@@ -222,4 +248,10 @@ construction_roof = {
     'type': 'EnergyConstructionOpaque',
     'name': 'Exterior Roof ASHRAE 2009',
     'materials': [in_material_roof_membrane, in_material_roof_insulation, in_material_metal_decking]
+}
+
+construction_door = {
+    'type': 'EnergyConstructionOpaque',
+    'name': 'Exterior Door',
+    'materials': [in_material_metal, in_material_insulation_board]
 }
