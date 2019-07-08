@@ -1,9 +1,9 @@
 construction_set = {
     'type': 'ConstructionSet',
-    'name': 'Construction Set 1',
+    'name': 'Construction Set',
     'wall_set': {
         'type': 'WallSet',
-        'exterior_wall': {
+        'exterior_construction': {
             'type': 'EnergyConstructionOpaque',
             'name': 'Exterior Wall ASHRAE 2009',
             'materials': [
@@ -60,7 +60,7 @@ construction_set = {
     },
     'floor_set': {
         'type': 'FloorSet',
-        'interior_floor': {
+        'interior_construction': {
             'type': 'EnergyConstructionOpaque',
             'name': 'Internal Floor',
             'materials': [
@@ -102,7 +102,7 @@ construction_set = {
     },
     'roof_ceiling_set': {
         'type': 'RoofCeilingSet',
-        'exterior_roof': {
+        'exterior_construction': {
             'type': 'EnergyConstructionOpaque',
             'name': 'Exterior Roof ASHRAE 2009',
             'materials': [
@@ -147,7 +147,7 @@ construction_set = {
     },
     'aperture_set': {
         'type': 'ApertureSet',
-        'fixed_window': {
+        'fixed_window_construction': {
             'type': 'EnergyConstructionWindow',
             'name': 'Exterior Window',
             'materials': [
@@ -199,7 +199,7 @@ construction_set = {
 
 wall_set = {
     'type': 'WallSet',
-    'exterior_wall': {
+    'exterior_construction': {
             'type': 'EnergyConstructionOpaque',
             'name': 'Exterior Wall ASHRAE 2009',
             'materials': [
@@ -257,7 +257,7 @@ wall_set = {
 
 floor_set = {
     'type': 'FloorSet',
-    'interior_floor': {
+    'interior_construction': {
             'type': 'EnergyConstructionOpaque',
             'name': 'Internal Floor',
             'materials': [
@@ -300,7 +300,7 @@ floor_set = {
 
 roof_ceiling_set = {
     'type': 'RoofCeilingSet',
-    'exterior_roof': {
+    'exterior_construction': {
             'type': 'EnergyConstructionOpaque',
             'name': 'Exterior Roof ASHRAE 2009',
             'materials': [
@@ -346,7 +346,7 @@ roof_ceiling_set = {
 
 aperture_set = {
     'type': 'ApertureSet',
-    'fixed_window': {
+    'fixed_window_construction': {
         'type': 'EnergyConstructionWindow',
         'name': 'Exterior Window',
         'materials': [
@@ -397,7 +397,7 @@ aperture_set = {
 
 door_set = {
     'type': 'DoorSet',
-    'exterior_door': {
+    'exterior_construction': {
         'type': 'EnergyConstructionOpaque',
         'name': 'Exterior Door',
         'materials': [
@@ -426,5 +426,16 @@ door_set = {
                 'visible_absorptance': 0.6
             }
         ]
+    }
+}
+
+construction_set_1 = {
+    'type': 'ConstructionSet',
+    'name': 'Construction Set 1',
+    'wall_set': {
+        'type': 'WallSet'
+    },
+    'floor_set': {
+        'type': 'FloorSet'
     }
 }

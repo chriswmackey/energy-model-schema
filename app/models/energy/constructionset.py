@@ -14,15 +14,15 @@ class WallSet(BaseModel):
                'type': 'WallSet'})
 
 
-    interior_wall: EnergyConstructionOpaque = Schema(
+    interior_construction: EnergyConstructionOpaque = Schema(
         default=None
     )
 
-    exterior_wall: EnergyConstructionOpaque = Schema(
+    exterior_construction: EnergyConstructionOpaque = Schema(
         default=None
     )
 
-    ground_wall: EnergyConstructionOpaque = Schema(
+    ground_construction: EnergyConstructionOpaque = Schema(
         default=None
     )
 
@@ -34,15 +34,15 @@ class FloorSet(BaseModel):
                'type': 'FloorSet'})
 
 
-    interior_floor: EnergyConstructionOpaque = Schema(
+    interior_construction: EnergyConstructionOpaque = Schema(
         default=None
     )
 
-    exterior_floor: EnergyConstructionOpaque = Schema(
+    exterior_construction: EnergyConstructionOpaque = Schema(
         default=None
     )
 
-    ground_floor: EnergyConstructionOpaque = Schema(
+    ground_construction: EnergyConstructionOpaque = Schema(
         default=None
     )
 
@@ -52,15 +52,15 @@ class RoofCeilingSet(BaseModel):
     type: Enum('RoofCeilingSet', {
                'type': 'RoofCeilingSet'})
 
-    interior_ceiling: EnergyConstructionOpaque = Schema(
+    interior_construction: EnergyConstructionOpaque = Schema(
         default=None
     )
 
-    exterior_roof: EnergyConstructionOpaque = Schema(
+    exterior_construction: EnergyConstructionOpaque = Schema(
         default=None
     )    
 
-    ground_ceiling: EnergyConstructionOpaque = Schema(
+    ground_construction: EnergyConstructionOpaque = Schema(
         default=None
     )
 
@@ -70,23 +70,23 @@ class ApertureSet(BaseModel):
     type: Enum('ApertureSet', {
                'type': 'ApertureSet'})
 
-    interior_window: EnergyConstructionWindow = Schema(
+    interior_construction: EnergyConstructionWindow = Schema(
         default=None
     )
 
-    fixed_window: EnergyConstructionWindow = Schema(
+    fixed_window_construction: EnergyConstructionWindow = Schema(
         default=None
     )    
 
-    skylight: EnergyConstructionWindow = Schema(
+    skylight_construction: EnergyConstructionWindow = Schema(
         default=None
     )
 
-    operable_window: EnergyConstructionWindow = Schema(
+    operable_window_construction: EnergyConstructionWindow = Schema(
         default=None
     ) 
 
-    glass_door: EnergyConstructionWindow = Schema(
+    glass_door_construction: EnergyConstructionWindow = Schema(
         default=None
     )
 
@@ -97,15 +97,15 @@ class DoorSet(BaseModel):
                'type': 'DoorSet'})
 
 
-    interior_door: EnergyConstructionOpaque = Schema(
+    interior_construction: EnergyConstructionOpaque = Schema(
         default=None
     )
 
-    exterior_door: EnergyConstructionOpaque = Schema(
+    exterior_construction: EnergyConstructionOpaque = Schema(
         default=None
     )
 
-    overhead_door: EnergyConstructionOpaque = Schema(
+    overhead_construction: EnergyConstructionOpaque = Schema(
         default=None
     )
 
