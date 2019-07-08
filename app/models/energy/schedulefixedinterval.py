@@ -17,6 +17,8 @@ class ScheduleFixedInterval(BaseModel):
         regex=r'^[\s.A-Za-z0-9_-]*$',
     )
 
+    start_date: Date
+
     values: List[int] = Schema(
         ...,
         minItems=24,
@@ -24,11 +26,9 @@ class ScheduleFixedInterval(BaseModel):
         description='A list of hourly values for the simulation.'
     )
 
-    start_date: Date
-
     @validator('values', whole=True)
     def check_range(cls, v, values):
-        "Ensure the number of values are not less than 24."
+        "Ensure correct number of values."
         if not 'start_date' in values:
             return v
         if values['start_date'].is_leap_year == False and len(v) < 24 or len(v) > 8760:
@@ -41,4 +41,4 @@ class ScheduleFixedInterval(BaseModel):
 
 
 if __name__ == '__main__':
-    print(schedulefixedinterval.schema_json(indent=2))
+    print(ScheduleFixedInterval.schema_json(indent=2))

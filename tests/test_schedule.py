@@ -69,7 +69,7 @@ def test_schedule_wrong_year():
 def test_schedule_wrong_time():
     wrong_time = copy(schedule_ruleset_1)
     wrong_time['schedule_rules'][0]['start_period']['time']['hour'] = 24
-    wrong_time['schedule_rules'][0]['start_period']['time']['minute'] = 00
+    wrong_time['schedule_rules'][0]['start_period']['time']['minute'] = 20
     with pytest.raises(ValidationError):
         ScheduleRuleset.parse_obj(wrong_time)
 
@@ -109,4 +109,4 @@ def test_schedule_fixed_wrong_date2():
     wrong_date['start_date']['month'] = 4
     wrong_date['start_date']['day'] = 31
     with pytest.raises(ValidationError):
-        ScheduleFixedInterval.parse_obj(wrong_date) 
+        ScheduleFixedInterval.parse_obj(wrong_date)

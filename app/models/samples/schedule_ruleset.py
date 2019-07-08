@@ -20,9 +20,8 @@ schedule_ruleset = {
         'day_values': [
                 {
                     'time': {
-                        'hour': 24,
-                        'minute': 00
-                    },
+                        'hour': 23,
+                        'minute': 59},
                     'value_until_time': 20
                 }
         ],
@@ -34,8 +33,8 @@ schedule_ruleset = {
         'day_values': [
                 {
                     'time': {
-                        'hour': 24,
-                        'minute': 00
+                        'hour': 23,
+                        'minute': 59
                     },
                     'value_until_time': 20
                 }
@@ -48,8 +47,8 @@ schedule_ruleset = {
         'day_values': [
                 {
                     'time': {
-                        'hour': 24,
-                        'minute': 00
+                        'hour': 23,
+                        'minute': 59
                     },
                     'value_until_time': 20
                 }
@@ -65,8 +64,8 @@ schedule_ruleset = {
                     'day_values': [
                         {
                             'time': {
-                                'hour': 24,
-                                'minute': 00
+                                'hour': 23,
+                                'minute': 59
                             },
                             'value_until_time': 20
                         }
@@ -90,7 +89,7 @@ schedule_ruleset = {
                     'is_leap_year': False
                 },
                 'time': {
-                    'hour': 24,
+                    'hour': 23,
                     'minute': 59
                 },
             },
@@ -140,14 +139,14 @@ schedule_ruleset_1 = {
                         'minute': 00
                     },
                     'value_until_time': 1
-            },
+                    },
             {
                     'time': {
-                        'hour': 24,
-                        'minute': 00
+                        'hour': 23,
+                        'minute': 59
                     },
                     'value_until_time': 0
-            }
+                    }
         ]
     },
     'summer_designday_schedule': {
@@ -157,8 +156,8 @@ schedule_ruleset_1 = {
         'day_values': [
                 {
                     'time': {
-                        'hour': 24,
-                        'minute': 00
+                        'hour': 23,
+                        'minute': 59
                     },
                     'value_until_time': 0
                 }
@@ -171,8 +170,8 @@ schedule_ruleset_1 = {
         'day_values': [
                 {
                     'time': {
-                        'hour': 24,
-                        'minute': 00
+                        'hour': 23,
+                        'minute': 59
                     },
                     'value_until_time': 0
                 }
@@ -188,8 +187,8 @@ schedule_ruleset_1 = {
                     'day_values': [
                         {
                             'time': {
-                                'hour': 24,
-                                'minute': 00
+                                'hour': 23,
+                                'minute': 59
                             },
                             'value_until_time': 0
                         }
@@ -213,8 +212,8 @@ schedule_ruleset_1 = {
                     'is_leap_year': False
                 },
                 'time': {
-                    'hour': 24,
-                    'minute': 00
+                    'hour': 23,
+                    'minute': 59
                 },
             },
             'name': 'Schedule Rule 180',
@@ -250,8 +249,8 @@ schedule_ruleset_1 = {
                         },
                         {
                             'time': {
-                                'hour': 24,
-                                'minute': 00
+                                'hour': 23,
+                                'minute': 59
                             },
                             'value_until_time': 0
                         }
@@ -273,8 +272,8 @@ schedule_ruleset_1 = {
                     'day': 11
                 },
                 'time': {
-                    'hour': 24,
-                    'minute': 00,
+                    'hour': 23,
+                    'minute': 59,
                 },
             },
             'name': 'Schedule Rule 181',
@@ -310,8 +309,8 @@ schedule_ruleset_1 = {
                         },
                         {
                             'time': {
-                                'hour': 24,
-                                'minute': 00,
+                                'hour': 23,
+                                'minute': 59,
                             },
                             'value_until_time': 0
                         }
@@ -335,8 +334,8 @@ schedule_ruleset_1 = {
                     'is_leap_year': False
                 },
                 'time': {
-                    'hour': 24,
-                    'minute': 00
+                    'hour': 23,
+                    'minute': 59
                 },
             },
             'name': 'Schedule Rule 182',
@@ -358,8 +357,8 @@ schedule_ruleset_1 = {
                     'day_values': [
                         {
                             'time': {
-                                'hour': 24,
-                                'minute': 00
+                                'hour': 23,
+                                'minute': 59
                             },
                             'value_until_time': 0
                         }
@@ -384,8 +383,8 @@ schedule_ruleset_1 = {
                     'is_leap_year': False
                 },
                 'time': {
-                    'hour': 24,
-                    'minute': 00,
+                    'hour': 23,
+                    'minute': 59,
                 },
                 'is_leap_year': False
             },
@@ -422,8 +421,8 @@ schedule_ruleset_1 = {
                         },
                         {
                             'time': {
-                                'hour': 24,
-                                'minute': 00
+                                'hour': 23,
+                                'minute': 59
                             },
                             'value_until_time': 0
                         }
@@ -447,8 +446,8 @@ schedule_ruleset_1 = {
                     'is_leap_year': False
                 },
                 'time': {
-                    'hour': 24,
-                    'minute': 00,
+                    'hour': 23,
+                    'minute': 59,
                 },
             },
             'name': 'Schedule Rule 184',
@@ -484,8 +483,8 @@ schedule_ruleset_1 = {
                         },
                         {
                             'time': {
-                                'hour': 24,
-                                'minute': 00
+                                'hour': 23,
+                                'minute': 59
                             },
                             'value_until_time': 0
                         }
@@ -509,8 +508,8 @@ schedule_ruleset_1 = {
                     'is_leap_year': False
                 },
                 'time': {
-                    'hour': 24,
-                    'minute': 00,
+                    'hour': 23,
+                    'minute': 59,
                 },
             },
             'name': 'Schedule Rule 185',
@@ -532,8 +531,8 @@ schedule_ruleset_1 = {
                     'day_values': [
                         {
                             'time': {
-                                'hour': 24,
-                                'minute': 00
+                                'hour': 23,
+                                'minute': 59
                             },
                             'value_until_time': 0
                         }
@@ -557,8 +556,8 @@ schedule_ruleset_1 = {
                     'is_leap_year': False
                 },
                 'time': {
-                    'hour': 24,
-                    'minute': 00,
+                    'hour': 23,
+                    'minute': 59,
                 },
             },
             'name': 'Schedule Rule 186',
@@ -594,8 +593,8 @@ schedule_ruleset_1 = {
                         },
                         {
                             'time': {
-                                'hour': 24,
-                                'minute': 00
+                                'hour': 23,
+                                'minute': 59
                             },
                             'value_until_time': 0
                         }
@@ -619,8 +618,8 @@ schedule_ruleset_1 = {
                     'is_leap_year': False
                 },
                 'time': {
-                    'hour': 24,
-                    'minute': 00,
+                    'hour': 23,
+                    'minute': 59,
                 },
             },
             'name': 'Schedule Rule 187',
@@ -642,8 +641,8 @@ schedule_ruleset_1 = {
                     'day_values': [
                         {
                             'time': {
-                                'hour': 7,
-                                'minute': 00
+                                'hour': 23,
+                                'minute': 59
                             },
                             'value_until_time': 0
                         },
@@ -656,8 +655,8 @@ schedule_ruleset_1 = {
                         },
                         {
                             'time': {
-                                'hour': 24,
-                                'minute': 00
+                                'hour': 23,
+                                'minute': 59
                             },
                             'value_until_time': 0
                         }
@@ -681,8 +680,8 @@ schedule_ruleset_1 = {
                     'is_leap_year': False
                 },
                 'time': {
-                    'hour': 24,
-                    'minute': 00,
+                    'hour': 23,
+                    'minute': 59,
                 },
             },
             'name': 'Schedule Rule 188',

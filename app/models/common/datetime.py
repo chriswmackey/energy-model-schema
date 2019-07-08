@@ -67,7 +67,8 @@ class Time(BaseModel):
         if not 'hour' in values:
             return v
         try:
-            datetime.time(v, values['hour'], 0)
+            datetime.time(values['hour'], v)
+
         except ValidationError:
             raise ValidationError(
                 '{}:{} is not a valid time.'.format(values['hour'], v))
