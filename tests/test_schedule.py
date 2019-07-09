@@ -101,6 +101,7 @@ def test_schedule_fixed_wrong_type():
 
 def test_schedule_fixed_wrong_date():
     wrong_date = copy(schedule_fixed_interval)
+    wrong_date['start_date']['is_leap_year'] = False
     wrong_date['start_date']['month'] = 2
     wrong_date['start_date']['day'] = 29
     with pytest.raises(ValidationError):
