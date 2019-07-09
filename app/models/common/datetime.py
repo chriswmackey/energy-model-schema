@@ -31,7 +31,6 @@ class Date(BaseModel):
 
     @validator('day')
     def check_date(cls, v, values):
-        print(values)
         if not 'month' in values:
             return v
         elif values['is_leap_year'] == True:

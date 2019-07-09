@@ -40,5 +40,6 @@ class ScheduleFixedInterval(BaseModel):
         return v
 
 
+
 if __name__ == '__main__':
     print(ScheduleFixedInterval.schema_json(indent=2))

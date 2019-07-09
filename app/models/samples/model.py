@@ -28,7 +28,7 @@ model_sample = {
 					"default_day_schedule": {
 						"type": "ScheduleDay",
 						"name": "Default Day 1",
-						"interpolate_to_timestep": 'false',
+						"interpolate_to_timestep": False,
 						"day_values": [{
 							"time": {
 								"hour": 7,
@@ -52,7 +52,7 @@ model_sample = {
 					"summer_designday_schedule": {
 						"type": "ScheduleDay",
 						"name": "Default Day 2",
-						"interpolate_to_timestep": 'false',
+						"interpolate_to_timestep": False,
 						"day_values": [{
 							"time": {
 								"hour": 24,
@@ -64,7 +64,7 @@ model_sample = {
 					"winter_designday_schedule": {
 						"type": "ScheduleDay",
 						"name": "Default Day 3",
-						"interpolate_to_timestep": 'false',
+						"interpolate_to_timestep": False,
 						"day_values": [{
 							"time": {
 								"hour": 24,
@@ -78,7 +78,7 @@ model_sample = {
 						"schedule_day": {
 							"type": "ScheduleDay",
 							"name": "Schedule Rule 180 Day 1",
-							"interpolate_to_timestep": 'false',
+							"interpolate_to_timestep": False,
 							"day_values": [{
 								"time": {
 									"hour": 24,
@@ -96,7 +96,7 @@ model_sample = {
 								"hour": 0,
 								"minute": 0
 							},
-							"is_leap_year": 'false'
+							"is_leap_year": False
 						},
 						"end_period": {
 							"date": {
@@ -107,23 +107,23 @@ model_sample = {
 								"hour": 24,
 								"minute": 0
 							},
-							"is_leap_year": 'false'
+							"is_leap_year": False
 						},
 						"name": "Schedule Rule 180",
-						"apply_sunday": 'true',
-						"apply_monday": 'false',
-						"apply_tuesday": 'false',
-						"apply_wednesday": 'false',
-						"apply_thursday": 'false',
-						"apply_friday": 'false',
-						"apply_saturday": 'false',
-						"apply_holiday": 'false'
+						"apply_sunday": True,
+						"apply_monday": False,
+						"apply_tuesday": False,
+						"apply_wednesday": False,
+						"apply_thursday": False,
+						"apply_friday": False,
+						"apply_saturday": False,
+						"apply_holiday": False
 					}, {
 						"type": "ScheduleRule",
 						"schedule_day": {
 							"type": "ScheduleDay",
 							"name": "Schedule Rule 181 Day 2",
-							"interpolate_to_timestep": 'false',
+							"interpolate_to_timestep": False,
 							"day_values": [{
 								"time": {
 									"hour": 7,
@@ -153,7 +153,7 @@ model_sample = {
 								"hour": 0,
 								"minute": 0
 							},
-							"is_leap_year": 'false'
+							"is_leap_year": False
 						},
 						"end_period": {
 							"date": {
@@ -164,23 +164,23 @@ model_sample = {
 								"hour": 24,
 								"minute": 0
 							},
-							"is_leap_year": 'false'
+							"is_leap_year": False
 						},
 						"name": "Schedule Rule 181",
-						"apply_sunday": 'false',
-						"apply_monday": 'false',
-						"apply_tuesday": 'false',
-						"apply_wednesday": 'false',
-						"apply_thursday": 'false',
-						"apply_friday": 'false',
-						"apply_saturday": 'true',
-						"apply_holiday": 'false'
+						"apply_sunday": False,
+						"apply_monday": False,
+						"apply_tuesday": False,
+						"apply_wednesday": False,
+						"apply_thursday": False,
+						"apply_friday": False,
+						"apply_saturday": True,
+						"apply_holiday": False
 					}, {
 						"type": "ScheduleRule",
 						"schedule_day": {
 							"type": "ScheduleDay",
 							"name": "Schedule Rule 182 Day",
-							"interpolate_to_timestep": 'false',
+							"interpolate_to_timestep": False,
 							"day_values": [{
 								"time": {
 									"hour": 7,
@@ -210,7 +210,7 @@ model_sample = {
 								"hour": 0,
 								"minute": 0
 							},
-							"is_leap_year": 'false'
+							"is_leap_year": False
 						},
 						"end_period": {
 							"date": {
@@ -221,23 +221,23 @@ model_sample = {
 								"hour": 24,
 								"minute": 0
 							},
-							"is_leap_year": 'false'
+							"is_leap_year": False
 						},
 						"name": "Schedule Rule 182",
-						"apply_sunday": 'false',
-						"apply_monday": 'true',
-						"apply_tuesday": 'true',
-						"apply_wednesday": 'true',
-						"apply_thursday": 'true',
-						"apply_friday": 'true',
-						"apply_saturday": 'false',
-						"apply_holiday": 'false'
+						"apply_sunday": False,
+						"apply_monday": True,
+						"apply_tuesday": True,
+						"apply_wednesday": True,
+						"apply_thursday": True,
+						"apply_friday": True,
+						"apply_saturday": False,
+						"apply_holiday": False
 					}, {
 						"type": "ScheduleRule",
 						"schedule_day": {
 							"type": "ScheduleDay",
 							"name": "Schedule Rule 183 Day",
-							"interpolate_to_timestep": 'false',
+							"interpolate_to_timestep": False,
 							"day_values": [{
 								"time": {
 									"hour": 24,
@@ -255,7 +255,7 @@ model_sample = {
 								"hour": 0,
 								"minute": 0
 							},
-							"is_leap_year": 'false'
+							"is_leap_year": False
 						},
 						"end_period": {
 							"date": {
@@ -266,23 +266,23 @@ model_sample = {
 								"hour": 24,
 								"minute": 0
 							},
-							"is_leap_year": 'false'
+							"is_leap_year": False
 						},
 						"name": "Schedule Rule 183",
-						"apply_sunday": 'true',
-						"apply_monday": 'false',
-						"apply_tuesday": 'false',
-						"apply_wednesday": 'false',
-						"apply_thursday": 'false',
-						"apply_friday": 'false',
-						"apply_saturday": 'false',
-						"apply_holiday": 'false'
+						"apply_sunday": True,
+						"apply_monday": False,
+						"apply_tuesday": False,
+						"apply_wednesday": False,
+						"apply_thursday": False,
+						"apply_friday": False,
+						"apply_saturday": False,
+						"apply_holiday": False
 					}, {
 						"type": "ScheduleRule",
 						"schedule_day": {
 							"type": "ScheduleDay",
 							"name": "Schedule Rule 184 Day",
-							"interpolate_to_timestep": 'false',
+							"interpolate_to_timestep": False,
 							"day_values": [{
 								"time": {
 									"hour": 7,
@@ -312,7 +312,7 @@ model_sample = {
 								"hour": 0,
 								"minute": 0
 							},
-							"is_leap_year": 'false'
+							"is_leap_year": False
 						},
 						"end_period": {
 							"date": {
@@ -323,23 +323,23 @@ model_sample = {
 								"hour": 24,
 								"minute": 0
 							},
-							"is_leap_year": 'false'
+							"is_leap_year": False
 						},
 						"name": "Schedule Rule 184",
-						"apply_sunday": 'false',
-						"apply_monday": 'false',
-						"apply_tuesday": 'false',
-						"apply_wednesday": 'false',
-						"apply_thursday": 'false',
-						"apply_friday": 'false',
-						"apply_saturday": 'true',
-						"apply_holiday": 'false'
+						"apply_sunday": False,
+						"apply_monday": False,
+						"apply_tuesday": False,
+						"apply_wednesday": False,
+						"apply_thursday": False,
+						"apply_friday": False,
+						"apply_saturday": True,
+						"apply_holiday": False
 					}, {
 						"type": "ScheduleRule",
 						"schedule_day": {
 							"type": "ScheduleDay",
 							"name": "Schedule Rule 185 Day",
-							"interpolate_to_timestep": 'false',
+							"interpolate_to_timestep": False,
 							"day_values": [{
 								"time": {
 									"hour": 7,
@@ -369,7 +369,7 @@ model_sample = {
 								"hour": 0,
 								"minute": 0
 							},
-							"is_leap_year": 'false'
+							"is_leap_year": False
 						},
 						"end_period": {
 							"date": {
@@ -380,23 +380,23 @@ model_sample = {
 								"hour": 24,
 								"minute": 0
 							},
-							"is_leap_year": 'false'
+							"is_leap_year": False
 						},
 						"name": "Schedule Rule 185",
-						"apply_sunday": 'false',
-						"apply_monday": 'true',
-						"apply_tuesday": 'true',
-						"apply_wednesday": 'true',
-						"apply_thursday": 'true',
-						"apply_friday": 'true',
-						"apply_saturday": 'false',
-						"apply_holiday": 'false'
+						"apply_sunday": False,
+						"apply_monday": True,
+						"apply_tuesday": True,
+						"apply_wednesday": True,
+						"apply_thursday": True,
+						"apply_friday": True,
+						"apply_saturday": False,
+						"apply_holiday": False
 					}, {
 						"type": "ScheduleRule",
 						"schedule_day": {
 							"type": "ScheduleDay",
 							"name": "Schedule Rule 186 Day",
-							"interpolate_to_timestep": 'false',
+							"interpolate_to_timestep": False,
 							"day_values": [{
 								"time": {
 									"hour": 24,
@@ -414,7 +414,7 @@ model_sample = {
 								"hour": 0,
 								"minute": 0
 							},
-							"is_leap_year": 'false'
+							"is_leap_year": False
 						},
 						"end_period": {
 							"date": {
@@ -425,23 +425,23 @@ model_sample = {
 								"hour": 24,
 								"minute": 0
 							},
-							"is_leap_year": 'false'
+							"is_leap_year": False
 						},
 						"name": "Schedule Rule 186",
-						"apply_sunday": 'true',
-						"apply_monday": 'false',
-						"apply_tuesday": 'false',
-						"apply_wednesday": 'false',
-						"apply_thursday": 'false',
-						"apply_friday": 'false',
-						"apply_saturday": 'false',
-						"apply_holiday": 'false'
+						"apply_sunday": True,
+						"apply_monday": False,
+						"apply_tuesday": False,
+						"apply_wednesday": False,
+						"apply_thursday": False,
+						"apply_friday": False,
+						"apply_saturday": False,
+						"apply_holiday": False
 					}, {
 						"type": "ScheduleRule",
 						"schedule_day": {
 							"type": "ScheduleDay",
 							"name": "Schedule Rule 187 Day",
-							"interpolate_to_timestep": 'false',
+							"interpolate_to_timestep": False,
 							"day_values": [{
 								"time": {
 									"hour": 7,
@@ -471,7 +471,7 @@ model_sample = {
 								"hour": 0,
 								"minute": 0
 							},
-							"is_leap_year": 'false'
+							"is_leap_year": False
 						},
 						"end_period": {
 							"date": {
@@ -482,23 +482,23 @@ model_sample = {
 								"hour": 24,
 								"minute": 0
 							},
-							"is_leap_year": 'false'
+							"is_leap_year": False
 						},
 						"name": "Schedule Rule 187",
-						"apply_sunday": 'false',
-						"apply_monday": 'false',
-						"apply_tuesday": 'false',
-						"apply_wednesday": 'false',
-						"apply_thursday": 'false',
-						"apply_friday": 'false',
-						"apply_saturday": 'true',
-						"apply_holiday": 'false'
+						"apply_sunday": False,
+						"apply_monday": False,
+						"apply_tuesday": False,
+						"apply_wednesday": False,
+						"apply_thursday": False,
+						"apply_friday": False,
+						"apply_saturday": True,
+						"apply_holiday": False
 					}, {
 						"type": "ScheduleRule",
 						"schedule_day": {
 							"type": "ScheduleDay",
 							"name": "Schedule Rule 188 Day",
-							"interpolate_to_timestep": 'false',
+							"interpolate_to_timestep": False,
 							"day_values": [{
 								"time": {
 									"hour": 7,
@@ -528,7 +528,7 @@ model_sample = {
 								"hour": 0,
 								"minute": 0
 							},
-							"is_leap_year": 'false'
+							"is_leap_year": False
 						},
 						"end_period": {
 							"date": {
@@ -539,17 +539,17 @@ model_sample = {
 								"hour": 24,
 								"minute": 0
 							},
-							"is_leap_year": 'false'
+							"is_leap_year": False
 						},
 						"name": "Schedule Rule 188",
-						"apply_sunday": 'false',
-						"apply_monday": 'true',
-						"apply_tuesday": 'true',
-						"apply_wednesday": 'true',
-						"apply_thursday": 'true',
-						"apply_friday": 'true',
-						"apply_saturday": 'false',
-						"apply_holiday": 'false'
+						"apply_sunday": False,
+						"apply_monday": True,
+						"apply_tuesday": True,
+						"apply_wednesday": True,
+						"apply_thursday": True,
+						"apply_friday": True,
+						"apply_saturday": False,
+						"apply_holiday": False
 					}]
 				}
 			},
