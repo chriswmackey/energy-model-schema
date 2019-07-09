@@ -129,4 +129,4 @@ class ScheduleRuleset(BaseModel):
 
 
 if __name__ == '__main__':
-    print(scheduleruleset.schema_json(indent=2))
+    print(ScheduleRuleset.schema_json(indent=2))

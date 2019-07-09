@@ -31,15 +31,17 @@ class Date(BaseModel):
 
     @validator('day')
     def check_date(cls, v, values):
+        if not 'month' in values:
+            return v
         try:
             datetime.date(2016, values['month'], v)
-        except ValidationError:
-            raise ValidationError(
+        except ValueError:
+            raise ValueError(
                 '{}/{} is not a valid date.'.format(values['month'], v))
         try:
             datetime.date(2017, values['month'], v)
-        except ValidationError:
-            raise ValidationError(
+        except ValueError:
+            raise ValueError(
                 '{}/{} is not a valid date.'.format(values['month'], v))
         else:
             return v
@@ -69,8 +71,11 @@ class Time(BaseModel):
         try:
             datetime.time(values['hour'], v)
 
-        except ValidationError:
-            raise ValidationError(
+        except:
+            if values['hour'] == 24 and v == 00:
+                return v
+            else:
+                raise ValueError(
                 '{}:{} is not a valid time.'.format(values['hour'], v))
         else:
             return v
