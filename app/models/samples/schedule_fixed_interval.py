@@ -1,5 +1,5 @@
 schedule_fixed_interval = {
-    'type': 'schedulefixedinterval',
+    'type': 'ScheduleFixedInterval',
     'name': 'Schedule Fixed Interval 1',
     'start_date': {
         'month': 2,
@@ -11,7 +11,7 @@ schedule_fixed_interval = {
 }
 
 schedule_fixed_interval1 = {
-    'type': 'schedulefixedinterval',
+    'type': 'ScheduleFixedInterval',
     'name': 'Schedule Fixed Interval 2',
     'start_date': {
         'month': 1,
