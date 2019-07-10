@@ -10,7 +10,7 @@ from app.models.common.datetime import Date
 class ScheduleFixedInterval(BaseModel):
     """Used to specify a start date and a list of values for a period of analysis."""
 
-    type: Enum('schedulefixedinterval', {'type': 'schedulefixedinterval'})
+    type: Enum('ScheduleFixedInterval', {'type': 'ScheduleFixedInterval'})
 
     name: str = Schema(
         ...,
