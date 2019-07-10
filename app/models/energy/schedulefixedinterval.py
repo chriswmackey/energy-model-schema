@@ -10,11 +10,15 @@ from app.models.common.datetime import Date
 class ScheduleFixedInterval(BaseModel):
     """Used to specify a start date and a list of values for a period of analysis."""
 
-    type: Enum('schedulefixedinterval', {'type': 'schedulefixedinterval'})
+    type: Enum('ScheduleFixedInterval', {'type': 'ScheduleFixedInterval'})
 
     name: str = Schema(
         ...,
         regex=r'^[\s.A-Za-z0-9_-]*$',
+    )
+
+    interpolate_to_timestep: bool = Schema(
+        False
     )
 
     start_date: Date
@@ -38,7 +42,6 @@ class ScheduleFixedInterval(BaseModel):
             raise ValueError(
                 'Number of values can not be lesser than 24 or greater than 8784 for leap year')
         return v
-
 
 
 if __name__ == '__main__':

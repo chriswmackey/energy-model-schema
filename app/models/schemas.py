@@ -5,8 +5,6 @@ from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
 from app.models.energy.construction import EnergyConstructionOpaque, EnergyConstructionTransparent
-from .energy.scheduleruleset import ScheduleRuleset
-from .energy.schedulefixedinterval import ScheduleFixedInterval
 
 
 class FaceType(str, Enum):
@@ -24,16 +22,6 @@ class Parent(BaseModel):
     name: str = Schema(
         ...,
         regex=r'^[.A-Za-z0-9_-]*$'
-    )
-
-    schedule_ruleset: ScheduleRuleset = Schema(
-        default=None,
-        description='Schedule Ruleset for zone for energy simulation.'
-    )
-
-    schedule_fixed_interval: ScheduleFixedInterval = Schema(
-        default=None,
-        description='Schedule File for zone for energy simulation'
     )
 
 

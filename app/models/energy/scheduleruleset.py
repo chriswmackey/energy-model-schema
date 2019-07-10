@@ -110,7 +110,7 @@ class ScheduleRule(BaseModel):
 class ScheduleRuleset(BaseModel):
     """Used to define a schedule for a default day, further described by ScheduleRule."""
 
-    type: Enum('scheduleruleset', {'type': 'scheduleruleset'})
+    type: Enum('ScheduleRuleset', {'type': 'ScheduleRuleset'})
 
     name: str = Schema(
         ...,

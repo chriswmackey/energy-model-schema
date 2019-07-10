@@ -1,5 +1,5 @@
 schedule_ruleset = {
-    'type': 'scheduleruleset',
+    'type': 'ScheduleRuleset',
     'name': 'Schedule Ruleset',
     'schedule_type_limits': {
         'type': 'ScheduleTypeLimits',
@@ -96,7 +96,7 @@ schedule_ruleset = {
 }
 
 schedule_ruleset_1 = {
-    'type': 'scheduleruleset',
+    'type': 'ScheduleRuleset',
     'name': 'Schedule Ruleset 1',
     'schedule_type_limits': {
         'type': 'ScheduleTypeLimits',
