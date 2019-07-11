@@ -5,7 +5,6 @@ from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
 
-
 class Roughness(str, Enum):
     """
     Relative roughness of a particular material layer.
@@ -285,6 +284,7 @@ class EnergyWindowMaterialGasMixture(BaseModel):
         if total !=1:
             raise ValueError('Sum of gas fractions must be 1.')
         return v
+
 
 
 class EnergyWindowMaterialSimpleGlazSys(BaseModel):
@@ -847,8 +847,8 @@ class EnergyConstructionWindow(BaseModel):
     )
 
     @validator('materials', whole=True)
-    def check_min_items(cls, materials):
-        "Ensure length of material is at least 1."
+    def check_num_items(cls, materials):
+        "Ensure length of material is at least 1 and not more than 8."
         if len(materials) == 0:
             raise ValidationError(
                 'Window construction should at least have one material.'
@@ -891,8 +891,8 @@ class EnergyConstructionOpaque(BaseModel):
     )
 
     @validator('materials', whole=True)
-    def check_min_items(cls, materials):
-        "Ensure length of material is at least 1."
+    def check_num_items(cls, materials):
+        "Ensure length of material is at least 1 and not more than 10."
         if len(materials) == 0:
             raise ValidationError(
                 'Opaque construction should at least have one material.'

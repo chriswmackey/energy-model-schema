@@ -187,6 +187,7 @@ class FaceBase(BaseModel):
         description='Face window construction for energy simulation'
     )
 
+
 class ShadeFace(FaceBase):
     """ShadeFace Schema"""
     type: Enum('ShadeFace', {'type': 'ShadeFace'})
@@ -280,5 +281,5 @@ class ModelOut(BaseModel):
         example='https://api.pollination.cloud/models/7bd00d58-6485-4ca6-b889-3da6d8df3ee4/faces'
     )
 
-if __name__ == '__main__':
-    print(Model.schema_json(indent=2))
+
+print(Model.schema_json(indent=2))
