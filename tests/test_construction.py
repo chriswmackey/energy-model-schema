@@ -1,5 +1,6 @@
-from app.models.energy.construction import EnergyConstructionOpaque, EnergyConstructionTransparent, EnergyMaterial, \
-    EnergyMaterialNoMass, EnergyWindowMaterialAirGap, EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing, \
+from app.models.energy.construction import EnergyConstructionOpaque, EnergyConstructionTransparent, \
+    EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialGas, EnergyWindowMaterialGasCustom, \
+        EnergyWindowMaterialGasMixture, EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing, \
     EnergyWindowMaterialShade, EnergyWindowMaterialSimpleGlazSys
 from app.models.samples.energyconstruction import in_material_internalsource, in_material_gypsum, in_material_stucco, \
     in_material_insulation, in_material_roof_insulation, in_material_metal_decking, in_material_concrete, \
