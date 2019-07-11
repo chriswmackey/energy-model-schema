@@ -42,8 +42,16 @@ def test_materialnomass():
     EnergyMaterialNoMass.parse_obj(in_material_no_mass)
 
 
-def test_windowairgap():
-    EnergyWindowMaterialAirGap.parse_obj(in_window_air_gap)
+def test_windowgas():
+    EnergyWindowMaterialGas.parse_obj(in_window_gas)
+
+
+def test_windowgasmixture(): 
+    EnergyWindowMaterialGasMixture.parse_obj(in_window_gas_mixture)
+
+
+def test_windowgascustom(): 
+    EnergyWindowMaterialGasCustom.parse_obj(in_window_gas_custom)
 
 
 def test_windowsimpleglazing():
@@ -55,7 +63,7 @@ def test_windowshade():
 
 
 def test_cons_transparent():
-    EnergyConstructionTransparent.parse_obj(construction_window)
+    EnergyConstructionTransparent.parse_obj(construction_window2)
 
 
 def test_cons_opaqueroof():
@@ -67,6 +75,9 @@ def test_cons_opaquewall():
 
 
 def test_material_wrong():
+    wrong_name = copy(in_material_internalsource)
+    wrong_name['name'] = ''
+    with pytest.raises(ValidationError): EnergyMaterial.parse_obj(wrong_name)
     wrong_thickness = copy(in_material_internalsource)
     wrong_thickness['thickness'] = 5
     with pytest.raises(ValidationError):
@@ -98,11 +109,11 @@ def test_windowshade_wrong():
     with pytest.raises(ValidationError):
         EnergyWindowMaterialShade.parse_obj(wrong_type)
     wrong_shadedistance = copy(in_window_shade)
-    wrong_shadedistance['shade_toglass_distance'] = 5
+    wrong_shadedistance['distance_to_glass'] = 0
     with pytest.raises(ValidationError):
         EnergyWindowMaterialShade.parse_obj(wrong_shadedistance)
     wrong_airflow = copy(in_window_shade)
-    wrong_airflow['airflow_permeability'] = 0.85
+    wrong_airflow['airflow_permeability'] = 1
     with pytest.raises(ValidationError):
         EnergyWindowMaterialShade.parse_obj(wrong_airflow)
 
@@ -125,20 +136,3 @@ def test_cons_wind():
     elif len(wind_len['materials']) == 0:
         with pytest.raises(ValidationError):
             EnergyConstructionTransparent.parse_obj(construction_window)
-
-
-# def construction_window_layer():
-#    window_wrong = copy(construction_window)
-#    if ((window_wrong['materials'])[0])['type'] or ((window_wrong['materials'])[-1])['type'] == 'EnergyWindowMaterialAirGap':
-#        with pytest.raises(ValidationError):
-#            EnergyConstructionTransparent.parse_obj(construction_window)
-
-# def test_windowairgap_wrong():
-    #gastype = copy(in_window_air_gap)
-    #gastype['gastype'] = 'Argon'
-    # with pytest.raises(ValidationError):
-    #    EnergyWindowMaterialAirGap.parse_obj(gastype)
-    #molecularweight = copy(in_window_air_gap)
-    #molecularweight['molecular_weight'] = 10
-    # with pytest.raises(ValidationError):
-    #    EnergyWindowMaterialAirGap.parse_obj(molecularweight)
