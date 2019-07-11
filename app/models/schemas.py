@@ -4,7 +4,7 @@ from typing import List, Union
 from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
-from .energy.construction import EnergyConstructionOpaque, EnergyConstructionTransparent
+from .energy.construction import EnergyConstructionOpaque, EnergyConstructionWindow
 
 
 class FaceType(str, Enum):
@@ -182,9 +182,9 @@ class FaceBase(BaseModel):
         description='Face opaque construction for energy simulation.'
     )
 
-    energy_construction_transparent: EnergyConstructionTransparent = Schema(
+    energy_construction_window: EnergyConstructionWindow = Schema(
         default=None,
-        description='Face transparent construction for energy simulation'
+        description='Face window construction for energy simulation'
     )
 
 

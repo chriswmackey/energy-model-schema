@@ -816,14 +816,14 @@ class EnergyWindowMaterialShade (BaseModel):
     )
 
 
-class EnergyConstructionTransparent(BaseModel):
+class EnergyConstructionWindow(BaseModel):
     """
     Group of objects to describe the physical properties and configuration for
     the building envelope and interior elements that is the windows of the building.
 
     """
-    type: Enum('EnergyConstructionTransparent', {
-               'type': 'EnergyConstructionTransparent'})
+    type: Enum('EnergyConstructionWindow', {
+               'type': 'EnergyConstructionWindow'})
 
     name: str = Schema(
         ...,
@@ -906,7 +906,7 @@ class EnergyConstructionOpaque(BaseModel):
 
 
 if __name__ == '__main__':
-    print(EnergyConstructionTransparent.schema_json(indent=2))
+    print(EnergyConstructionWindow.schema_json(indent=2))
 
 if __name__ == '__main__':
     print(EnergyConstructionOpaque.schema_json(indent=2))

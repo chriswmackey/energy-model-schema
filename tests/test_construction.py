@@ -1,11 +1,5 @@
-from app.models.energy.construction import EnergyConstructionOpaque, EnergyConstructionTransparent, \
-    EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialGas, EnergyWindowMaterialGasCustom, \
-        EnergyWindowMaterialGasMixture, EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing, \
-    EnergyWindowMaterialShade, EnergyWindowMaterialSimpleGlazSys
-from app.models.samples.energyconstruction import in_material_internalsource, in_material_gypsum, in_material_stucco, \
-    in_material_insulation, in_material_roof_insulation, in_material_metal_decking, in_material_concrete, \
-    in_material_no_mass, in_window_air_gap, in_window_simpleglazing, in_window_blind, in_window_glazing, in_window_shade, \
-    construction_internal_floor, construction_window, construction_window_blind, construction_roof, construction_wall
+from app.models.energy.construction import EnergyConstructionOpaque, EnergyConstructionWindow, EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialGas, EnergyWindowMaterialGasMixture, EnergyWindowMaterialGasCustom, EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing, EnergyWindowMaterialShade, EnergyWindowMaterialSimpleGlazSys
+from app.models.samples.energyconstruction import in_material_internalsource, in_material_gypsum, in_material_stucco, in_material_insulation, in_material_roof_insulation, in_material_metal_decking, in_material_concrete, in_material_no_mass, in_window_simpleglazing, in_window_blind, in_window_glazing, in_window_shade, construction_internal_floor, construction_window, construction_window_blind, construction_roof, construction_wall, in_window_gas, in_window_gas_custom, in_window_gas_mixture,construction_window2
 from copy import copy
 from pydantic import ValidationError
 import pytest
@@ -63,8 +57,8 @@ def test_windowshade():
     EnergyWindowMaterialShade.parse_obj(in_window_shade)
 
 
-def test_cons_transparent():
-    EnergyConstructionTransparent.parse_obj(construction_window2)
+def test_cons_window():
+    EnergyConstructionWindow.parse_obj(construction_window2)
 
 
 def test_cons_opaqueroof():
@@ -133,7 +127,7 @@ def test_cons_wind():
     wind_len = copy(construction_window)
     if len(wind_len['materials']) > 8:
         with pytest.raises(ValidationError):
-            EnergyConstructionTransparent.parse_obj(construction_window)
+            EnergyConstructionWindow.parse_obj(construction_window)
     elif len(wind_len['materials']) == 0:
         with pytest.raises(ValidationError):
-            EnergyConstructionTransparent.parse_obj(construction_window)
+            EnergyConstructionWindow.parse_obj(construction_window)
