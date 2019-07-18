@@ -50,32 +50,6 @@ in_material_insulation = {
     'visible_absorptance': 0.5
 }
 
-in_material_metal = {
-    'type': 'EnergyMaterial',
-    'name': 'Metal Surface',
-    'roughness': 'Smooth',
-    'thickness': '0.0008',
-    'conductivity': 45.28, 
-    'density': 7824,
-    'specific_heat': 500,
-    'thermal_absorptance': 0.9,
-    'solar_absorptance': 0.7,
-    'visible_absorptance': 0.7
-}
-
-in_material_insulation_board = {
-    'type': 'EnergyMaterial',
-    'name': 'Insulation Board',
-    'roughness': 'MediumRough',
-    'thickness': '0.0254',
-    'conductivity': 0.03, 
-    'density': 43,
-    'specific_heat': 1210,
-    'thermal_absorptance': 0.9,
-    'solar_absorptance': 0.6,
-    'visible_absorptance': 0.6
-}
-
 in_material_concrete = {
     'type': 'EnergyMaterial',
     'name': '8in Concrete HW',
@@ -217,41 +191,41 @@ in_window_shade = {
 construction_internal_floor = {
     'type': 'EnergyConstructionOpaque',
     'name': 'Internal Floor',
-    'materials': []
+    'layers': ['CP02 Carpet Pad', 'Internal Source', '8in Concrete HW'],
+    'materials': [in_material_no_mass, in_material_internalsource, in_material_concrete]
 }
 
 construction_window = {
     'type': 'EnergyConstructionWindow',
     'name': 'Exterior Window',
+    'layers': ['Theoretical Glass 167', 'Air 13mm', 'Theoretical Glass 167'],
     'materials': [in_window_glazing, in_window_gas, in_window_glazing]
 }
 
 construction_window2 = {
     'type': 'EnergyConstructionWindow',
     'name': 'Exterior Window - Gas Mixture',
+    'layers': ['Theoretical Glass 167',  'Gas Mixture', 'Theoretical Glass 167'],
     'materials': [in_window_glazing, in_window_gas_mixture, in_window_glazing]
 }
 
 construction_window_blind = {
-    'type': 'EnergyConstruction',
+    'type': 'EnergyConstructionWindow',
     'name': 'Window with Blinds',
+    'layers': ['Window Material Blind 1', 'Fixed Window 2.00 0.40 0.31'],
     'materials': [in_window_blind, in_window_simpleglazing]
 }
 
 construction_wall = {
     'type': 'EnergyConstructionOpaque',
     'name': 'Exterior Wall ASHRAE 2009',
+    'layers': ['1 in Gypsum', '8in Concrete HW', 'Wall Insulation', '1.5 in Gypsum'],
     'materials': [in_material_stucco, in_material_concrete, in_material_insulation, in_material_gypsum]
 }
 
 construction_roof = {
     'type': 'EnergyConstructionOpaque',
     'name': 'Exterior Roof ASHRAE 2009',
+    'layers': ['Metal Surface', 'Insulation Board'],
     'materials': [in_material_roof_membrane, in_material_roof_insulation, in_material_metal_decking]
-}
-
-construction_door = {
-    'type': 'EnergyConstructionOpaque',
-    'name': 'Exterior Door',
-    'materials': [in_material_metal, in_material_insulation_board]
 }

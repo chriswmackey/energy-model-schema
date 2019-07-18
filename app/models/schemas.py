@@ -4,7 +4,7 @@ from typing import List, Union
 from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
-from .energy.construction import EnergyConstructionOpaque, EnergyConstructionWindow
+from .energy.constructionabridged import EnergyConstructionOpaqueAbridged, EnergyConstructionWindowAbridged
 
 
 class FaceType(str, Enum):
@@ -177,12 +177,12 @@ class FaceBase(BaseModel):
         description='Radiance material for direct sunlight simulation.'
     )
 
-    energy_construction_opaque: EnergyConstructionOpaque = Schema(
+    energy_construction_opaque: EnergyConstructionOpaqueAbridged = Schema(
         default=None,
         description='Face opaque construction for energy simulation.'
     )
 
-    energy_construction_window: EnergyConstructionWindow = Schema(
+    energy_construction_window: EnergyConstructionWindowAbridged = Schema(
         default=None,
         description='Face window construction for energy simulation'
     )
