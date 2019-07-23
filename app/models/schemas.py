@@ -4,7 +4,7 @@ from typing import List, Union
 from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
-from .energy.constructionabridged import OpaqueConstructionAbridged, WindowConstructionAbridged
+from .energy.construction import OpaqueConstructionAbridged, WindowConstructionAbridged
 
 
 class FaceType(str, Enum):

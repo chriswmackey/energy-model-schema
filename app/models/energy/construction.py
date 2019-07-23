@@ -7,14 +7,13 @@ from datetime import datetime
 from app.models.energy.materials import EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialGas, EnergyWindowMaterialGasCustom, EnergyWindowMaterialGasMixture, EnergyWindowMaterialSimpleGlazSys, EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing, EnergyWindowMaterialShade
 
 
-class WindowConstruction(BaseModel):
+class WindowConstructionAbridged(BaseModel):
     """
     Group of objects to describe the physical properties and configuration for
     the building envelope and interior elements that is the windows of the building.
-
     """
-    type: Enum('WindowConstruction', {
-               'type': 'WindowConstruction'})
+    type: Enum('WindowConstructionAbridged', {
+               'type': 'WindowConstructionAbridged'})
 
     name: str = Schema(
         ...,
@@ -23,8 +22,39 @@ class WindowConstruction(BaseModel):
         max_length=100
     )
 
-    layers: List[constr(regex=r'^[\s.A-Za-z0-9_-]*$',
-                        min_length=1, max_length=100)]
+    layers: List[constr(regex=r'^[\s.A-Za-z0-9_-]*$', min_length=1, max_length=100)] = Schema(
+        ...,
+        description='List of materials. The order of the materials is from outside to'
+        ' inside.',
+        minItems=1,
+        maxItems=8
+    )
+
+    @validator('layers', whole=True)
+    def check_num_items(cls, layers):
+        "Ensure length of material is at least 1 and not more than 8."
+        if len(layers) == 0:
+            raise ValidationError(
+                'Window construction should at least have one material.'
+            )
+
+        elif len(layers) > 8:
+            raise ValidationError(
+                'Window construction cannot have more than 8 materials.'
+            )
+        else:
+            return layers
+
+
+class WindowConstruction(WindowConstructionAbridged):
+    """
+    Group of objects to describe the physical properties and configuration for
+    the building envelope and interior elements that is the windows of the building.
+
+    """
+    type: Enum('WindowConstruction', {
+               'type': 'WindowConstruction'})
+
 
     materials: List[
         Union[
@@ -56,14 +86,14 @@ class WindowConstruction(BaseModel):
             return materials
 
 
-class OpaqueConstruction(BaseModel):
+class OpaqueConstructionAbridged(BaseModel):
     """
     Group of objects to describe the physical properties and configuration for
     the building envelope and interior elements that is the walls, roofs, floors,
     and doors of the building.
     """
-    type: Enum('OpaqueConstruction', {
-               'type': 'OpaqueConstruction'})
+    type: Enum('OpaqueConstructionAbridged', {
+               'type': 'OpaqueConstructionAbridged'})
 
     name: str = Schema(
         ...,
@@ -72,8 +102,37 @@ class OpaqueConstruction(BaseModel):
         max_length=100
     )
 
-    layers: List[constr(regex=r'^[\s.A-Za-z0-9_-]*$',
-                        min_length=1, max_length=100)]
+    layers: List[constr(regex=r'^[\s.A-Za-z0-9_-]*$', min_length=1, max_length=100)] = Schema(
+        ...,
+        description='List of materials. The order of the materials is from outside to'
+        ' inside.',
+        minItems=1,
+        maxItems=10
+    )
+
+    @validator('layers', whole=True)
+    def check_num_items(cls, layers):
+        "Ensure length of material is at least 1 and not more than 10."
+        if len(layers) == 0:
+            raise ValidationError(
+                'Opaque construction should at least have one material.'
+            )
+        elif len(layers) > 10:
+            raise ValidationError(
+                'Opaque construction cannot have more than 10 materials.'
+            )
+        else:
+            return layers
+
+
+class OpaqueConstruction(OpaqueConstructionAbridged):
+    """
+    Group of objects to describe the physical properties and configuration for
+    the building envelope and interior elements that is the walls, roofs, floors,
+    and doors of the building.
+    """
+    type: Enum('OpaqueConstruction', {
+               'type': 'OpaqueConstruction'})
 
     materials: List[
         Union[
@@ -103,7 +162,15 @@ class OpaqueConstruction(BaseModel):
 
 
 if __name__ == '__main__':
+    print(WindowConstructionAbridged.schema_json(indent=2))
+
+
+if __name__ == '__main__':
     print(WindowConstruction.schema_json(indent=2))
+
+if __name__ == '__main__':
+    print(OpaqueConstructionAbridged.schema_json(indent=2))
+
 
 if __name__ == '__main__':
     print(OpaqueConstruction.schema_json(indent=2))

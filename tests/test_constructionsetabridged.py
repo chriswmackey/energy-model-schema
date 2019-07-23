@@ -1,4 +1,4 @@
-from app.models.energy.constructionsetabridged import ConstructionSetAbridged, WallSetAbridged, RoofCeilingSetAbridged, FloorSetAbridged, ApertureSetAbridged, DoorSetAbridged
+from app.models.energy.constructionset import ConstructionSetAbridged, WallSetAbridged, RoofCeilingSetAbridged, FloorSetAbridged, ApertureSetAbridged, DoorSetAbridged
 from app.models.samples.energyconstructionsetabridged import construction_set, wall_set, roof_ceiling_set, floor_set, door_set, aperture_set, construction_set_1
 from copy import copy
 from pydantic import ValidationError

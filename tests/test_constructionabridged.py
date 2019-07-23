@@ -1,4 +1,4 @@
-from app.models.energy.constructionabridged import OpaqueConstructionAbridged, WindowConstructionAbridged
+from app.models.energy.construction import OpaqueConstructionAbridged, WindowConstructionAbridged
 from app.models.samples.energyconstructionabridged import construction_internal_floor, construction_window, construction_window_blind, construction_roof, construction_wall, construction_window2
 from copy import copy
 from pydantic import ValidationError

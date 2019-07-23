@@ -1,10 +1,10 @@
-"""Construction Set Abridged Schema"""
+"""Construction Set Schema"""
 from pydantic import BaseModel, Schema, validator, ValidationError
 from typing import List, Union
 from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
-from app.models.energy.constructionabridged import OpaqueConstructionAbridged, WindowConstructionAbridged
+from app.models.energy.construction import OpaqueConstructionAbridged, WindowConstructionAbridged
 
 
 class WallSetAbridged(BaseModel):
