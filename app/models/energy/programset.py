@@ -1,6 +1,6 @@
 """Programset Schema"""
 from pydantic import BaseModel, Schema, validator, ValidationError
-from typing import List, Union
+from typing import List, Union, Optional
 from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
@@ -8,10 +8,10 @@ from app.models.energy.scheduleruleset import ScheduleRuleset
 from app.models.energy.schedulefixedinterval import ScheduleFixedInterval
 
 
-class People(BaseModel):
+class PeopleAbridged(BaseModel):
     """Used to model the occupant's effect on the space conditions."""
 
-    type: Enum('People', {'type': 'People'})
+    type: Enum('PeopleAbridged', {'type': 'PeopleAbridged'})
 
     name: str = Schema(
         ...,
@@ -30,7 +30,7 @@ class People(BaseModel):
         0.3,
         ge=0,
         le=1,
-        description='The radiant fraction of sensible heat released by people. The default' 
+        description='The radiant fraction of sensible heat released by people. The default'
         'value is 0.30.'
     )
 
@@ -41,21 +41,27 @@ class People(BaseModel):
         description='Used to specify a fixed latent fraction of heat gain due to people.'
     )
 
-    occupancy_schedule: Union[ScheduleRuleset, ScheduleFixedInterval] = Schema(
+    occupancy_schedule: str = Schema(
         ...,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100,
         description='Used to describe the occupancy schedule for people.'
     )
 
-    activity_schedule: Union[ScheduleRuleset, ScheduleFixedInterval] = Schema(
+    activity_schedule: str = Schema(
         ...,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100,
         description='Schedule that determines the amount of heat gain per person.'
     )
 
 
-class Lighting(BaseModel):
+class LightingAbridged(BaseModel):
     """Used to specify the information about the electric lighting system."""
 
-    type: Enum('Lighting', {'type': 'Lighting'})
+    type: Enum('LightingAbridged', {'type': 'LightingAbridged'})
 
     name: str = Schema(
         ...,
@@ -78,17 +84,21 @@ class Lighting(BaseModel):
         ' value is `0`.'
     )
 
-    schedule: Union[ScheduleRuleset, ScheduleFixedInterval] = Schema(
+    schedule: str = Schema(
         ...,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100,
         description='Used to describe the schedule for lighting as a fraction applied to '
         'design level of lights.'
     )
 
 
-class ElectricalEquipment(BaseModel):
+class ElectricalEquipmentAbridged(BaseModel):
     """Used to specify information about the electrical equipment."""
 
-    type: Enum('ElectricalEquipment', {'type': 'ElectricalEquipment'})
+    type: Enum('ElectricalEquipmentAbridged', {
+               'type': 'ElectricalEquipmentAbridged'})
 
     name: str = Schema(
         ...,
@@ -119,17 +129,20 @@ class ElectricalEquipment(BaseModel):
 
     )
 
-    schedule: Union[ScheduleRuleset, ScheduleFixedInterval] = Schema(
+    schedule: str = Schema(
         ...,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100,
         description='Used to describe the schedule for equipment as a fraction applied to'
         ' design level for electric equipment.'
     )
 
 
-class ProgramSet(BaseModel):
+class ProgramSetAbridged (BaseModel):
     """A set of programs."""
 
-    type: Enum('ProgramSet', {'type': 'ProgramSet'})
+    type: Enum('ProgramSetAbridged', {'type': 'ProgramSetAbridged'})
 
     name: str = Schema(
         ...,
@@ -138,12 +151,12 @@ class ProgramSet(BaseModel):
         max_length=100
     )
 
-    people: People
+    people: PeopleAbridged
 
-    lighting: Lighting
+    lighting: LightingAbridged
 
-    electrical_equipment: ElectricalEquipment
+    electrical_equipment: ElectricalEquipmentAbridged
 
 
 if __name__ == '__main__':
-    print(ProgramSet.schema_json(indent=2))
+    print(ProgramSetAbridged.schema_json(indent=2))

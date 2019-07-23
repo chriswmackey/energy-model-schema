@@ -1,20 +1,20 @@
-from app.models.energy.programset import People, Lighting, ElectricalEquipment, ProgramSet
-from app.models.samples.energyprogramset import program_set, people, lighting, electrical_equipment
+from app.models.energy.programset import PeopleAbridged, LightingAbridged, ElectricalEquipmentAbridged, ProgramSetAbridged
+from app.models.samples.energyprogramset import program_set_abridged, people_abridged, lighting_abridged, electrical_equipment_abridged
 from pydantic import ValidationError
 import pytest
 
 
 def test_program_set():
-    ProgramSet.parse_obj(program_set)
+    ProgramSetAbridged.parse_obj(program_set_abridged)
 
 
 def test_people():
-    People.parse_obj(people)
+    PeopleAbridged.parse_obj(people_abridged)
 
 
 def test_lighting():
-    Lighting.parse_obj(lighting)
+    LightingAbridged.parse_obj(lighting_abridged)
 
 
 def test_electrical_equipment():
-    ElectricalEquipment.parse_obj(electrical_equipment)
+    ElectricalEquipmentAbridged.parse_obj(electrical_equipment_abridged)

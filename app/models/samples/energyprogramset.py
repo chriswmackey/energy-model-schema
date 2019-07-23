@@ -1,117 +1,45 @@
-program_set = {
-    'type': 'ProgramSet',
+program_set_abridged = {
+    'type': 'ProgramSetAbridged',
     'name': 'Program Set',
     'people': {
-        'type': 'People',
+        'type': 'PeopleAbridged',
         'name': 'People Definition',
         'people_per_area': 0.35,
-        'occupancy_schedule': {
-            'type': 'ScheduleFixedInterval',
-            'name': 'Schedule-People Occupancy',
-            'start_date': {
-                'month': 1,
-                'day': 1,
-                'is_leap_year': False,
-            },
-            'values': [0, 0, 0, 0, 0, 0, 0, 0.55, 0.55, 1, 1, 1, 1, 1, 0.55, 0.55, 0.55, 0.55, 0.10, 0.10, 0, 0, 0, 0]
-        },
-        'activity_schedule': {
-            'type': 'ScheduleFixedInterval',
-            'name': 'Schedule-People Activity',
-            'start_date': {
-                'month': 1,
-                'day': 1,
-                'is_leap_year': False,
-            },
-            'values': [117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117]
-        },
+        'occupancy_schedule':'Schedule-People Occupancy',
+        'activity_schedule':'Schedule-People Activity'
     },
     'lighting': {
-        'type': 'Lighting',
+        'type': 'LightingAbridged',
         'name': 'Lighting Definition',
         'lighting_per_area': 17,
-        'schedule': {
-            'type': 'ScheduleFixedInterval',
-            'name': 'Schedule-Lighting',
-            'start_date': {
-                'month': 1,
-                'day': 1,
-                'is_leap_year': False
-            },
-            'values': [0, 0, 0, 0, 0, 0, 0, 0.55, 0.55, 1, 1, 1, 1, 1, 0.55, 0.55, 0.55, 0.55, 0.10, 0.10, 0, 0, 0, 0]
-        }
+        'schedule': 'Schedule-Lighting'
     },
     'electrical_equipment': {
-        'type': 'ElectricalEquipment',
+        'type': 'ElectricalEquipmentAbridged',
         'name': 'Electrical Equipment Definition',
         'equipment_per_area': 12.5,
-        'schedule': {
-            'type': 'ScheduleFixedInterval',
-            'name': 'Schedule-Equipment',
-            'start_date': {
-                'month': 1,
-                'day': 1,
-                'is_leap_year': False
-            },
-            'values': [0.05, 0.05, 0.05, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.8, 1, 1, 1, 1, 1, 0.55, 0.55, 0.35, 0.35, 0.35, 0, 0, 0, 0]
-        }
+        'schedule': 'Schedule-Equipment'
     }
 }
 
-people = {
-    'type': 'People',
+people_abridged = {
+    'type': 'PeopleAbridged',
     'name': 'People Definition',
     'people_per_area': 0.35,
-    'occupancy_schedule': {
-            'type': 'ScheduleFixedInterval',
-            'name': 'Schedule-People Occupancy',
-            'start_date': {
-                'month': 1,
-                'day': 1,
-                'is_leap_year': False,
-            },
-        'values': [0, 0, 0, 0, 0, 0, 0, 0.55, 0.55, 1, 1, 1, 1, 1, 0.55, 0.55, 0.55, 0.55, 0.10, 0.10, 0, 0, 0, 0]
-    },
-    'activity_schedule': {
-        'type': 'ScheduleFixedInterval',
-        'name': 'Schedule-People Activity',
-        'start_date': {
-                'month': 1,
-                'day': 1,
-                'is_leap_year': False,
-        },
-        'values': [117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117, 117]
-    },
+    'occupancy_schedule': 'Schedule-People Occupancy',
+    'activity_schedule': 'Schedule-People Activity'
 }
 
-lighting = {
-    'type': 'Lighting',
+lighting_abridged = {
+    'type': 'LightingAbridged',
     'name': 'Lighting Definition',
     'lighting_per_area': 17,
-    'schedule': {
-            'type': 'ScheduleFixedInterval',
-            'name': 'Schedule-Lighting',
-            'start_date': {
-                'month': 1,
-                'day': 1,
-                'is_leap_year': False
-            },
-        'values': [0, 0, 0, 0, 0, 0, 0, 0.55, 0.55, 1, 1, 1, 1, 1, 0.55, 0.55, 0.55, 0.55, 0.10, 0.10, 0, 0, 0, 0]
-    }
+    'schedule': 'Schedule-Lighting'
 }
 
-electrical_equipment = {
-    'type': 'ElectricalEquipment',
+electrical_equipment_abridged = {
+    'type': 'ElectricalEquipmentAbridged',
     'name': 'Electrical Equipment Definition',
     'equipment_per_area': 12.5,
-    'schedule': {
-            'type': 'ScheduleFixedInterval',
-            'name': 'Schedule-Equipment',
-            'start_date': {
-                'month': 1,
-                'day': 1,
-                'is_leap_year': False
-            },
-        'values': [0.05, 0.05, 0.05, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.8, 1, 1, 1, 1, 1, 0.55, 0.55, 0.35, 0.35, 0.35, 0, 0, 0, 0]
-    }
+    'schedule': 'Schedule-Equipment'
 }
