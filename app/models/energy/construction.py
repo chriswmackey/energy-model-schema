@@ -7,14 +7,14 @@ from datetime import datetime
 from app.models.energy.materials import EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialGas, EnergyWindowMaterialGasCustom, EnergyWindowMaterialGasMixture, EnergyWindowMaterialSimpleGlazSys, EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing, EnergyWindowMaterialShade
 
 
-class EnergyConstructionWindow(BaseModel):
+class WindowConstruction(BaseModel):
     """
     Group of objects to describe the physical properties and configuration for
     the building envelope and interior elements that is the windows of the building.
 
     """
-    type: Enum('EnergyConstructionWindow', {
-               'type': 'EnergyConstructionWindow'})
+    type: Enum('WindowConstruction', {
+               'type': 'WindowConstruction'})
 
     name: str = Schema(
         ...,
@@ -56,14 +56,14 @@ class EnergyConstructionWindow(BaseModel):
             return materials
 
 
-class EnergyConstructionOpaque(BaseModel):
+class OpaqueConstruction(BaseModel):
     """
     Group of objects to describe the physical properties and configuration for
     the building envelope and interior elements that is the walls, roofs, floors,
     and doors of the building.
     """
-    type: Enum('EnergyConstructionOpaque', {
-               'type': 'EnergyConstructionOpaque'})
+    type: Enum('OpaqueConstruction', {
+               'type': 'OpaqueConstruction'})
 
     name: str = Schema(
         ...,
@@ -103,7 +103,7 @@ class EnergyConstructionOpaque(BaseModel):
 
 
 if __name__ == '__main__':
-    print(EnergyConstructionWindow.schema_json(indent=2))
+    print(WindowConstruction.schema_json(indent=2))
 
 if __name__ == '__main__':
-    print(EnergyConstructionOpaque.schema_json(indent=2))
+    print(OpaqueConstruction.schema_json(indent=2))

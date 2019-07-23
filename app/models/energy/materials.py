@@ -815,14 +815,14 @@ class EnergyWindowMaterialShade (BaseModel):
     )
 
 
-class EnergyConstructionWindow(BaseModel):
+class WindowConstruction(BaseModel):
     """
     Group of objects to describe the physical properties and configuration for
     the building envelope and interior elements that is the windows of the building.
 
     """
-    type: Enum('EnergyConstructionWindow', {
-               'type': 'EnergyConstructionWindow'})
+    type: Enum('WindowConstruction', {
+               'type': 'WindowConstruction'})
 
     name: str = Schema(
         ...,

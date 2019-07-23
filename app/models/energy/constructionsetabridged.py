@@ -4,7 +4,7 @@ from typing import List, Union
 from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
-from app.models.energy.constructionabridged import EnergyConstructionOpaqueAbridged, EnergyConstructionWindowAbridged
+from app.models.energy.constructionabridged import OpaqueConstructionAbridged, WindowConstructionAbridged
 
 
 class WallSetAbridged(BaseModel):

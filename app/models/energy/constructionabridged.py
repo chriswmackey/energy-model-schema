@@ -6,13 +6,13 @@ from uuid import UUID, uuid4
 from datetime import datetime
 
 
-class EnergyConstructionWindowAbridged(BaseModel):
+class WindowConstructionAbridged(BaseModel):
     """
     Group of objects to describe the physical properties and configuration for
     the building envelope and interior elements that is the windows of the building.
     """
-    type: Enum('EnergyConstructionWindowAbridged', {
-               'type': 'EnergyConstructionWindowAbridged'})
+    type: Enum('WindowConstructionAbridged', {
+               'type': 'WindowConstructionAbridged'})
 
     name: str = Schema(
         ...,
@@ -45,14 +45,14 @@ class EnergyConstructionWindowAbridged(BaseModel):
             return layers
 
 
-class EnergyConstructionOpaqueAbridged(BaseModel):
+class OpaqueConstructionAbridged(BaseModel):
     """
     Group of objects to describe the physical properties and configuration for
     the building envelope and interior elements that is the walls, roofs, floors,
     and doors of the building.
     """
-    type: Enum('EnergyConstructionOpaqueAbridged', {
-               'type': 'EnergyConstructionOpaqueAbridged'})
+    type: Enum('OpaqueConstructionAbridged', {
+               'type': 'OpaqueConstructionAbridged'})
 
     name: str = Schema(
         ...,
@@ -85,7 +85,7 @@ class EnergyConstructionOpaqueAbridged(BaseModel):
 
 
 if __name__ == '__main__':
-    print(EnergyConstructionWindowAbridged.schema_json(indent=2))
+    print(WindowConstructionAbridged.schema_json(indent=2))
 
 if __name__ == '__main__':
-    print(EnergyConstructionOpaqueAbridged.schema_json(indent=2))
+    print(OpaqueConstructionAbridged.schema_json(indent=2))

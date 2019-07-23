@@ -1,1 +1,1 @@
-{"type": "EnergyConstructionOpaque", "name": "Internal Floor", "materials": []}
+{"type": "OpaqueConstruction", "name": "Internal Floor", "materials": []}
