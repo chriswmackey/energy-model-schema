@@ -49,7 +49,7 @@ model_sample = {
                 }
             ],
             "energy_construction_opaque": {
-                "type": "EnergyConstructionOpaque",
+                "type": "OpaqueConstruction",
                 "name": "construction_internal_floor",
                 "materials": [
                     {
@@ -134,7 +134,7 @@ model_sample = {
                 }
             ],
             "energy_construction_opaque": {
-                "type": "EnergyConstructionOpaque", 
+                "type": "OpaqueConstruction", 
                 "name": "Exterior Roof ASHRAE 2009",
                 "materials": [
                     {
@@ -222,7 +222,7 @@ model_sample = {
                 }
             ],
             "energy_construction_opaque": {
-                "type": "EnergyConstructionOpaque",
+                "type": "OpaqueConstruction",
                 "name": "construction_internal_floor",
                 "materials": [
                     {
@@ -390,7 +390,7 @@ model_sample = {
                 }
             ],
             "energy_construction_opaque": {
-                "type": "EnergyConstructionOpaque",
+                "type": "OpaqueConstruction",
                 "name": "Exterior Wall ASHRAE 2009",
                 "materials": [
                     {
@@ -487,7 +487,7 @@ model_sample = {
                 }
             ],
             "energy_construction_opaque": {
-                "type": "EnergyConstructionOpaque",
+                "type": "OpaqueConstruction",
                 "name": "Exterior Wall ASHRAE 2009",
                 "materials": [
                     {
@@ -584,7 +584,7 @@ model_sample = {
                 }
             ],
             "energy_construction_opaque": {
-                "type": "EnergyConstructionOpaque",
+                "type": "OpaqueConstruction",
                 "name": "Exterior Wall ASHRAE 2009",
                 "materials": [
                     {
