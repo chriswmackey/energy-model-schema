@@ -1,0 +1,1659 @@
+{
+    "type": "Model",
+    "name": "MultiZoneSingleFamilyHouse",
+    "name_original": "Multi Zone Single Family House",
+    "properties": {
+        "type": "ModelProperties",
+        "energy": {
+            "type": "ModelEnergyProperties",
+            "global_construction_set": {
+                "type": "ConstructionSetAbridged",
+                "name": "Default Generic Construction Set",
+                "wall_set": {
+                    "type": "WallSetAbridged",
+                    "exterior_construction": "Generic Exterior Brick Wall",
+                    "interior_construction": "Generic Interior Wall",
+                    "ground_construction": "Generic Underground Wall"
+                },
+                "floor_set": {
+                    "type": "FloorSetAbridged",
+                    "exterior_construction": "Generic Exposed Floor Slab",
+                    "interior_construction": "Generic Interior Floor",
+                    "ground_construction": "Generic Ground Slab"
+                },
+                "roof_ceiling_set": {
+                    "type": "RoofCeilingSetAbridged",
+                    "exterior_construction": "Generic Roof",
+                    "interior_construction": "Generic Interior Ceiling",
+                    "ground_construction": "Generic Underground Roof"
+                },
+                "aperture_set": {
+                    "type": "ApertureSetAbridged",
+                    "fixed_window_construction": "Generic Double Pane Window",
+                    "interior_construction": "Generic Single Pane Window",
+                    "skylight_construction": "Generic Double Pane Window",
+                    "operable_window_construction": "Generic Double Pane Window",
+                    "glass_door_construction": "Generic Double Pane Window"
+                },
+                "door_set": {
+                    "type": "DoorSetAbridged",
+                    "exterior_construction": "Generic Exterior Door",
+                    "interior_construction": "Generic Interior Door",
+                    "overhead_construction": "Generic Exterior Door"
+                }
+            },
+            "construction_sets": [
+                {
+                    "type": "ConstructionSetAbridged",
+                    "name": "Attic Construction Set",
+                    "wall_set": {
+                        "type": "WallSetAbridged",
+                        "exterior_construction": null,
+                        "interior_construction": null,
+                        "ground_construction": null
+                    },
+                    "floor_set": {
+                        "type": "FloorSetAbridged",
+                        "exterior_construction": null,
+                        "interior_construction": "Attic Floor Construction",
+                        "ground_construction": null
+                    },
+                    "roof_ceiling_set": {
+                        "type": "RoofCeilingSetAbridged",
+                        "exterior_construction": "Attic Roof Construction",
+                        "interior_construction": null,
+                        "ground_construction": null
+                    },
+                    "aperture_set": {
+                        "type": "ApertureSetAbridged",
+                        "fixed_window_construction": null,
+                        "interior_construction": null,
+                        "skylight_construction": null,
+                        "operable_window_construction": null,
+                        "glass_door_construction": null
+                    },
+                    "door_set": {
+                        "type": "DoorSetAbridged",
+                        "exterior_construction": null,
+                        "interior_construction": null,
+                        "overhead_construction": null
+                    }
+                }
+            ],
+            "constructions": [
+                {
+                    "type": "OpaqueConstructionAbridged",
+                    "name": "Generic Underground Roof",
+                    "layers": [
+                        "Generic 50mm Insulation Board",
+                        "Generic Heavyweight Concrete",
+                        "Generic Ceiling Air Gap",
+                        "Generic Acoustic Tile"
+                    ]
+                },
+                {
+                    "type": "OpaqueConstructionAbridged",
+                    "name": "Generic Interior Floor",
+                    "layers": [
+                        "Generic Acoustic Tile",
+                        "Generic Ceiling Air Gap",
+                        "Generic Lightweight Concrete"
+                    ]
+                },
+                {
+                    "type": "OpaqueConstructionAbridged",
+                    "name": "Generic Interior Ceiling",
+                    "layers": [
+                        "Generic Lightweight Concrete",
+                        "Generic Ceiling Air Gap",
+                        "Generic Acoustic Tile"
+                    ]
+                },
+                {
+                    "type": "OpaqueConstructionAbridged",
+                    "name": "Generic Roof",
+                    "layers": [
+                        "Generic Roof Membrane",
+                        "Generic 50mm Insulation Board",
+                        "Generic Lightweight Concrete",
+                        "Generic Ceiling Air Gap",
+                        "Generic Acoustic Tile"
+                    ]
+                },
+                {
+                    "type": "WindowConstructionAbridged",
+                    "name": "Generic Single Pane Window",
+                    "layers": [
+                        "Generic Clear Glass"
+                    ]
+                },
+                {
+                    "type": "OpaqueConstructionAbridged",
+                    "name": "Generic Exposed Floor Slab",
+                    "layers": [
+                        "Generic Metal Surface",
+                        "Generic Ceiling Air Gap",
+                        "Generic 50mm Insulation Board",
+                        "Generic Lightweight Concrete"
+                    ]
+                },
+                {
+                    "type": "OpaqueConstructionAbridged",
+                    "name": "Generic Underground Wall",
+                    "layers": [
+                        "Generic 50mm Insulation Board",
+                        "Generic Heavyweight Concrete"
+                    ]
+                },
+                {
+                    "type": "WindowConstructionAbridged",
+                    "name": "Generic Double Pane Window",
+                    "layers": [
+                        "Generic Clear Glass",
+                        "Generic Window Air Gap",
+                        "Generic Clear Glass"
+                    ]
+                },
+                {
+                    "type": "OpaqueConstructionAbridged",
+                    "name": "Generic Interior Wall",
+                    "layers": [
+                        "Generic Gypsum Board",
+                        "Generic Wall Air Gap",
+                        "Generic Gypsum Board"
+                    ]
+                },
+                {
+                    "type": "OpaqueConstructionAbridged",
+                    "name": "Attic Roof Construction",
+                    "layers": [
+                        "Generic Roof Membrane",
+                        "PolyIso",
+                        "Generic 25mm Wood"
+                    ]
+                },
+                {
+                    "type": "OpaqueConstructionAbridged",
+                    "name": "Generic Ground Slab",
+                    "layers": [
+                        "Generic 50mm Insulation Board",
+                        "Generic Heavyweight Concrete"
+                    ]
+                },
+                {
+                    "type": "OpaqueConstructionAbridged",
+                    "name": "Generic Interior Door",
+                    "layers": [
+                        "Generic 25mm Wood"
+                    ]
+                },
+                {
+                    "type": "OpaqueConstructionAbridged",
+                    "name": "Attic Floor Construction",
+                    "layers": [
+                        "Generic 25mm Wood",
+                        "Generic 50mm Insulation Board",
+                        "Generic 25mm Wood"
+                    ]
+                },
+                {
+                    "type": "OpaqueConstructionAbridged",
+                    "name": "Generic Exterior Door",
+                    "layers": [
+                        "Generic Metal Surface",
+                        "Generic 25mm Insulation Board",
+                        "Generic Metal Surface"
+                    ]
+                },
+                {
+                    "type": "OpaqueConstructionAbridged",
+                    "name": "Generic Exterior Brick Wall",
+                    "layers": [
+                        "Generic Brick",
+                        "Generic Lightweight Concrete",
+                        "Generic 50mm Insulation Board",
+                        "Generic Wall Air Gap",
+                        "Generic Gypsum Board"
+                    ]
+                }
+            ],
+            "materials": [
+                {
+                    "type": "EnergyMaterial",
+                    "name": "Generic Brick",
+                    "roughness": "MediumRough",
+                    "thickness": 0.1,
+                    "conductivity": 0.9,
+                    "density": 1920.0,
+                    "specific_heat": 790.0,
+                    "thermal_absorptance": 0.9,
+                    "solar_absorptance": 0.7,
+                    "visible_absorptance": 0.7
+                },
+                {
+                    "type": "EnergyMaterial",
+                    "name": "Generic Ceiling Air Gap",
+                    "roughness": "Smooth",
+                    "thickness": 0.1,
+                    "conductivity": 0.556,
+                    "density": 1.28,
+                    "specific_heat": 1000.0,
+                    "thermal_absorptance": 0.9,
+                    "solar_absorptance": 0.7,
+                    "visible_absorptance": 0.7
+                },
+                {
+                    "type": "EnergyMaterial",
+                    "name": "Generic Metal Surface",
+                    "roughness": "Smooth",
+                    "thickness": 0.0015,
+                    "conductivity": 45.0,
+                    "density": 7690.0,
+                    "specific_heat": 410.0,
+                    "thermal_absorptance": 0.9,
+                    "solar_absorptance": 0.5,
+                    "visible_absorptance": 0.5
+                },
+                {
+                    "type": "EnergyMaterial",
+                    "name": "Generic Lightweight Concrete",
+                    "roughness": "MediumRough",
+                    "thickness": 0.1,
+                    "conductivity": 0.53,
+                    "density": 1280.0,
+                    "specific_heat": 840.0,
+                    "thermal_absorptance": 0.9,
+                    "solar_absorptance": 0.8,
+                    "visible_absorptance": 0.8
+                },
+                {
+                    "type": "EnergyWindowMaterialGlazing",
+                    "name": "Generic Clear Glass",
+                    "thickness": 0.006,
+                    "solar_transmittance": 0.771,
+                    "solar_reflectance": 0.07,
+                    "solar_reflectance_back": 0.07,
+                    "visible_transmittance": 0.884,
+                    "visible_reflectance": 0.0804,
+                    "visible_reflectance_back": 0.0804,
+                    "infrared_transmittance": 0.0,
+                    "emissivity": 0.84,
+                    "emissivity_back": 0.84,
+                    "conductivity": 1.0,
+                    "dirt_correction": 1.0,
+                    "solar_diffusing": false
+                },
+                {
+                    "type": "EnergyMaterial",
+                    "name": "Generic Gypsum Board",
+                    "roughness": "MediumSmooth",
+                    "thickness": 0.0127,
+                    "conductivity": 0.16,
+                    "density": 800.0,
+                    "specific_heat": 1090.0,
+                    "thermal_absorptance": 0.9,
+                    "solar_absorptance": 0.5,
+                    "visible_absorptance": 0.5
+                },
+                {
+                    "type": "EnergyMaterial",
+                    "name": "Generic Wall Air Gap",
+                    "roughness": "Smooth",
+                    "thickness": 0.1,
+                    "conductivity": 0.667,
+                    "density": 1.28,
+                    "specific_heat": 1000.0,
+                    "thermal_absorptance": 0.9,
+                    "solar_absorptance": 0.7,
+                    "visible_absorptance": 0.7
+                },
+                {
+                    "type": "EnergyMaterial",
+                    "name": "Generic 50mm Insulation Board",
+                    "roughness": "MediumRough",
+                    "thickness": 0.05,
+                    "conductivity": 0.03,
+                    "density": 43.0,
+                    "specific_heat": 1210.0,
+                    "thermal_absorptance": 0.9,
+                    "solar_absorptance": 0.7,
+                    "visible_absorptance": 0.7
+                },
+                {
+                    "type": "EnergyMaterial",
+                    "name": "Generic 25mm Wood",
+                    "roughness": "MediumSmooth",
+                    "thickness": 0.0254,
+                    "conductivity": 0.15,
+                    "density": 608.0,
+                    "specific_heat": 1630.0,
+                    "thermal_absorptance": 0.9,
+                    "solar_absorptance": 0.5,
+                    "visible_absorptance": 0.5
+                },
+                {
+                    "type": "EnergyMaterial",
+                    "name": "Generic Acoustic Tile",
+                    "roughness": "MediumSmooth",
+                    "thickness": 0.02,
+                    "conductivity": 0.06,
+                    "density": 368.0,
+                    "specific_heat": 590.0,
+                    "thermal_absorptance": 0.9,
+                    "solar_absorptance": 0.3,
+                    "visible_absorptance": 0.3
+                },
+                {
+                    "type": "EnergyMaterial",
+                    "name": "PolyIso",
+                    "roughness": "MediumRough",
+                    "thickness": 0.2,
+                    "conductivity": 0.03,
+                    "density": 43.0,
+                    "specific_heat": 1210.0,
+                    "thermal_absorptance": 0.9,
+                    "solar_absorptance": 0.7,
+                    "visible_absorptance": 0.7
+                },
+                {
+                    "type": "EnergyMaterial",
+                    "name": "Generic 25mm Insulation Board",
+                    "roughness": "MediumRough",
+                    "thickness": 0.05,
+                    "conductivity": 0.03,
+                    "density": 43.0,
+                    "specific_heat": 1210.0,
+                    "thermal_absorptance": 0.9,
+                    "solar_absorptance": 0.7,
+                    "visible_absorptance": 0.7
+                },
+                {
+                    "type": "EnergyWindowMaterialGas",
+                    "name": "Generic Window Air Gap",
+                    "thickness": 0.0127,
+                    "gas_type": "Air"
+                },
+                {
+                    "type": "EnergyMaterial",
+                    "name": "Generic Roof Membrane",
+                    "roughness": "MediumRough",
+                    "thickness": 0.01,
+                    "conductivity": 0.16,
+                    "density": 1120.0,
+                    "specific_heat": 1460.0,
+                    "thermal_absorptance": 0.9,
+                    "solar_absorptance": 0.7,
+                    "visible_absorptance": 0.7
+                },
+                {
+                    "type": "EnergyMaterial",
+                    "name": "Generic Heavyweight Concrete",
+                    "roughness": "MediumRough",
+                    "thickness": 0.2,
+                    "conductivity": 1.95,
+                    "density": 2240.0,
+                    "specific_heat": 900.0,
+                    "thermal_absorptance": 0.9,
+                    "solar_absorptance": 0.8,
+                    "visible_absorptance": 0.8
+                }
+            ]
+        }
+    },
+    "rooms": [
+        {
+            "type": "RoomAbridged",
+            "name": "FirstFloor",
+            "name_original": "First Floor",
+            "properties": {
+                "type": "RoomProperties",
+                "energy": {
+                    "type": "RoomEnergyPropertiesAbridged",
+                    "program_type": null,
+                    "construction_set": null,
+                    "people": null,
+                    "lighting": null,
+                    "electric_equipment": null,
+                    "gas_equipment": null,
+                    "infiltration": null,
+                    "ventilation": null
+                }
+            },
+            "faces": [
+                "FirstFloor_Bottom",
+                "FirstFloor_Front",
+                "FirstFloor_Right",
+                "FirstFloor_Back",
+                "FirstFloor_Left",
+                "FirstFloor_Top"
+            ]
+        },
+        {
+            "type": "RoomAbridged",
+            "name": "SecondFloor",
+            "name_original": "Second Floor",
+            "properties": {
+                "type": "RoomProperties",
+                "energy": {
+                    "type": "RoomEnergyPropertiesAbridged",
+                    "program_type": null,
+                    "construction_set": null,
+                    "people": null,
+                    "lighting": null,
+                    "electric_equipment": null,
+                    "gas_equipment": null,
+                    "infiltration": null,
+                    "ventilation": null
+                }
+            },
+            "faces": [
+                "SecondFloor_Bottom",
+                "SecondFloor_Front",
+                "SecondFloor_Right",
+                "SecondFloor_Back",
+                "SecondFloor_Left",
+                "SecondFloor_Top"
+            ]
+        },
+        {
+            "type": "RoomAbridged",
+            "name": "Attic",
+            "name_original": "Attic",
+            "properties": {
+                "type": "RoomProperties",
+                "energy": {
+                    "type": "RoomEnergyPropertiesAbridged",
+                    "program_type": null,
+                    "construction_set": "Attic Construction Set",
+                    "people": null,
+                    "lighting": null,
+                    "electric_equipment": null,
+                    "gas_equipment": null,
+                    "infiltration": null,
+                    "ventilation": null
+                }
+            },
+            "faces": [
+                "AtticFace1",
+                "AtticFace2",
+                "AtticFace3",
+                "AtticFace4",
+                "AtticFace5"
+            ]
+        }
+    ],
+    "faces": [
+        {
+            "type": "FaceAbridged",
+            "name": "FirstFloor_Bottom",
+            "name_original": "First Floor_Bottom",
+            "geometry": {
+                "type": "Face3D",
+                "boundary": [
+                    [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    [
+                        0.0,
+                        10.0,
+                        0.0
+                    ],
+                    [
+                        10.0,
+                        10.0,
+                        0.0
+                    ],
+                    [
+                        10.0,
+                        0.0,
+                        0.0
+                    ]
+                ]
+            },
+            "properties": {
+                "type": "FaceProperties",
+                "energy": {
+                    "type": "FaceEnergyPropertiesAbridged"
+                }
+            },
+            "face_type": {
+                "type": "Floor"
+            },
+            "boundary_condition": {
+                "type": "Ground",
+                "sun_exposure": "NoSun",
+                "wind_exposure": "NoWind",
+                "view_factor": "autocalculate"
+            },
+            "parent": "FirstFloor"
+        },
+        {
+            "type": "FaceAbridged",
+            "name": "FirstFloor_Front",
+            "name_original": "First Floor_Front",
+            "geometry": {
+                "type": "Face3D",
+                "boundary": [
+                    [
+                        10.0,
+                        10.0,
+                        0.0
+                    ],
+                    [
+                        0.0,
+                        10.0,
+                        0.0
+                    ],
+                    [
+                        0.0,
+                        10.0,
+                        3.0
+                    ],
+                    [
+                        10.0,
+                        10.0,
+                        3.0
+                    ]
+                ]
+            },
+            "properties": {
+                "type": "FaceProperties",
+                "energy": {
+                    "type": "FaceEnergyPropertiesAbridged"
+                }
+            },
+            "face_type": {
+                "type": "Wall"
+            },
+            "boundary_condition": {
+                "type": "Outdoors",
+                "sun_exposure": "SunExposed",
+                "wind_exposure": "WindExposed",
+                "view_factor": "autocalculate"
+            },
+            "parent": "FirstFloor",
+            "apertures": [
+                "FirstFloor_Front_Glz0"
+            ]
+        },
+        {
+            "type": "FaceAbridged",
+            "name": "FirstFloor_Right",
+            "name_original": "First Floor_Right",
+            "geometry": {
+                "type": "Face3D",
+                "boundary": [
+                    [
+                        10.0,
+                        10.0,
+                        3.0
+                    ],
+                    [
+                        10.0,
+                        0.0,
+                        3.0
+                    ],
+                    [
+                        10.0,
+                        0.0,
+                        0.0
+                    ],
+                    [
+                        10.0,
+                        10.0,
+                        0.0
+                    ]
+                ]
+            },
+            "properties": {
+                "type": "FaceProperties",
+                "energy": {
+                    "type": "FaceEnergyPropertiesAbridged"
+                }
+            },
+            "face_type": {
+                "type": "Wall"
+            },
+            "boundary_condition": {
+                "type": "Outdoors",
+                "sun_exposure": "SunExposed",
+                "wind_exposure": "WindExposed",
+                "view_factor": "autocalculate"
+            },
+            "parent": "FirstFloor",
+            "apertures": [
+                "FirstFloor_Right_Glz0"
+            ]
+        },
+        {
+            "type": "FaceAbridged",
+            "name": "FirstFloor_Back",
+            "name_original": "First Floor_Back",
+            "geometry": {
+                "type": "Face3D",
+                "boundary": [
+                    [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    [
+                        10.0,
+                        0.0,
+                        0.0
+                    ],
+                    [
+                        10.0,
+                        0.0,
+                        3.0
+                    ],
+                    [
+                        0.0,
+                        0.0,
+                        3.0
+                    ]
+                ]
+            },
+            "properties": {
+                "type": "FaceProperties",
+                "energy": {
+                    "type": "FaceEnergyPropertiesAbridged"
+                }
+            },
+            "face_type": {
+                "type": "Wall"
+            },
+            "boundary_condition": {
+                "type": "Outdoors",
+                "sun_exposure": "SunExposed",
+                "wind_exposure": "WindExposed",
+                "view_factor": "autocalculate"
+            },
+            "parent": "FirstFloor",
+            "apertures": [
+                "FirstFloor_Back_Glz0"
+            ]
+        },
+        {
+            "type": "FaceAbridged",
+            "name": "FirstFloor_Left",
+            "name_original": "First Floor_Left",
+            "geometry": {
+                "type": "Face3D",
+                "boundary": [
+                    [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    [
+                        0.0,
+                        0.0,
+                        3.0
+                    ],
+                    [
+                        0.0,
+                        10.0,
+                        3.0
+                    ],
+                    [
+                        0.0,
+                        10.0,
+                        0.0
+                    ]
+                ]
+            },
+            "properties": {
+                "type": "FaceProperties",
+                "energy": {
+                    "type": "FaceEnergyPropertiesAbridged"
+                }
+            },
+            "face_type": {
+                "type": "Wall"
+            },
+            "boundary_condition": {
+                "type": "Outdoors",
+                "sun_exposure": "SunExposed",
+                "wind_exposure": "WindExposed",
+                "view_factor": "autocalculate"
+            },
+            "parent": "FirstFloor",
+            "apertures": [
+                "FirstFloor_Left_Glz0"
+            ]
+        },
+        {
+            "type": "FaceAbridged",
+            "name": "FirstFloor_Top",
+            "name_original": "First Floor_Top",
+            "geometry": {
+                "type": "Face3D",
+                "boundary": [
+                    [
+                        10.0,
+                        0.0,
+                        3.0
+                    ],
+                    [
+                        10.0,
+                        10.0,
+                        3.0
+                    ],
+                    [
+                        0.0,
+                        10.0,
+                        3.0
+                    ],
+                    [
+                        0.0,
+                        0.0,
+                        3.0
+                    ]
+                ]
+            },
+            "properties": {
+                "type": "FaceProperties",
+                "energy": {
+                    "type": "FaceEnergyPropertiesAbridged"
+                }
+            },
+            "face_type": {
+                "type": "RoofCeiling"
+            },
+            "boundary_condition": {
+                "type": "Surface",
+                "sun_exposure": "NoSun",
+                "wind_exposure": "NoWind",
+                "view_factor": "autocalculate",
+                "bc_object": "SecondFloor_Bottom"
+            },
+            "parent": "FirstFloor"
+        },
+        {
+            "type": "FaceAbridged",
+            "name": "SecondFloor_Bottom",
+            "name_original": "Second Floor_Bottom",
+            "geometry": {
+                "type": "Face3D",
+                "boundary": [
+                    [
+                        0.0,
+                        0.0,
+                        3.0
+                    ],
+                    [
+                        0.0,
+                        10.0,
+                        3.0
+                    ],
+                    [
+                        10.0,
+                        10.0,
+                        3.0
+                    ],
+                    [
+                        10.0,
+                        0.0,
+                        3.0
+                    ]
+                ]
+            },
+            "properties": {
+                "type": "FaceProperties",
+                "energy": {
+                    "type": "FaceEnergyPropertiesAbridged"
+                }
+            },
+            "face_type": {
+                "type": "Floor"
+            },
+            "boundary_condition": {
+                "type": "Surface",
+                "sun_exposure": "NoSun",
+                "wind_exposure": "NoWind",
+                "view_factor": "autocalculate",
+                "bc_object": "FirstFloor_Top"
+            },
+            "parent": "SecondFloor"
+        },
+        {
+            "type": "FaceAbridged",
+            "name": "SecondFloor_Front",
+            "name_original": "Second Floor_Front",
+            "geometry": {
+                "type": "Face3D",
+                "boundary": [
+                    [
+                        10.0,
+                        10.0,
+                        3.0
+                    ],
+                    [
+                        0.0,
+                        10.0,
+                        3.0
+                    ],
+                    [
+                        0.0,
+                        10.0,
+                        6.0
+                    ],
+                    [
+                        10.0,
+                        10.0,
+                        6.0
+                    ]
+                ]
+            },
+            "properties": {
+                "type": "FaceProperties",
+                "energy": {
+                    "type": "FaceEnergyPropertiesAbridged"
+                }
+            },
+            "face_type": {
+                "type": "Wall"
+            },
+            "boundary_condition": {
+                "type": "Outdoors",
+                "sun_exposure": "SunExposed",
+                "wind_exposure": "WindExposed",
+                "view_factor": "autocalculate"
+            },
+            "parent": "SecondFloor",
+            "apertures": [
+                "SecondFloor_Front_Glz0"
+            ]
+        },
+        {
+            "type": "FaceAbridged",
+            "name": "SecondFloor_Right",
+            "name_original": "Second Floor_Right",
+            "geometry": {
+                "type": "Face3D",
+                "boundary": [
+                    [
+                        10.0,
+                        10.0,
+                        6.0
+                    ],
+                    [
+                        10.0,
+                        0.0,
+                        6.0
+                    ],
+                    [
+                        10.0,
+                        0.0,
+                        3.0
+                    ],
+                    [
+                        10.0,
+                        10.0,
+                        3.0
+                    ]
+                ]
+            },
+            "properties": {
+                "type": "FaceProperties",
+                "energy": {
+                    "type": "FaceEnergyPropertiesAbridged"
+                }
+            },
+            "face_type": {
+                "type": "Wall"
+            },
+            "boundary_condition": {
+                "type": "Outdoors",
+                "sun_exposure": "SunExposed",
+                "wind_exposure": "WindExposed",
+                "view_factor": "autocalculate"
+            },
+            "parent": "SecondFloor",
+            "apertures": [
+                "SecondFloor_Right_Glz0"
+            ]
+        },
+        {
+            "type": "FaceAbridged",
+            "name": "SecondFloor_Back",
+            "name_original": "Second Floor_Back",
+            "geometry": {
+                "type": "Face3D",
+                "boundary": [
+                    [
+                        0.0,
+                        0.0,
+                        3.0
+                    ],
+                    [
+                        10.0,
+                        0.0,
+                        3.0
+                    ],
+                    [
+                        10.0,
+                        0.0,
+                        6.0
+                    ],
+                    [
+                        0.0,
+                        0.0,
+                        6.0
+                    ]
+                ]
+            },
+            "properties": {
+                "type": "FaceProperties",
+                "energy": {
+                    "type": "FaceEnergyPropertiesAbridged"
+                }
+            },
+            "face_type": {
+                "type": "Wall"
+            },
+            "boundary_condition": {
+                "type": "Outdoors",
+                "sun_exposure": "SunExposed",
+                "wind_exposure": "WindExposed",
+                "view_factor": "autocalculate"
+            },
+            "parent": "SecondFloor",
+            "apertures": [
+                "SecondFloor_Back_Glz0"
+            ]
+        },
+        {
+            "type": "FaceAbridged",
+            "name": "SecondFloor_Left",
+            "name_original": "Second Floor_Left",
+            "geometry": {
+                "type": "Face3D",
+                "boundary": [
+                    [
+                        0.0,
+                        0.0,
+                        3.0
+                    ],
+                    [
+                        0.0,
+                        0.0,
+                        6.0
+                    ],
+                    [
+                        0.0,
+                        10.0,
+                        6.0
+                    ],
+                    [
+                        0.0,
+                        10.0,
+                        3.0
+                    ]
+                ]
+            },
+            "properties": {
+                "type": "FaceProperties",
+                "energy": {
+                    "type": "FaceEnergyPropertiesAbridged"
+                }
+            },
+            "face_type": {
+                "type": "Wall"
+            },
+            "boundary_condition": {
+                "type": "Outdoors",
+                "sun_exposure": "SunExposed",
+                "wind_exposure": "WindExposed",
+                "view_factor": "autocalculate"
+            },
+            "parent": "SecondFloor",
+            "apertures": [
+                "SecondFloor_Left_Glz0"
+            ]
+        },
+        {
+            "type": "FaceAbridged",
+            "name": "SecondFloor_Top",
+            "name_original": "Second Floor_Top",
+            "geometry": {
+                "type": "Face3D",
+                "boundary": [
+                    [
+                        10.0,
+                        0.0,
+                        6.0
+                    ],
+                    [
+                        10.0,
+                        10.0,
+                        6.0
+                    ],
+                    [
+                        0.0,
+                        10.0,
+                        6.0
+                    ],
+                    [
+                        0.0,
+                        0.0,
+                        6.0
+                    ]
+                ]
+            },
+            "properties": {
+                "type": "FaceProperties",
+                "energy": {
+                    "type": "FaceEnergyPropertiesAbridged"
+                }
+            },
+            "face_type": {
+                "type": "RoofCeiling"
+            },
+            "boundary_condition": {
+                "type": "Surface",
+                "sun_exposure": "NoSun",
+                "wind_exposure": "NoWind",
+                "view_factor": "autocalculate",
+                "bc_object": "AtticFace1"
+            },
+            "parent": "SecondFloor"
+        },
+        {
+            "type": "FaceAbridged",
+            "name": "AtticFace1",
+            "name_original": "Attic Face 1",
+            "geometry": {
+                "type": "Face3D",
+                "boundary": [
+                    [
+                        0.0,
+                        0.0,
+                        6.0
+                    ],
+                    [
+                        0.0,
+                        10.0,
+                        6.0
+                    ],
+                    [
+                        10.0,
+                        10.0,
+                        6.0
+                    ],
+                    [
+                        10.0,
+                        0.0,
+                        6.0
+                    ]
+                ]
+            },
+            "properties": {
+                "type": "FaceProperties",
+                "energy": {
+                    "type": "FaceEnergyPropertiesAbridged"
+                }
+            },
+            "face_type": {
+                "type": "Floor"
+            },
+            "boundary_condition": {
+                "type": "Surface",
+                "sun_exposure": "NoSun",
+                "wind_exposure": "NoWind",
+                "view_factor": "autocalculate",
+                "bc_object": "SecondFloor_Top"
+            },
+            "parent": "Attic"
+        },
+        {
+            "type": "FaceAbridged",
+            "name": "AtticFace2",
+            "name_original": "Attic Face 2",
+            "geometry": {
+                "type": "Face3D",
+                "boundary": [
+                    [
+                        0.0,
+                        0.0,
+                        6.0
+                    ],
+                    [
+                        5.0,
+                        0.0,
+                        9.0
+                    ],
+                    [
+                        5.0,
+                        10.0,
+                        9.0
+                    ],
+                    [
+                        0.0,
+                        10.0,
+                        6.0
+                    ]
+                ]
+            },
+            "properties": {
+                "type": "FaceProperties",
+                "energy": {
+                    "type": "FaceEnergyPropertiesAbridged"
+                }
+            },
+            "face_type": {
+                "type": "Wall"
+            },
+            "boundary_condition": {
+                "type": "Outdoors",
+                "sun_exposure": "SunExposed",
+                "wind_exposure": "WindExposed",
+                "view_factor": "autocalculate"
+            },
+            "parent": "Attic"
+        },
+        {
+            "type": "FaceAbridged",
+            "name": "AtticFace3",
+            "name_original": "Attic Face 3",
+            "geometry": {
+                "type": "Face3D",
+                "boundary": [
+                    [
+                        10.0,
+                        0.0,
+                        6.0
+                    ],
+                    [
+                        10.0,
+                        10.0,
+                        6.0
+                    ],
+                    [
+                        5.0,
+                        10.0,
+                        9.0
+                    ],
+                    [
+                        5.0,
+                        0.0,
+                        9.0
+                    ]
+                ]
+            },
+            "properties": {
+                "type": "FaceProperties",
+                "energy": {
+                    "type": "FaceEnergyPropertiesAbridged"
+                }
+            },
+            "face_type": {
+                "type": "Wall"
+            },
+            "boundary_condition": {
+                "type": "Outdoors",
+                "sun_exposure": "SunExposed",
+                "wind_exposure": "WindExposed",
+                "view_factor": "autocalculate"
+            },
+            "parent": "Attic"
+        },
+        {
+            "type": "FaceAbridged",
+            "name": "AtticFace4",
+            "name_original": "Attic Face 4",
+            "geometry": {
+                "type": "Face3D",
+                "boundary": [
+                    [
+                        0.0,
+                        0.0,
+                        6.0
+                    ],
+                    [
+                        10.0,
+                        0.0,
+                        6.0
+                    ],
+                    [
+                        5.0,
+                        0.0,
+                        9.0
+                    ]
+                ]
+            },
+            "properties": {
+                "type": "FaceProperties",
+                "energy": {
+                    "type": "FaceEnergyPropertiesAbridged"
+                }
+            },
+            "face_type": {
+                "type": "Wall"
+            },
+            "boundary_condition": {
+                "type": "Outdoors",
+                "sun_exposure": "SunExposed",
+                "wind_exposure": "WindExposed",
+                "view_factor": "autocalculate"
+            },
+            "parent": "Attic"
+        },
+        {
+            "type": "FaceAbridged",
+            "name": "AtticFace5",
+            "name_original": "Attic Face 5",
+            "geometry": {
+                "type": "Face3D",
+                "boundary": [
+                    [
+                        10.0,
+                        10.0,
+                        6.0
+                    ],
+                    [
+                        0.0,
+                        10.0,
+                        6.0
+                    ],
+                    [
+                        5.0,
+                        10.0,
+                        9.0
+                    ]
+                ]
+            },
+            "properties": {
+                "type": "FaceProperties",
+                "energy": {
+                    "type": "FaceEnergyPropertiesAbridged"
+                }
+            },
+            "face_type": {
+                "type": "Wall"
+            },
+            "boundary_condition": {
+                "type": "Outdoors",
+                "sun_exposure": "SunExposed",
+                "wind_exposure": "WindExposed",
+                "view_factor": "autocalculate"
+            },
+            "parent": "Attic"
+        }
+    ],
+    "shades": [],
+    "apertures": [
+        {
+            "type": "ApertureAbridged",
+            "name": "FirstFloor_Front_Glz0",
+            "name_original": "First Floor_Front_Glz0",
+            "geometry": {
+                "type": "Face3D",
+                "boundary": [
+                    [
+                        7.23606797749979,
+                        10.0,
+                        0.8291796067500631
+                    ],
+                    [
+                        2.76393202250021,
+                        10.0,
+                        0.8291796067500631
+                    ],
+                    [
+                        2.76393202250021,
+                        10.0,
+                        2.170820393249937
+                    ],
+                    [
+                        7.23606797749979,
+                        10.0,
+                        2.170820393249937
+                    ]
+                ]
+            },
+            "properties": {
+                "type": "ApertureProperties",
+                "energy": {
+                    "type": "ApertureEnergyPropertiesAbridged"
+                }
+            },
+            "aperture_type": {
+                "type": "Window"
+            },
+            "boundary_condition": {
+                "type": "Outdoors",
+                "sun_exposure": "SunExposed",
+                "wind_exposure": "WindExposed",
+                "view_factor": "autocalculate"
+            },
+            "parent": "FirstFloor_Front"
+        },
+        {
+            "type": "ApertureAbridged",
+            "name": "FirstFloor_Right_Glz0",
+            "name_original": "First Floor_Right_Glz0",
+            "geometry": {
+                "type": "Face3D",
+                "boundary": [
+                    [
+                        10.0,
+                        2.76393202250021,
+                        0.8291796067500631
+                    ],
+                    [
+                        10.0,
+                        7.23606797749979,
+                        0.8291796067500631
+                    ],
+                    [
+                        10.0,
+                        7.23606797749979,
+                        2.170820393249937
+                    ],
+                    [
+                        10.0,
+                        2.76393202250021,
+                        2.170820393249937
+                    ]
+                ]
+            },
+            "properties": {
+                "type": "ApertureProperties",
+                "energy": {
+                    "type": "ApertureEnergyPropertiesAbridged"
+                }
+            },
+            "aperture_type": {
+                "type": "Window"
+            },
+            "boundary_condition": {
+                "type": "Outdoors",
+                "sun_exposure": "SunExposed",
+                "wind_exposure": "WindExposed",
+                "view_factor": "autocalculate"
+            },
+            "parent": "FirstFloor_Right"
+        },
+        {
+            "type": "ApertureAbridged",
+            "name": "FirstFloor_Back_Glz0",
+            "name_original": "First Floor_Back_Glz0",
+            "geometry": {
+                "type": "Face3D",
+                "boundary": [
+                    [
+                        2.76393202250021,
+                        0.0,
+                        0.8291796067500631
+                    ],
+                    [
+                        7.23606797749979,
+                        0.0,
+                        0.8291796067500631
+                    ],
+                    [
+                        7.23606797749979,
+                        0.0,
+                        2.170820393249937
+                    ],
+                    [
+                        2.76393202250021,
+                        0.0,
+                        2.170820393249937
+                    ]
+                ]
+            },
+            "properties": {
+                "type": "ApertureProperties",
+                "energy": {
+                    "type": "ApertureEnergyPropertiesAbridged"
+                }
+            },
+            "aperture_type": {
+                "type": "Window"
+            },
+            "boundary_condition": {
+                "type": "Outdoors",
+                "sun_exposure": "SunExposed",
+                "wind_exposure": "WindExposed",
+                "view_factor": "autocalculate"
+            },
+            "parent": "FirstFloor_Back"
+        },
+        {
+            "type": "ApertureAbridged",
+            "name": "FirstFloor_Left_Glz0",
+            "name_original": "First Floor_Left_Glz0",
+            "geometry": {
+                "type": "Face3D",
+                "boundary": [
+                    [
+                        0.0,
+                        7.23606797749979,
+                        0.8291796067500631
+                    ],
+                    [
+                        0.0,
+                        2.76393202250021,
+                        0.8291796067500631
+                    ],
+                    [
+                        0.0,
+                        2.76393202250021,
+                        2.170820393249937
+                    ],
+                    [
+                        0.0,
+                        7.23606797749979,
+                        2.170820393249937
+                    ]
+                ]
+            },
+            "properties": {
+                "type": "ApertureProperties",
+                "energy": {
+                    "type": "ApertureEnergyPropertiesAbridged"
+                }
+            },
+            "aperture_type": {
+                "type": "Window"
+            },
+            "boundary_condition": {
+                "type": "Outdoors",
+                "sun_exposure": "SunExposed",
+                "wind_exposure": "WindExposed",
+                "view_factor": "autocalculate"
+            },
+            "parent": "FirstFloor_Left"
+        },
+        {
+            "type": "ApertureAbridged",
+            "name": "SecondFloor_Front_Glz0",
+            "name_original": "Second Floor_Front_Glz0",
+            "geometry": {
+                "type": "Face3D",
+                "boundary": [
+                    [
+                        7.23606797749979,
+                        10.0,
+                        3.829179606750063
+                    ],
+                    [
+                        2.76393202250021,
+                        10.0,
+                        3.829179606750063
+                    ],
+                    [
+                        2.76393202250021,
+                        10.0,
+                        5.170820393249937
+                    ],
+                    [
+                        7.23606797749979,
+                        10.0,
+                        5.170820393249937
+                    ]
+                ]
+            },
+            "properties": {
+                "type": "ApertureProperties",
+                "energy": {
+                    "type": "ApertureEnergyPropertiesAbridged"
+                }
+            },
+            "aperture_type": {
+                "type": "Window"
+            },
+            "boundary_condition": {
+                "type": "Outdoors",
+                "sun_exposure": "SunExposed",
+                "wind_exposure": "WindExposed",
+                "view_factor": "autocalculate"
+            },
+            "parent": "SecondFloor_Front"
+        },
+        {
+            "type": "ApertureAbridged",
+            "name": "SecondFloor_Right_Glz0",
+            "name_original": "Second Floor_Right_Glz0",
+            "geometry": {
+                "type": "Face3D",
+                "boundary": [
+                    [
+                        10.0,
+                        2.76393202250021,
+                        3.829179606750063
+                    ],
+                    [
+                        10.0,
+                        7.23606797749979,
+                        3.829179606750063
+                    ],
+                    [
+                        10.0,
+                        7.23606797749979,
+                        5.170820393249937
+                    ],
+                    [
+                        10.0,
+                        2.76393202250021,
+                        5.170820393249937
+                    ]
+                ]
+            },
+            "properties": {
+                "type": "ApertureProperties",
+                "energy": {
+                    "type": "ApertureEnergyPropertiesAbridged"
+                }
+            },
+            "aperture_type": {
+                "type": "Window"
+            },
+            "boundary_condition": {
+                "type": "Outdoors",
+                "sun_exposure": "SunExposed",
+                "wind_exposure": "WindExposed",
+                "view_factor": "autocalculate"
+            },
+            "parent": "SecondFloor_Right"
+        },
+        {
+            "type": "ApertureAbridged",
+            "name": "SecondFloor_Back_Glz0",
+            "name_original": "Second Floor_Back_Glz0",
+            "geometry": {
+                "type": "Face3D",
+                "boundary": [
+                    [
+                        2.76393202250021,
+                        0.0,
+                        3.829179606750063
+                    ],
+                    [
+                        7.23606797749979,
+                        0.0,
+                        3.829179606750063
+                    ],
+                    [
+                        7.23606797749979,
+                        0.0,
+                        5.170820393249937
+                    ],
+                    [
+                        2.76393202250021,
+                        0.0,
+                        5.170820393249937
+                    ]
+                ]
+            },
+            "properties": {
+                "type": "ApertureProperties",
+                "energy": {
+                    "type": "ApertureEnergyPropertiesAbridged"
+                }
+            },
+            "aperture_type": {
+                "type": "Window"
+            },
+            "boundary_condition": {
+                "type": "Outdoors",
+                "sun_exposure": "SunExposed",
+                "wind_exposure": "WindExposed",
+                "view_factor": "autocalculate"
+            },
+            "parent": "SecondFloor_Back"
+        },
+        {
+            "type": "ApertureAbridged",
+            "name": "SecondFloor_Left_Glz0",
+            "name_original": "Second Floor_Left_Glz0",
+            "geometry": {
+                "type": "Face3D",
+                "boundary": [
+                    [
+                        0.0,
+                        7.23606797749979,
+                        3.829179606750063
+                    ],
+                    [
+                        0.0,
+                        2.76393202250021,
+                        3.829179606750063
+                    ],
+                    [
+                        0.0,
+                        2.76393202250021,
+                        5.170820393249937
+                    ],
+                    [
+                        0.0,
+                        7.23606797749979,
+                        5.170820393249937
+                    ]
+                ]
+            },
+            "properties": {
+                "type": "ApertureProperties",
+                "energy": {
+                    "type": "ApertureEnergyPropertiesAbridged"
+                }
+            },
+            "aperture_type": {
+                "type": "Window"
+            },
+            "boundary_condition": {
+                "type": "Outdoors",
+                "sun_exposure": "SunExposed",
+                "wind_exposure": "WindExposed",
+                "view_factor": "autocalculate"
+            },
+            "parent": "SecondFloor_Left"
+        }
+    ],
+    "doors": []
+}
