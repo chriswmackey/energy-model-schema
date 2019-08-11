@@ -9,6 +9,357 @@ from app.models.energy.construction import OpaqueConstructionAbridged, WindowCon
 from app.models.energy.materials import EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialGas, EnergyWindowMaterialGasCustom, EnergyWindowMaterialGasMixture, EnergyWindowMaterialSimpleGlazSys, EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing, EnergyWindowMaterialShade
 
 
+class Plane(BaseModel):
+
+    n: List[float] = Schema(
+        ...,
+        description="Normal"
+    )
+
+    o: List[float] = Schema(
+        ...,
+        description="Origin"
+    )
+
+    x: List[float] = Schema(
+        default=None,
+        description="x-axis"
+    )
+
+
+class Face3D(BaseModel):
+
+    type: Enum('Face3D', {'type': 'Face3D'})
+
+    boundary: List[List[float]]
+
+    holes: List[List[List[float]]] = Schema(
+        default=None
+    )
+
+    plane: Plane = Schema(
+        default=None
+    )
+
+    @validator('boundary', whole=True)
+    def check_num_items(cls, v):
+        for i in v:
+            if len(i) != 3:
+                raise ValueError(
+                    'Number of floats must be 3.'
+                )
+        return v
+
+    @validator('holes', whole=True)
+    def check_num_items_holes(cls, v):
+        for pt_list in v:
+            for pt in pt_list:
+                if len(pt) != 3:
+                    raise ValueError(
+                        'Number of floats must be 3.'
+                    )
+        return v
+
+
+class ShadeEnergyPropertiesAbridged(BaseModel):
+
+    type: Enum('ShadeEnergyPropertiesAbridged', {
+               'type': 'ShadeEnergyPropertiesAbridged'})
+
+    diffuse_reflectance: float = Schema(
+        0.2,
+        ge=0,
+        le=1
+    )
+
+    specular_reflectance: float = Schema(
+        0,
+        ge=0,
+        le=1
+    )
+
+    transmittance: float = Schema(
+        0,
+        ge=0,
+        le=1
+    )
+
+    transmittance_schedule: str = Schema(
+        default=None,
+        regex=r'[A-Za-z0-9_-]',
+        min_length=1,
+        max_length=100
+    )
+
+    @validator('transmittance_schedule')
+    def check_field(cls, v, values):
+        if values['transmittance'] != "" and v != "":
+            raise ValueError(
+                'Can not specify both transmittance and transmittance_schedule.'
+            )
+
+
+class ShadePropertiesAbridged(BaseModel):
+
+    type: Enum('ShadePropertiesAbridged', {'type': 'ShadePropertiesAbridged'})
+
+    energy: ShadeEnergyPropertiesAbridged
+
+
+class Shade(BaseModel):
+
+    type: Enum('Shade', {'type': 'Shade'})
+
+    name: str = Schema(
+        ...,
+        regex=r'[A-Za-z0-9_-]',
+        min_length=1,
+        max_length=100
+    )
+
+    display_name: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
+    )
+
+    geometry: Face3D
+
+    properties: ShadePropertiesAbridged
+
+
+class Outdoors(BaseModel):
+
+    type: Enum('Outdoors', {'type': 'Outdoors'})
+
+    sun_exposure: bool = Schema(
+        default=None
+    )
+
+    wind_exposure: bool = Schema(
+        default=None
+    )
+
+    view_factor: Union[str, float] = Schema(
+        'autocalculate',
+        ge=0,
+        le=1
+    )
+
+
+class Ground(BaseModel):
+
+    type: Enum('Ground', {'type': 'Ground'})
+
+
+class Adiabatic(BaseModel):
+
+    type: Enum('Adiabatic', {'type': 'Adiabatic'})
+
+
+class Surface(BaseModel):
+
+    type: Enum('Surface', {'type': 'Surface'})
+
+    boundary_condition_objects: List[str] = Schema(
+        ...,
+        minItems=2,
+        maxItems=3
+    )
+
+    @validator('boundary_condition_objects', whole=True)
+    def check_num(cls, v):
+        if len(v) != (2 or 3):
+            raise ValueError('Incorrect number of boundary condition objects.')
+        return v
+
+
+class ApertureEnergyPropertiesAbridged(BaseModel):
+
+    type: Enum('ApertureEnergyPropertiesAbridged', {
+               'type': 'ApertureEnergyPropertiesAbridged'})
+
+    construction: str = Schema(
+        default=None,
+        regex=r'[A-Za-z0-9_-]',
+        min_length=1,
+        max_length=100
+    )
+
+
+class AperturePropertiesAbridged(BaseModel):
+
+    type: Enum('AperturePropertiesAbridged', {
+               'type': 'AperturePropertiesAbridged'})
+
+    energy: ApertureEnergyPropertiesAbridged = Schema(
+        default=None
+    )
+
+
+class ApertureType(str, Enum):
+
+    window = 'Window'
+    operable_window = 'OperableWindow'
+    glass_door = 'GlassDoor'
+
+
+class Aperture(BaseModel):
+
+    type: Enum('Aperture', {'type': 'Aperture'})
+
+    name: str = Schema(
+        ...,
+        regex=r'[A-Za-z0-9_-]',
+        min_length=1,
+        max_length=100
+    )
+
+    display_name: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
+    )
+
+    geometry: Face3D
+
+    properties: AperturePropertiesAbridged
+
+    aperture_type: ApertureType
+
+    boundary_condition: Union[Ground, Outdoors, Adiabatic, Surface]
+
+    indoor_shades: List[Shade] = Schema(
+        default=None
+    )
+
+    outdoor_shades : List[Shade] = Schema(
+        default=None
+    )
+
+
+class DoorEnergyPropertiesAbridged(BaseModel):
+
+    type: Enum('DoorEnergyPropertiesAbridged', {
+               'type': 'DoorEnergyPropertiesAbridged'})
+
+    construction: str = Schema(
+        default=None,
+        regex=r'[A-Za-z0-9_-]',
+        min_length=1,
+        max_length=100
+    )
+
+
+class DoorPropertiesAbridged(BaseModel):
+
+    type: Enum('DoorPropertiesAbridged', {'type': 'DoorPropertiesAbridged'})
+
+    energy: DoorEnergyPropertiesAbridged = Schema(
+        default=None
+    )
+
+
+class Door(BaseModel):
+
+    type: Enum('Door', {'type': 'Door'})
+
+    name: str = Schema(
+        ...,
+        regex=r'[A-Za-z0-9_-]',
+        min_length=1,
+        max_length=100
+    )
+
+    display_name: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
+    )
+
+    geometry: Face3D
+
+    boundary_condition: Union[Ground, Outdoors, Adiabatic, Surface]
+
+    properties: DoorPropertiesAbridged
+
+
+class FaceEnergyPropertiesAbridged(BaseModel):
+
+    type: Enum('FaceEnergyPropertiesAbridged', {
+               'type': 'FaceEnergyPropertiesAbridged'})
+
+    construction: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
+    )
+
+
+class FacePropertiesAbridged(BaseModel):
+
+    type: Enum('FacePropertiesAbridged', {'type': 'FacePropertiesAbridged'})
+
+    energy: FaceEnergyPropertiesAbridged = Schema(
+        default=None
+    )
+
+
+class FaceType(str, Enum):
+
+    wall = 'Wall'
+    floor = 'Floor'
+    roof_ceiling = 'RoofCeiling'
+    air_wall = 'AirWall'
+
+
+class Face(BaseModel):
+
+    type: Enum('Face', {'type': 'Face'})
+
+    name: str = Schema(
+        ...,
+        regex=r'[A-Za-z0-9_-]',
+        min_length=1,
+        max_length=100
+    )
+
+    display_name: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
+    )
+
+    geometry: Face3D
+
+    properties: FacePropertiesAbridged
+
+    face_type: FaceType
+
+    boundary_condition: Union[Ground, Outdoors, Adiabatic, Surface]
+
+    apertures: List[Aperture] = Schema(
+        default=None
+    )
+
+    doors: List[Door] = Schema(
+        default=None
+    )
+
+    indoor_shades: List[Shade] = Schema(
+        default=None
+    )
+
+    outdoor_shades : List[Shade] = Schema(
+        default=None
+    )
+
+
 class RoomEnergyPropertiesAbridged(BaseModel):
 
     type: Enum('RoomEnergyPropertiesAbridged', {
@@ -71,16 +422,16 @@ class RoomEnergyPropertiesAbridged(BaseModel):
     )
 
 
-class RoomProperties(BaseModel):
+class RoomPropertiesAbridged(BaseModel):
 
-    type: Enum('RoomProperties', {'type': 'RoomProperties'})
+    type: Enum('RoomPropertiesAbridged', {'type': 'RoomPropertiesAbridged'})
 
     energy: RoomEnergyPropertiesAbridged
 
 
-class RoomAbridged(BaseModel):
+class Room(BaseModel):
 
-    type: Enum('RoomAbridged', {'type': 'RoomAbridged'})
+    type: Enum('Room', {'type': 'Room'})
 
     name: str = Schema(
         ...,
@@ -96,383 +447,17 @@ class RoomAbridged(BaseModel):
         max_length=100
     )
 
-    properties: RoomProperties
+    properties: RoomPropertiesAbridged
 
-    faces: List[constr(regex=r'[A-Za-z0-9_-]', min_length=1, max_length=100)] = Schema(
+    faces: List[Face] = Schema(
         ...
     )
 
-    interior_shades:  List[constr(
-        regex=r'[A-Za-z0-9_-]', min_length=1, max_length=100)] = Schema(
-            default=None)
-
-    outdoor_shades: List[constr(
-        regex=r'[A-Za-z0-9_-]', min_length=1, max_length=100)] = Schema(
-            default=None)
-
-
-class FaceEnergyPropertiesAbridged(BaseModel):
-
-    type: Enum('FaceEnergyPropertiesAbridged', {
-               'type': 'FaceEnergyPropertiesAbridged'})
-
-    construction: str = Schema(
-        default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
-        min_length=1,
-        max_length=100
-    )
-
-
-class FaceProperties(BaseModel):
-
-    type: Enum('FaceProperties', {'type': 'FaceProperties'})
-
-    energy: FaceEnergyPropertiesAbridged = Schema(
-        default=None
-    )
-
-
-class Wall(BaseModel):
-
-    type: Enum('Wall', {'type': 'Wall'})
-
-
-class RoofCeiling(BaseModel):
-
-    type: Enum('RoofCeiling', {'type': 'RoofCeiling'})
-
-
-class Floor(BaseModel):
-
-    type: Enum('Floor', {'type': 'Floor'})
-
-
-class AirWall(BaseModel):
-
-    type: Enum('AirWall', {'type': 'AirWall'})
-
-
-class Shading(BaseModel):
-
-    type: Enum('Shading', {'type': 'Shading'})
-
-
-class Plane(BaseModel):
-
-    n: List[float] = Schema(
-        ...,
-        description="Normal"
-    )
-
-    o: List[float] = Schema(
-        ...,
-        description="Origin"
-    )
-
-    x: List[float] = Schema(
-        default=None,
-        description="x-axis"
-    )
-
-
-class Face3D(BaseModel):
-
-    type: Enum('Face3D', {'type': 'Face3D'})
-
-    boundary: List[List[float]]
-
-    holes: List[List[List[float]]] = Schema(
-        default=None
-    )
-
-    plane: Plane = Schema(
-        default=None
-    )
-
-    @validator('boundary', whole=True)
-    def check_num_items(cls, v):
-        for i in v:
-            if len(i) != 3:
-                raise ValueError(
-                    'Number of floats must be 3.'
-                )
-        return v
-
-    @validator('holes', whole=True)
-    def check_num_items_holes(cls, v):
-        for pt_list in v:
-            for pt in pt_list:
-                if len(pt) != 3:
-                    raise ValidationError(
-                        'Number of floats must be 3.'
-                    )
-        return v
-
-
-class Ground(BaseModel):
-
-    type: Enum('Ground', {'type': 'Ground'})
-
-    sun_exposure: bool = Schema(
-        default=None
-    )
-
-    wind_exposure: bool = Schema(
-        default=None
-    )
-
-    view_factor: Union[str, float] = Schema(
-        'autocalculate',
-        ge=0,
-        le=1
-    )
-
-
-class Outdoors(Ground):
-
-    type: Enum('Outdoors', {'type': 'Outdoors'})
-
-
-class Adiabatic(Ground):
-
-    type: Enum('Adiabatic', {'type': 'Adiabatic'})
-
-
-class Surface(Ground):
-
-    type: Enum('Surface', {'type': 'Surface'})
-
-    boundary_condition_object: str = Schema(
-        ...,
-        regex=r'[A-Za-z0-9_-]',
-        min_length=1,
-        max_length=100
-    )
-
-
-class FaceAbridged(BaseModel):
-
-    type: Enum('FaceAbridged', {'type': 'FaceAbridged'})
-
-    name: str = Schema(
-        ...,
-        regex=r'[A-Za-z0-9_-]',
-        min_length=1,
-        max_length=100
-    )
-
-    display_name: str = Schema(
-        default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
-        min_length=1,
-        max_length=100
-    )
-
-    geometry: Face3D
-
-    properties: FaceProperties
-
-    face_type: Union[Wall, RoofCeiling, Floor, AirWall,  Shading]
-
-    boundary_condition: Union[Ground, Outdoors, Adiabatic, Surface]
-
-    parent: str = Schema(
-        default=None,
-        regex=r'[A-Za-z0-9_-]',
-        min_length=1,
-        max_length=100
-    )
-
-    apertures: List[constr(regex=r'[A-Za-z0-9_-]', min_length=1, max_length=100)] = Schema(
-        default=None
-    )
-
-    doors: List[constr(regex=r'[A-Za-z0-9_-]', min_length=1, max_length=100)] = Schema(
-        default=None
-    )
-
-
-class ShadeEnergyPropertiesAbridged(BaseModel):
-
-    type: Enum('ShadeEnergyPropertiesAbridged', {
-               'type': 'ShadeEnergyPropertiesAbridged'})
-
-    diffuse_reflectance: float = Schema(
-        0.2,
-        ge=0,
-        le=1
-    )
-
-    specular_reflectance: float = Schema(
-        0,
-        ge=0,
-        le=1
-    )
-
-    transmittance: float = Schema(
-        0,
-        ge=0,
-        le=1
-    )
-
-    transmittance_schedule: str = Schema(
-        default=None,
-        regex=r'[A-Za-z0-9_-]',
-        min_length=1,
-        max_length=100
-    )
-
-    @validator('transmittance_schedule')
-    def check_field(cls, v, values):
-        if values['transmittance'] != "" and v != "":
-            raise ValueError(
-                'Can not specify both transmittance and transmittance_schedule.'
-            )
-
-
-class ShadeProperties(BaseModel):
-
-    type: Enum('ShadeProperties', {'type': 'ShadeProperties'})
-
-    energy: ShadeEnergyPropertiesAbridged
-
-
-class ShadeAbridged(BaseModel):
-
-    type: Enum('ShadeAbridged', {'type': 'ShadeAbridged'})
-
-    name: str = Schema(
-        ...,
-        regex=r'[A-Za-z0-9_-]',
-        min_length=1,
-        max_length=100
-    )
-
-    display_name: str = Schema(
-        default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
-        min_length=1,
-        max_length=100
-    )
-
-    geometry: Face3D
-
-    properties: ShadeProperties
-
-    parent: str = Schema(
-        default=None,
-        regex=r'[A-Za-z0-9_-]',
-        min_length=1,
-        max_length=100
-    )
-
-
-class ApertureEnergyPropertiesAbridged(BaseModel):
-
-    type: Enum('ApertureEnergyPropertiesAbridged', {
-               'type': 'ApertureEnergyPropertiesAbridged'})
-
-    construction: str = Schema(
-        default=None,
-        regex=r'[A-Za-z0-9_-]',
-        min_length=1,
-        max_length=100
-    )
-
-
-class ApertureProperties(BaseModel):
-
-    type: Enum('ApertureProperties', {'type': 'ApertureProperties'})
-
-    energy: ApertureEnergyPropertiesAbridged = Schema(
-        default=None
-    )
-
-
-class Window(BaseModel):
-
-    type: Enum('Window', {'type': 'Window'})
-
-
-class OperableWindow(BaseModel):
-
-    type: Enum('OperableWindow', {'type': 'OperableWindow'})
-
-
-class GlassDoor(BaseModel):
-
-    type: Enum('GlassDoor', {'type': 'GlassDoor'})
-
-
-class ApertureAbridged(BaseModel):
-
-    type: Enum('ApertureAbridged', {'type': 'ApertureAbridged'})
-
-    name: str = Schema(
-        ...,
-        regex=r'[A-Za-z0-9_-]',
-        min_length=1,
-        max_length=100
-    )
-
-    display_name: str = Schema(
-        default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
-        min_length=1,
-        max_length=100
-    )
-
-    geometry: Face3D
-
-    properties: ApertureProperties
-
-    aperture_type: Union[Window, OperableWindow, GlassDoor]
-
-    boundary_condition: Union[Ground, Outdoors, Adiabatic, Surface]
-
-    parent: str = Schema(
-        ...,
-        regex=r'[A-Za-z0-9_-]',
-        min_length=1,
-        max_length=100
-    )
-
-
-class DoorEnergyPropertiesAbridged(BaseModel):
-
-    type: Enum('DoorEnergyPropertiesAbridged', {
-               'type': 'DoorEnergyPropertiesAbridged'})
-
-
-class DoorProperties(BaseModel):
-
-    type: Enum('DoorProperties', {'type': 'DoorProperties'})
-
-    energy: DoorEnergyPropertiesAbridged
-
-
-class DoorAbridged(BaseModel):
-
-    type: Enum('DoorAbridged', {'type': 'DoorAbridged'})
-
-    name: str = Schema(
-        ...,
-        regex=r'[A-Za-z0-9_-]',
-        min_length=1,
-        max_length=100
-    )
-
-    display_name: str = Schema(
-        default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
-        min_length=1,
-        max_length=100
-    )
-
-    geometry: Face3D
-
-    properties: DoorProperties
+    indoor_shades:  List[Shade] = Schema(
+        default=None)
+
+    outdoor_shades: List[Shade] = Schema(
+        default=None)
 
 
 class ModelEnergyProperties(BaseModel):
@@ -484,7 +469,7 @@ class ModelEnergyProperties(BaseModel):
     )
 
     global_construction_set: str = Schema(
-        ...,
+        default=None,
         regex=r'[A-Za-z0-9_-]',
         min_length=1,
         max_length=100
@@ -524,23 +509,23 @@ class Model(BaseModel):
 
     properties: ModelProperties
 
-    rooms: List[RoomAbridged] = Schema(
+    rooms: List[Room] = Schema(
         default=None
     )
 
-    faces: List[FaceAbridged] = Schema(
+    faces: List[Face] = Schema(
         default=None
     )
 
-    shades: List[ShadeAbridged] = Schema(
+    orphaned_shades: List[Shade] = Schema(
         default=None
     )
 
-    apertures: List[ApertureAbridged] = Schema(
+    orphaned_apertures: List[Aperture] = Schema(
         default=None
     )
 
-    doors: List[DoorAbridged] = Schema(
+    orphaned_doors: List[Door] = Schema(
         default=None
     )
 

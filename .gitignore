@@ -13,3 +13,4 @@ test_schedule_file.py
 try.py
 test_construction_schema.py
 test_schedule_file_schema.py
+try_model.py
