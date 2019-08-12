@@ -513,7 +513,7 @@ class Model(BaseModel):
         default=None
     )
 
-    faces: List[Face] = Schema(
+    orphaned_faces: List[Face] = Schema(
         default=None
     )
 
