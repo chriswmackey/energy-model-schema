@@ -5,7 +5,7 @@ from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
 from app.models.energy.constructionset import ConstructionSetAbridged
-from app.models.energy.construction import OpaqueConstructionAbridged, WindowConstructionAbridged
+from app.models.energy.construction import OpaqueConstructionAbridged, WindowConstructionAbridged, ShadeConstruction
 from app.models.energy.materials import EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialGas, EnergyWindowMaterialGasCustom, EnergyWindowMaterialGasMixture, EnergyWindowMaterialSimpleGlazSys, EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing, EnergyWindowMaterialShade
 
 
@@ -66,24 +66,6 @@ class ShadeEnergyPropertiesAbridged(BaseModel):
     type: Enum('ShadeEnergyPropertiesAbridged', {
                'type': 'ShadeEnergyPropertiesAbridged'})
 
-    diffuse_reflectance: float = Schema(
-        0.2,
-        ge=0,
-        le=1
-    )
-
-    specular_reflectance: float = Schema(
-        0,
-        ge=0,
-        le=1
-    )
-
-    transmittance: float = Schema(
-        0,
-        ge=0,
-        le=1
-    )
-
     transmittance_schedule: str = Schema(
         default=None,
         regex=r'[A-Za-z0-9_-]',
@@ -91,19 +73,21 @@ class ShadeEnergyPropertiesAbridged(BaseModel):
         max_length=100
     )
 
-    @validator('transmittance_schedule')
-    def check_field(cls, v, values):
-        if values['transmittance'] != "" and v != "":
-            raise ValueError(
-                'Can not specify both transmittance and transmittance_schedule.'
-            )
+    construction:  str = Schema(
+        default=None,
+        regex=r'[A-Za-z0-9_-]',
+        min_length=1,
+        max_length=100
+    )
 
 
 class ShadePropertiesAbridged(BaseModel):
 
     type: Enum('ShadePropertiesAbridged', {'type': 'ShadePropertiesAbridged'})
 
-    energy: ShadeEnergyPropertiesAbridged
+    energy: ShadeEnergyPropertiesAbridged = Schema(
+        default=None
+    )
 
 
 class Shade(BaseModel):
@@ -198,13 +182,6 @@ class AperturePropertiesAbridged(BaseModel):
     )
 
 
-class ApertureType(str, Enum):
-
-    window = 'Window'
-    operable_window = 'OperableWindow'
-    glass_door = 'GlassDoor'
-
-
 class Aperture(BaseModel):
 
     type: Enum('Aperture', {'type': 'Aperture'})
@@ -225,19 +202,21 @@ class Aperture(BaseModel):
 
     geometry: Face3D
 
-    properties: AperturePropertiesAbridged
-
-    aperture_type: ApertureType
-
     boundary_condition: Union[Ground, Outdoors, Adiabatic, Surface]
+
+    is_operable: bool = Schema(
+        default=None
+    )
 
     indoor_shades: List[Shade] = Schema(
         default=None
     )
 
-    outdoor_shades : List[Shade] = Schema(
+    outdoor_shades: List[Shade] = Schema(
         default=None
     )
+
+    properties: AperturePropertiesAbridged
 
 
 class DoorEnergyPropertiesAbridged(BaseModel):
@@ -283,6 +262,10 @@ class Door(BaseModel):
     geometry: Face3D
 
     boundary_condition: Union[Ground, Outdoors, Adiabatic, Surface]
+
+    is_glass: bool = Schema(
+        default=None
+    )
 
     properties: DoorPropertiesAbridged
 
@@ -355,7 +338,7 @@ class Face(BaseModel):
         default=None
     )
 
-    outdoor_shades : List[Shade] = Schema(
+    outdoor_shades: List[Shade] = Schema(
         default=None
     )
 
@@ -476,7 +459,7 @@ class ModelEnergyProperties(BaseModel):
     )
 
     constructions: List[Union[OpaqueConstructionAbridged,
-                              WindowConstructionAbridged]]
+                              WindowConstructionAbridged, ShadeConstruction]]
 
     materials: List[Union[EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialGas, EnergyWindowMaterialGasCustom, EnergyWindowMaterialGasMixture,
                           EnergyWindowMaterialSimpleGlazSys, EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing, EnergyWindowMaterialShade]]
@@ -513,7 +496,7 @@ class Model(BaseModel):
         default=None
     )
 
-    faces: List[Face] = Schema(
+    orphaned_faces: List[Face] = Schema(
         default=None
     )
 

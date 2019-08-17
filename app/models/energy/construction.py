@@ -55,7 +55,6 @@ class WindowConstruction(WindowConstructionAbridged):
     type: Enum('WindowConstruction', {
                'type': 'WindowConstruction'})
 
-
     materials: List[
         Union[
             EnergyWindowMaterialGas, EnergyWindowMaterialGasCustom, EnergyWindowMaterialGasMixture,
@@ -161,6 +160,33 @@ class OpaqueConstruction(OpaqueConstructionAbridged):
             return materials
 
 
+class ShadeConstruction(BaseModel):
+
+    type: Enum('ShadeConstruction', {
+               'type': 'ShadeConstruction'})
+
+    name: str = Schema(
+        ...,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
+    )
+
+    solar_reflectance: float = Schema(
+        0,
+        ge=0,
+        le=1
+    )
+
+    visible_reflectance: float = Schema(
+        0,
+        ge=0,
+        le=1
+    )
+
+    is_specular: bool
+
+
 if __name__ == '__main__':
     print(WindowConstructionAbridged.schema_json(indent=2))
 
@@ -174,3 +200,6 @@ if __name__ == '__main__':
 
 if __name__ == '__main__':
     print(OpaqueConstruction.schema_json(indent=2))
+
+if __name__ == '__main__':
+    print(ShadeConstruction.schema_json(indent=2))
