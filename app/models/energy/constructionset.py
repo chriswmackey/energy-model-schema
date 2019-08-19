@@ -104,7 +104,7 @@ class ApertureSetAbridged(BaseModel):
         max_length=100
     )
 
-    fixed_window_construction: str = Schema(
+    window_construction: str = Schema(
         default=None,
         regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
@@ -118,14 +118,7 @@ class ApertureSetAbridged(BaseModel):
         max_length=100
     )
 
-    operable_window_construction: str = Schema(
-        default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
-        min_length=1,
-        max_length=100
-    )
-
-    glass_door_construction: str = Schema(
+    operable_construction: str = Schema(
         default=None,
         regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
@@ -154,6 +147,20 @@ class DoorSetAbridged(BaseModel):
     )
 
     overhead_construction: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
+    )
+
+    exterior_glass_construction: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
+    )
+
+    interior_glass_construction: str = Schema(
         default=None,
         regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
@@ -190,6 +197,13 @@ class ConstructionSetAbridged(BaseModel):
 
     door_set: DoorSetAbridged = Schema(
         default=None
+    )
+
+    shade_construction: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
     )
 
 
