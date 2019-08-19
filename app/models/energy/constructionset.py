@@ -104,7 +104,7 @@ class ApertureSetAbridged(BaseModel):
         max_length=100
     )
 
-    fixed_window_construction: str = Schema(
+    window_construction: str = Schema(
         default=None,
         regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
@@ -118,7 +118,7 @@ class ApertureSetAbridged(BaseModel):
         max_length=100
     )
 
-    operable_window_construction: str = Schema(
+    operable_construction: str = Schema(
         default=None,
         regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,

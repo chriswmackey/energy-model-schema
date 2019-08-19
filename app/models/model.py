@@ -202,10 +202,10 @@ class Aperture(BaseModel):
 
     geometry: Face3D
 
-    boundary_condition: Union[Ground, Outdoors, Adiabatic, Surface]
+    boundary_condition: Union[Outdoors, Surface]
 
     is_operable: bool = Schema(
-        default=None
+        False
     )
 
     indoor_shades: List[Shade] = Schema(
@@ -261,10 +261,10 @@ class Door(BaseModel):
 
     geometry: Face3D
 
-    boundary_condition: Union[Ground, Outdoors, Adiabatic, Surface]
+    boundary_condition: Union[Outdoors, Surface]
 
     is_glass: bool = Schema(
-        default=None
+        False
     )
 
     properties: DoorPropertiesAbridged
