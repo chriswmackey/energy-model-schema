@@ -4,6 +4,7 @@ from typing import List, Union
 from enum import Enum
 from uuid import UUID, uuid4
 import datetime
+from app.models.energy.schedulebase import ScheduleType
 from app.models.common.datetime import Date
 
 
@@ -15,6 +16,10 @@ class ScheduleFixedInterval(BaseModel):
     name: str = Schema(
         ...,
         regex=r'^[\s.A-Za-z0-9_-]*$',
+    )
+
+    schedule_type: ScheduleType = Schema(
+        default=None
     )
 
     interpolate_to_timestep: bool = Schema(

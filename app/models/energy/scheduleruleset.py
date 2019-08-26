@@ -4,33 +4,10 @@ from typing import List, Union
 from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
-from app.models.energy.schedulebase import ScheduleNumericType, ScheduleUnitType
+from app.models.energy.schedulebase import ScheduleType
 from app.models.common.datetime import Date, Time
 
 
-class ScheduleTypeLimits(BaseModel):
-    """Specifies the data types and limits for values contained in schedules."""
-
-    type: Enum('ScheduleTypeLimits', {'type': 'ScheduleTypeLimits'})
-
-    name: str = Schema(
-        ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
-    )
-
-    lower_limit_value: float = Schema(
-        0,
-        description='Lower limit for the schedule type is entered.'
-    )
-
-    upper_limit_value: float = Schema(
-        1,
-        description='Upper limit for the schedule type is entered.'
-    )
-
-    numeric_type: ScheduleNumericType
-
-    unit_type: ScheduleUnitType
 
 
 class DayValue(BaseModel):
@@ -117,7 +94,9 @@ class ScheduleRuleset(BaseModel):
         regex=r'^[\s.A-Za-z0-9_-]*$',
     )
 
-    schedule_type_limits: ScheduleTypeLimits
+    schedule_type: ScheduleType = Schema(
+        default=None
+    )
 
     default_day_schedule: ScheduleDay
 

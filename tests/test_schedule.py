@@ -16,20 +16,6 @@ def test_schedule_rule1():
     ScheduleRuleset.parse_obj(schedule_ruleset_1)
 
 
-def test_schedule_rule_wrong():
-    wrong_schedule_type_limits = copy(schedule_ruleset_1)
-    wrong_schedule_type_limits['schedule_type_limits']['numeric_type'] = 'Empty'
-    with pytest.raises(ValidationError):
-        ScheduleRuleset.parse_obj(wrong_schedule_type_limits)
-
-
-def test_schedule_rule_wrong_lower():
-    wrong_lower_limit = copy(schedule_ruleset_1)
-    wrong_lower_limit['schedule_type_limits']['lower_limit_value'] = -1
-    with pytest.raises(ValidationError):
-        ScheduleRuleset.parse_obj(wrong_lower_limit)
-
-
 def test_schedule_rule_wrong_month():
     wrong_month = copy(schedule_ruleset_1)
     wrong_month['schedule_rules'][0]['start_period']['month'] = 13

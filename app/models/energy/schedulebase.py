@@ -5,28 +5,10 @@ from enum import Enum
 from uuid import UUID, uuid4
 
 
-class ScheduleContinuous(BaseModel):
-    """This Schedule Numeric Type allows all numbers, including fractional amounts, \
-        within the range to be valid."""
-
-    type: Enum('ScheduleContinuous', {'type': 'ScheduleContinuous'})
-
-    schedule_continuous: float = None
-
-
-class ScheduleDiscrete(BaseModel):
-    """This Schedule Numeric Type allows only integers within the range to be valid."""
-
-    type: Enum('ScheduleDiscrete', {'type': 'ScheduleDiscrete'})
-
-    schedule_discrete: int = None
-
-
-class ScheduleNumericType (BaseModel):
+class ScheduleNumericType (str, Enum):
     """Designates how the range values are validated."""
-
-    numeric_type:  Union[ScheduleContinuous, ScheduleDiscrete]
-
+    schedule_continuous = 'ScheduleContinuous'
+    schedule_discrete = 'ScheduleDiscrete'
 
 class ScheduleUnitType (str, Enum):
     dimensionless = 'Dimensionless'
@@ -43,3 +25,28 @@ class ScheduleUnitType (str, Enum):
     percent = 'Percent'
     control = 'Control'
     mode = 'Mode'
+
+
+class ScheduleType(BaseModel):
+    """Specifies the data types and limits for values contained in schedules."""
+
+    type: Enum('ScheduleType', {'type': 'ScheduleType'})
+
+    name: str = Schema(
+        ...,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+    )
+
+    lower_limit_value: float = Schema(
+        0,
+        description='Lower limit for the schedule type is entered.'
+    )
+
+    upper_limit_value: float = Schema(
+        1,
+        description='Upper limit for the schedule type is entered.'
+    )
+
+    numeric_type: ScheduleNumericType
+
+    unit_type: ScheduleUnitType

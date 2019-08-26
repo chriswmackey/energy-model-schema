@@ -1,13 +1,9 @@
 schedule_ruleset = {
     'type': 'ScheduleRuleset',
     'name': 'Schedule Ruleset',
-    'schedule_type_limits': {
-        'type': 'ScheduleTypeLimits',
-        'numeric_type': {
-            'numeric_type': {
-                'type': 'ScheduleContinuous'
-            }
-        },
+    'schedule_type': {
+        'type': 'ScheduleType',
+        'numeric_type': 'ScheduleContinuous',
         'unit_type': 'Temperature',
         'name': 'Numeric Type',
         'lower_limit_value': 0,
@@ -98,13 +94,9 @@ schedule_ruleset = {
 schedule_ruleset_1 = {
     'type': 'ScheduleRuleset',
     'name': 'Schedule Ruleset 1',
-    'schedule_type_limits': {
-        'type': 'ScheduleTypeLimits',
-        'numeric_type': {
-            'numeric_type': {
-                'type': 'ScheduleContinuous'
-            }
-        },
+    'schedule_type': {
+        'type': 'ScheduleType',
+        'numeric_type': 'ScheduleContinuous',
         'unit_type': 'Dimensionless',
         'name': 'Numeric Type',
         'lower_limit_value': 0,
