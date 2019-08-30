@@ -511,7 +511,7 @@ class EnergyWindowMaterialBlind(BaseModel):
 
     emissivity_back: float = Schema(
         0.9,
-        ge=9,
+        ge=0,
         lt=1,
         description='Back side hemispherical emissivity of the slat. Default is 0.9 for'
         ' most materials. The default value is 0.9.'
