@@ -8,30 +8,30 @@ from app.models.energy.schedulebase import ScheduleType
 from app.models.common.datetime import Date, Time
 
 
-
-
-class DayValue(BaseModel):
-    """Values for daily schedule"""
-
-    time: Time
-
-    value_until_time: float
-
-
 class ScheduleDay(BaseModel):
     """Used to describe the daily schedule for a single simulation day."""
     type: Enum('ScheduleDay', {'type': 'ScheduleDay'})
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
+        regex=r'^[\s.A-Za-z0-9_-]*$'
     )
 
-    interpolate_to_timestep: bool = Schema(
+    values: List[float]
+
+    times: List[List[float]]
+
+    @validator('times', whole=True)
+    def check_len_times(cls, v):
+        for i in v:
+            if len(i) != 2:
+                raise ValueError(
+                    'Incorrect number of values.'
+                )
+
+    interpolate: bool = Schema(
         False
     )
-
-    day_values: List[DayValue]
 
 
 class ScheduleRule(BaseModel):
@@ -39,11 +39,6 @@ class ScheduleRule(BaseModel):
   particular days of the week according to a priority sequence."""
 
     type: Enum('ScheduleRule', {'type': 'ScheduleRule'})
-
-    name: str = Schema(
-        ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$'
-    )
 
     schedule_day: ScheduleDay
 
@@ -79,15 +74,29 @@ class ScheduleRule(BaseModel):
         False
     )
 
-    start_period: Date
+    start_date: List[float]
 
-    end_period: Date
+    @validator('start_date', whole=True)
+    def check_len_start_date(cls, v):
+        if len(v) != 2:
+            raise ValueError(
+                'Incorrect number of values.'
+            )
+
+    end_date: List[float]
+
+    @validator('end_date', whole=True)
+    def check_len_end_date(cls, v):
+        if len(v) != 2:
+            raise ValueError(
+                'Incorrect number of values.'
+            )
 
 
-class ScheduleRuleset(BaseModel):
+class ScheduleRulesetAbridged(BaseModel):
     """Used to define a schedule for a default day, further described by ScheduleRule."""
 
-    type: Enum('ScheduleRuleset', {'type': 'ScheduleRuleset'})
+    type: Enum('ScheduleRulesetAbridged', {'type': 'ScheduleRulesetAbridged'})
 
     name: str = Schema(
         ...,
@@ -100,12 +109,18 @@ class ScheduleRuleset(BaseModel):
 
     default_day_schedule: ScheduleDay
 
-    summer_designday_schedule: ScheduleDay
+    schedule_rules: List[ScheduleRule] = Schema(
+        default=None
+    )
 
-    winter_designday_schedule: ScheduleDay
+    summer_designday_schedule: ScheduleDay = Schema(
+        default=None
+    )
 
-    schedule_rules: List[ScheduleRule]
+    winter_designday_schedule: ScheduleDay = Schema(
+        default=None
+    )
 
 
 if __name__ == '__main__':
-    print(ScheduleRuleset.schema_json(indent=2))
+    print(ScheduleRulesetAbridged.schema_json(indent=2))
