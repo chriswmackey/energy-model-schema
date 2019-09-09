@@ -1,1 +1,1 @@
-{"type": "EnergyConstructionOpaque", "name": "Internal Floor", "materials": []}
+{"type": "OpaqueConstructionAbridged", "name": "Internal Floor", "layers": ["CP02 Carpet Pad", "Internal Source", "8in Concrete HW"]}

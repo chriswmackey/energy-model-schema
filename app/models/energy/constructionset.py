@@ -4,143 +4,208 @@ from typing import List, Union
 from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
-from app.models.energy.construction import EnergyConstructionOpaque, EnergyConstructionWindow
+from app.models.energy.construction import OpaqueConstructionAbridged, WindowConstructionAbridged
 
 
-class WallSet(BaseModel):
+class WallSetAbridged(BaseModel):
     """A set of constructions for wall assemblies."""
 
-    type: Enum('WallSet', {
-               'type': 'WallSet'})
+    type: Enum('WallSetAbridged', {
+               'type': 'WallSetAbridged'})
 
-
-    interior_construction: EnergyConstructionOpaque = Schema(
-        default=None
+    interior_construction: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
     )
 
-    exterior_construction: EnergyConstructionOpaque = Schema(
-        default=None
+    exterior_construction: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
     )
 
-    ground_construction: EnergyConstructionOpaque = Schema(
-        default=None
+    ground_construction: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
     )
 
 
-class FloorSet(BaseModel):
+class FloorSetAbridged(BaseModel):
     """A set of constructions for floor assemblies."""
 
-    type: Enum('FloorSet', {
-               'type': 'FloorSet'})
+    type: Enum('FloorSetAbridged', {
+               'type': 'FloorSetAbridged'})
 
-
-    interior_construction: EnergyConstructionOpaque = Schema(
-        default=None
+    interior_construction: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
     )
 
-    exterior_construction: EnergyConstructionOpaque = Schema(
-        default=None
+    exterior_construction: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
     )
 
-    ground_construction: EnergyConstructionOpaque = Schema(
-        default=None
+    ground_construction: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
     )
 
-class RoofCeilingSet(BaseModel): 
+
+class RoofCeilingSetAbridged(BaseModel):
     """A set of constructions for roof and ceiling assemblies."""
 
-    type: Enum('RoofCeilingSet', {
-               'type': 'RoofCeilingSet'})
+    type: Enum('RoofCeilingSetAbridged', {
+               'type': 'RoofCeilingSetAbridged'})
 
-    interior_construction: EnergyConstructionOpaque = Schema(
-        default=None
+    interior_construction: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
     )
 
-    exterior_construction: EnergyConstructionOpaque = Schema(
-        default=None
-    )    
-
-    ground_construction: EnergyConstructionOpaque = Schema(
-        default=None
+    exterior_construction: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
     )
 
-class ApertureSet(BaseModel): 
+    ground_construction: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
+    )
+
+
+class ApertureSetAbridged(BaseModel):
     """A set of constructions for aperture assemblies."""
 
-    type: Enum('ApertureSet', {
-               'type': 'ApertureSet'})
+    type: Enum('ApertureSetAbridged', {
+               'type': 'ApertureSetAbridged'})
 
-    interior_construction: EnergyConstructionWindow = Schema(
-        default=None
+    interior_construction: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
     )
 
-    fixed_window_construction: EnergyConstructionWindow = Schema(
-        default=None
-    )    
-
-    skylight_construction: EnergyConstructionWindow = Schema(
-        default=None
+    window_construction: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
     )
 
-    operable_window_construction: EnergyConstructionWindow = Schema(
-        default=None
-    ) 
-
-    glass_door_construction: EnergyConstructionWindow = Schema(
-        default=None
+    skylight_construction: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
     )
 
-class DoorSet(BaseModel): 
+    operable_construction: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
+    )
+
+
+class DoorSetAbridged(BaseModel):
     """A set of constructions for door assemblies."""
 
-    type: Enum('DoorSet', {
-               'type': 'DoorSet'})
+    type: Enum('DoorSetAbridged', {
+               'type': 'DoorSetAbridged'})
 
-
-    interior_construction: EnergyConstructionOpaque = Schema(
-        default=None
+    interior_construction: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
     )
 
-    exterior_construction: EnergyConstructionOpaque = Schema(
-        default=None
+    exterior_construction: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
     )
 
-    overhead_construction: EnergyConstructionOpaque = Schema(
-        default=None
+    overhead_construction: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
     )
 
-class ConstructionSet(BaseModel):
+    exterior_glass_construction: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
+    )
+
+    interior_glass_construction: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
+    )
+
+
+class ConstructionSetAbridged(BaseModel):
     """A set of constructions for different surface types and boundary conditions."""
 
-
-    type: Enum('ConstructionSet', {
-               'type': 'ConstructionSet'})
-
+    type: Enum('ConstructionSetAbridged', {
+               'type': 'ConstructionSetAbridged'})
 
     name: str = Schema(
         ...,
         regex=r'^[\s.A-Za-z0-9_-]*$'
     )
-    
-    wall_set: WallSet = Schema(
+
+    wall_set: WallSetAbridged = Schema(
         default=None
     )
 
-    floor_set: FloorSet = Schema(
+    floor_set: FloorSetAbridged = Schema(
         default=None
     )
 
-    roof_ceiling_set: RoofCeilingSet = Schema(
+    roof_ceiling_set: RoofCeilingSetAbridged = Schema(
         default=None
     )
 
-    aperture_set: ApertureSet = Schema(
+    aperture_set: ApertureSetAbridged = Schema(
         default=None
     )
 
-    door_set: DoorSet = Schema(
+    door_set: DoorSetAbridged = Schema(
         default=None
     )
-    
+
+    shade_construction: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
+    )
+
+
 if __name__ == '__main__':
-    print(ConstructionSet.schema_json(indent=2))
+    print(ConstructionSetAbridged.schema_json(indent=2))

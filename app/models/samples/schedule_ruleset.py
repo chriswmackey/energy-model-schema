@@ -94,9 +94,19 @@ schedule_ruleset = {
 schedule_ruleset_1 = {
     'type': 'ScheduleRuleset',
     'name': 'Schedule Ruleset 1',
+<<<<<<< HEAD
     'schedule_type': {
         'type': 'ScheduleType',
         'numeric_type': 'ScheduleContinuous',
+=======
+    'schedule_type_limits': {
+        'type': 'ScheduleTypeLimits',
+        'numeric_type': {
+            'numeric_type': {
+                'type': 'ScheduleContinuous'
+            }
+        },
+>>>>>>> develop
         'unit_type': 'Dimensionless',
         'name': 'Numeric Type',
         'lower_limit_value': 0,
