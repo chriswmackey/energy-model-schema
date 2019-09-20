@@ -4,7 +4,7 @@ from typing import List, Union
 from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
-from app.models.energy.schedulebase import ScheduleType
+from app.models.energy.schedulebase import ScheduleTypeLimit
 from app.models.common.datetime import Date, Time
 
 
@@ -74,7 +74,9 @@ class ScheduleRule(BaseModel):
         False
     )
 
-    start_date: List[float]
+    start_date: List[float] = Schema(
+        [1, 1]
+    )
 
     @validator('start_date', whole=True)
     def check_len_start_date(cls, v):
@@ -83,7 +85,9 @@ class ScheduleRule(BaseModel):
                 'Incorrect number of values.'
             )
 
-    end_date: List[float]
+    end_date: List[float] = Schema(
+        [12, 31]
+    )
 
     @validator('end_date', whole=True)
     def check_len_end_date(cls, v):
@@ -103,8 +107,9 @@ class ScheduleRulesetAbridged(BaseModel):
         regex=r'^[\s.A-Za-z0-9_-]*$',
     )
 
-    schedule_type: ScheduleType = Schema(
-        default=None
+    schedule_type_limit: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$'
     )
 
     default_day_schedule: ScheduleDay
