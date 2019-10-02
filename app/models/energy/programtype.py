@@ -100,14 +100,14 @@ class LightingAbridged(BaseModel):
         'air. Default value is `0`.'
     )
 
-#    @validator('return_air_fraction')
-#    def check_sum(cls, v, values): 
-#        "Ensure sum is less than 1."
-#        if not 'visible_fraction' in values or not 'radiant_fraction' in values:
-#            return v
-#        elif sum(v, values['visible_fraction'], values['radiant_fraction']) > 1:
-#            raise ValueError(
-#        'Sum cannot be greater than 1.')
+    @validator('return_air_fraction')
+    def check_sum(cls, v, values): 
+        "Ensure sum is less than 1."
+        if not 'visible_fraction' in values or not 'radiant_fraction' in values:
+            return v
+        elif (v + values['visible_fraction']+ values['radiant_fraction']) > 1:
+            raise ValueError(
+        'Sum cannot be greater than 1.')
 
     schedule: str = Schema(
         ...,
