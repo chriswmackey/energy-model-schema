@@ -17,6 +17,11 @@ class ScheduleFixedInterval(BaseModel):
         regex=r'^[\s.A-Za-z0-9_-]*$',
     )
 
+    interpolate_to_timestep: bool = Schema(
+        False
+    )
+
+
     start_date: Date
 
     values: List[int] = Schema(
@@ -38,8 +43,6 @@ class ScheduleFixedInterval(BaseModel):
             raise ValueError(
                 'Number of values can not be lesser than 24 or greater than 8784 for leap year')
         return v
-
-
 
 if __name__ == '__main__':
     print(ScheduleFixedInterval.schema_json(indent=2))
