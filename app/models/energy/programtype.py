@@ -4,8 +4,8 @@ from typing import List, Union, Optional
 from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
-from app.models.energy.scheduleruleset import ScheduleRuleset
-from app.models.energy.schedulefixedinterval import ScheduleFixedInterval
+from app.models.energy.scheduleruleset import ScheduleRulesetAbridged
+from app.models.energy.schedulefixedinterval import ScheduleFixedIntervalAbridged
 
 
 class PeopleAbridged(BaseModel):
@@ -100,12 +100,14 @@ class LightingAbridged(BaseModel):
         'air. Default value is `0`.'
     )
 
-    @validator('return_air_fraction')
-    def check_sum(cls, v, values): 
-        "Ensure sum is less than 1."
-        if sum(values['visible_fraction'], values['radiant_fraction'], values['return_air_fraction']) > 1:
-            raise ValueError(
-        'Sum cannot be greater than 1.')
+#    @validator('return_air_fraction')
+#    def check_sum(cls, v, values): 
+#        "Ensure sum is less than 1."
+#        if not 'visible_fraction' in values or not 'radiant_fraction' in values:
+#            return v
+#        elif sum(v, values['visible_fraction'], values['radiant_fraction']) > 1:
+#            raise ValueError(
+#        'Sum cannot be greater than 1.')
 
     schedule: str = Schema(
         ...,
@@ -140,15 +142,15 @@ class ElectricalEquipmentAbridged(BaseModel):
         ge=0,
         le=1,
         description='Used to characterise the amount of long-wave radiation heat given off'
-        ' by electric equipment.'
+        ' by electric equipment. Default value is 0.'
     )
 
     latent_fraction: Union[float, str] = Schema(
-        'autocalculate',
+        0,
         ge=0,
         le=1,
         description='Used to characterise the amount of latent heat given off by electric' 
-        'equipment.'
+        'equipment. Default value is 0.'
 
     )
 
@@ -198,11 +200,11 @@ class GasEquipmentAbridged(BaseModel):
     )
 
     latent_fraction: Union[float, str] = Schema(
-        'autocalculate',
+        0,
         ge=0,
         le=1,
         description='Used to characterise the amount of latent heat given off by electric' 
-        'equipment.'
+        'equipment. Default value is 0.'
 
     )
 
@@ -227,7 +229,7 @@ class GasEquipmentAbridged(BaseModel):
 class InfiltrationAbridged(BaseModel):
     """Used to model the infiltration of air from the outdoor environment into a thermal zone."""
 
-    type: Enum('Infiltration', {'type': 'Infiltration'})
+    type: Enum('InfiltrationAbridged', {'type': 'InfiltrationAbridged'})
 
     name: str = Schema(
         ...,
@@ -267,10 +269,10 @@ class InfiltrationAbridged(BaseModel):
     )
 
 
-class Ventilation(BaseModel):
+class VentilationAbridged(BaseModel):
     """Used to model the purposeful flow of air from the outdoor environment directly into a thermal zone."""
 
-    type: Enum('Ventilation')
+    type: Enum('VentilationAbridged', {'type': 'VentilationAbridged'})
 
     name: str = Schema(
         ...,
@@ -280,12 +282,14 @@ class Ventilation(BaseModel):
     )
 
     air_changes_per_hour: float = Schema(
-        ...
+        0,
+        ge = 0
     )
 
     flow_per_zone: float = Schema(
-        ...,
-        description='Unit is m3/s-m2.'
+        0,
+        ge = 0,
+        description='Unit is m3/s. Default value is 0.'
     )
 
     flow_per_person: float = Schema(
@@ -300,24 +304,51 @@ class Ventilation(BaseModel):
         description='Used to model the ventilation flow rate per zone floor area in m3/s-m2.'
     )
 
-    schedule: Optional[]
+    schedule: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
+    )
 
-class Setpoint(BaseModel):
+class SetpointAbridged(BaseModel):
     """Used to specify information about the setpoint schedule."""
 
-    cooling_schedule: ScheduleFixedInterval
+    type: Enum('SetpointAbridged', {'type': 'SetpointAbridged'})   
 
-    heating_schedule: ScheduleFixedInterval
+    cooling_schedule: str = Schema(
+        ...,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
+    )
 
-    humidification_schedule: ScheduleFixedInterval
+    heating_schedule: str = Schema(
+        ...,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
+    )
 
-    dehumidification_schedule: ScheduleFixedInterval
+    humidification_schedule: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
+    )
+
+    dehumidification_schedule: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
+    )
 
 
-class ProgramType(BaseModel):
+class ProgramTypeAbridged(BaseModel):
     """A set of programs."""
 
-    type: Enum('ProgramType', {'type': 'ProgramType'})
+    type: Enum('ProgramTypeAbridged', {'type': 'ProgramTypeAbridged'})
 
     name: str = Schema(
         ...,
@@ -326,15 +357,33 @@ class ProgramType(BaseModel):
         max_length=100
     )
 
-    people: People
+    people: PeopleAbridged = Schema(
+        default = None
+    )
 
-    lighting: Lighting
+    lighting: LightingAbridged = Schema(
+        default = None
+    )
 
-    electrical_equipment: ElectricalEquipment
+    electrical_equipment: ElectricalEquipmentAbridged = Schema(
+        default = None
+    )
 
-    gas_equipment: GasEquipment
+    gas_equipment: GasEquipmentAbridged = Schema(
+        default = None
+    )
 
-    setpoint: Setpoint
+    infiltration : InfiltrationAbridged = Schema(
+        default = None
+    )
+
+    ventilation : VentilationAbridged = Schema(
+        default = None
+    )
+
+    setpoint: SetpointAbridged = Schema(
+        default = None
+    )
 
 if __name__ == '__main__':
     print(ProgramType.schema_json(indent=2))
