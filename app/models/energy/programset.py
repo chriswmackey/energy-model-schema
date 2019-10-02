@@ -97,6 +97,7 @@ class LightingAbridged(BaseModel):
 class ElectricalEquipmentAbridged(BaseModel):
     """Used to specify information about the electrical equipment."""
 
+
     type: Enum('ElectricalEquipmentAbridged', {'type': 'ElectricalEquipmentAbridged'})
 
     name: str = Schema(
@@ -138,111 +139,10 @@ class ElectricalEquipmentAbridged(BaseModel):
     )
 
 
-class GasEquipmentAbridged(BaseModel):
-    """Used to specify information about the gas equipment."""
-
-    type: Enum('GasEquipmentAbridged', {'type': 'GasEquipmentAbridged'})
-
-    name: str = Schema(
-        ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
-        min_length=1,
-        max_length=100
-    )
-
-    equipment_per_area: float = Schema(
-        ...,
-        ge=0,
-        description='Equipment level per floor area expressed as watts/m².'
-    )
-
-    radiant_fraction: float = Schema(
-        0,
-        ge=0,
-        le=1,
-        description='Used to characterise the amount of long-wave radiation heat given off'
-        ' by electric equipment.'
-    )
-
-    latent_fraction: Union[float, str] = Schema(
-        'autocalculate',
-        ge=0,
-        le=1,
-        description='Used to characterise the amount of latent heat given off by electric' 'equipment.'
-
-    )
-
-    schedule: str = Schema(
-        ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
-        min_length=1,
-        max_length=100,
-        description='Used to describe the schedule for equipment as a fraction applied to'
-        ' design level for electric equipment.'
-    )
-
-
-class InfiltrationAbridged(BaseModel):
-    """Used to model the infiltration of air from the outdoor environment into a thermal zone."""
-
-    type: Enum('Infiltration', {'type': 'Infiltration'})
-
-    name: str = Schema(
-        ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
-        min_length=1,
-        max_length=100
-    )
-
-    flow_per_exterior_area: float = Schema(
-        ...,
-        ge=0,
-        description='Used to model the infiltration per exterior surface area in m3/s-m2.'
-    )
-
-    schedule: str = Schema(
-        ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
-        min_length=1,
-        max_length=100,
-        description='Used to describe the schedule for equipment as a fraction applied to'
-        ' design level for electric equipment.'
-    )
-
-
-class Ventilation(BaseModel):
-    """Used to model the purposeful flow of air from the outdoor environment directly into a thermal zone."""
-
-    type: Enum('Ventilation')
-
-    name: str = Schema(
-        ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
-        min_length=1,
-        max_length=100
-    )
-
-    design_flow_rate_calculation_method: Union[]
-
-    flow_per_person: float = Schema(
-        None,
-        ge=0,
-        description='Used to model the ventilation flow rate per person in m3/s-person.'
-    )
-
-    flow_per_area: float = Schema(
-        None,
-        ge=0,
-        description='Used to model the ventilation flow rate per zone floor area in m3/s-m2.'
-    )
-
-    schedule: Optional[]
-
-
-class ProgramSet(BaseModel):
+class ProgramSetAbridged (BaseModel):
     """A set of programs."""
 
-    type: Enum('ProgramSet', {'type': 'ProgramSet'})
+    type: Enum('ProgramSetAbridged', {'type': 'ProgramSetAbridged'})
 
     name: str = Schema(
         ...,
@@ -250,15 +150,13 @@ class ProgramSet(BaseModel):
         min_length=1,
         max_length=100
     )
+    
+    people: PeopleAbridged
 
-    people: People
+    lighting: LightingAbridged
 
-    lighting: Lighting
-
-    electrical_equipment: ElectricalEquipment
-
-    gas_equipment: GasEquipment
+    electrical_equipment: ElectricalEquipmentAbridged
 
 
 if __name__ == '__main__':
-    print(ProgramSet.schema_json(indent=2))
+    print(ProgramSetAbridged.schema_json(indent=2))
