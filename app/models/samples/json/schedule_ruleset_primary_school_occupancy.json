@@ -7,7 +7,7 @@
         "values": [
             0.0,
             1.0,
-            0.0
+            0.5
         ],
         "times": [
             [
@@ -142,11 +142,11 @@
     ],
     "summer_designday_schedule": {
         "type": "ScheduleDay",
-        "name": "Weekday School Year",
+        "name": "School Summer Design",
         "values": [
             0.0,
             1.0,
-            0.0
+            0.25
         ],
         "times": [
             [
@@ -154,11 +154,11 @@
                 0
             ],
             [
-                9,
+                6,
                 0
             ],
             [
-                17,
+                18,
                 0
             ]
         ],
@@ -166,7 +166,8 @@
     },
     "winter_designday_schedule": {
         "type": "ScheduleDay",
-        "name": "Weekend School Year",
+        "name": "School Winter Design",
+
         "values": [
             0.0
         ],
