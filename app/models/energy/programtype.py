@@ -1,11 +1,11 @@
-"""Programset Schema"""
+"""Programtype Schema"""
 from pydantic import BaseModel, Schema, validator, ValidationError
 from typing import List, Union, Optional
 from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
-from app.models.energy.scheduleruleset import ScheduleRuleset
-from app.models.energy.schedulefixedinterval import ScheduleFixedInterval
+from app.models.energy.scheduleruleset import ScheduleRulesetAbridged
+from app.models.energy.schedulefixedinterval import ScheduleFixedIntervalAbridged
 
 
 class PeopleAbridged(BaseModel):
@@ -70,19 +70,44 @@ class LightingAbridged(BaseModel):
         max_length=100
     )
 
-    lighting_per_area: float = Schema(
+    watts_per_area: float = Schema(
         ...,
         ge=0,
         description='Lighting per floor area expressed as watts/m².'
     )
 
+    visible_fraction: float = Schema(
+        0.25,
+        ge=0,
+        le=1,
+        description='The fraction of heat from lights that goes into the zone as visible '
+        '(short-wave) radiation. The default value is `0.25`.'
+    )
+
     radiant_fraction: float = Schema(
-        0,
+        0.32,
         ge=0,
         le=1,
         description='The fraction of heat from lights that is long-wave radiation. Default'
-        ' value is `0`.'
+        ' value is `0.32`.'
     )
+
+    return_air_fraction: float = Schema(
+        0.00,
+        ge=0,
+        le=1,
+        description='The fraction of the heat from lights that goes into the zone return '
+        'air. Default value is `0`.'
+    )
+
+#    @validator('return_air_fraction')
+#    def check_sum(cls, v, values): 
+#        "Ensure sum is less than 1."
+#        if not 'visible_fraction' in values or not 'radiant_fraction' in values:
+#            return v
+#        elif sum(v, values['visible_fraction'], values['radiant_fraction']) > 1:
+#            raise ValueError(
+#        'Sum cannot be greater than 1.')
 
     schedule: str = Schema(
         ...,
@@ -106,7 +131,7 @@ class ElectricalEquipmentAbridged(BaseModel):
         max_length=100
     )
 
-    equipment_per_area: float = Schema(
+    watts_per_area: float = Schema(
         ...,
         ge=0,
         description='Equipment level per floor area expressed as watts/m².'
@@ -117,16 +142,26 @@ class ElectricalEquipmentAbridged(BaseModel):
         ge=0,
         le=1,
         description='Used to characterise the amount of long-wave radiation heat given off'
-        ' by electric equipment.'
+        ' by electric equipment. Default value is 0.'
     )
 
     latent_fraction: Union[float, str] = Schema(
-        'autocalculate',
+        0,
         ge=0,
         le=1,
-        description='Used to characterise the amount of latent heat given off by electric' 'equipment.'
+        description='Used to characterise the amount of latent heat given off by electric' 
+        'equipment. Default value is 0.'
 
     )
+
+    lost_fraction: float = Schema(
+        0,
+        ge = 0,
+        le = 1,
+        description='Used to characterize the amount of “lost” heat being given off by '
+        'equipment. The default value is 0.'
+    )
+
 
     schedule: str = Schema(
         ...,
@@ -150,7 +185,7 @@ class GasEquipmentAbridged(BaseModel):
         max_length=100
     )
 
-    equipment_per_area: float = Schema(
+    watts_per_area: float = Schema(
         ...,
         ge=0,
         description='Equipment level per floor area expressed as watts/m².'
@@ -165,12 +200,21 @@ class GasEquipmentAbridged(BaseModel):
     )
 
     latent_fraction: Union[float, str] = Schema(
-        'autocalculate',
+        0,
         ge=0,
         le=1,
-        description='Used to characterise the amount of latent heat given off by electric' 'equipment.'
+        description='Used to characterise the amount of latent heat given off by electric' 
+        'equipment. Default value is 0.'
 
     )
+
+    lost_fraction: float = Schema(
+        0,
+        ge = 0,
+        le = 1,
+        description='Used to characterize the amount of “lost” heat being given off by '
+        'equipment. The default value is 0.'
+    )    
 
     schedule: str = Schema(
         ...,
@@ -185,7 +229,7 @@ class GasEquipmentAbridged(BaseModel):
 class InfiltrationAbridged(BaseModel):
     """Used to model the infiltration of air from the outdoor environment into a thermal zone."""
 
-    type: Enum('Infiltration', {'type': 'Infiltration'})
+    type: Enum('InfiltrationAbridged', {'type': 'InfiltrationAbridged'})
 
     name: str = Schema(
         ...,
@@ -200,6 +244,21 @@ class InfiltrationAbridged(BaseModel):
         description='Used to model the infiltration per exterior surface area in m3/s-m2.'
     )
 
+    constant_coefficient: float = Schema(
+        1,
+        ge=0
+    )
+
+    temperature_coefficient: float = Schema(
+        0,
+        ge=0
+    )
+
+    velocity_coefficient: float = Schema(
+        0,
+        ge=0
+    )
+
     schedule: str = Schema(
         ...,
         regex=r'^[\s.A-Za-z0-9_-]*$',
@@ -210,10 +269,10 @@ class InfiltrationAbridged(BaseModel):
     )
 
 
-class Ventilation(BaseModel):
+class VentilationAbridged(BaseModel):
     """Used to model the purposeful flow of air from the outdoor environment directly into a thermal zone."""
 
-    type: Enum('Ventilation')
+    type: Enum('VentilationAbridged', {'type': 'VentilationAbridged'})
 
     name: str = Schema(
         ...,
@@ -222,7 +281,16 @@ class Ventilation(BaseModel):
         max_length=100
     )
 
-    design_flow_rate_calculation_method: Union[]
+    air_changes_per_hour: float = Schema(
+        0,
+        ge = 0
+    )
+
+    flow_per_zone: float = Schema(
+        0,
+        ge = 0,
+        description='Unit is m3/s. Default value is 0.'
+    )
 
     flow_per_person: float = Schema(
         None,
@@ -236,13 +304,51 @@ class Ventilation(BaseModel):
         description='Used to model the ventilation flow rate per zone floor area in m3/s-m2.'
     )
 
-    schedule: Optional[]
+    schedule: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
+    )
+
+class SetpointAbridged(BaseModel):
+    """Used to specify information about the setpoint schedule."""
+
+    type: Enum('SetpointAbridged', {'type': 'SetpointAbridged'})   
+
+    cooling_schedule: str = Schema(
+        ...,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
+    )
+
+    heating_schedule: str = Schema(
+        ...,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
+    )
+
+    humidification_schedule: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
+    )
+
+    dehumidification_schedule: str = Schema(
+        default=None,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
+    )
 
 
-class ProgramSet(BaseModel):
+class ProgramTypeAbridged(BaseModel):
     """A set of programs."""
 
-    type: Enum('ProgramSet', {'type': 'ProgramSet'})
+    type: Enum('ProgramTypeAbridged', {'type': 'ProgramTypeAbridged'})
 
     name: str = Schema(
         ...,
@@ -251,14 +357,33 @@ class ProgramSet(BaseModel):
         max_length=100
     )
 
-    people: People
+    people: PeopleAbridged = Schema(
+        default = None
+    )
 
-    lighting: Lighting
+    lighting: LightingAbridged = Schema(
+        default = None
+    )
 
-    electrical_equipment: ElectricalEquipment
+    electrical_equipment: ElectricalEquipmentAbridged = Schema(
+        default = None
+    )
 
-    gas_equipment: GasEquipment
+    gas_equipment: GasEquipmentAbridged = Schema(
+        default = None
+    )
 
+    infiltration : InfiltrationAbridged = Schema(
+        default = None
+    )
+
+    ventilation : VentilationAbridged = Schema(
+        default = None
+    )
+
+    setpoint: SetpointAbridged = Schema(
+        default = None
+    )
 
 if __name__ == '__main__':
-    print(ProgramSet.schema_json(indent=2))
+    print(ProgramType.schema_json(indent=2))

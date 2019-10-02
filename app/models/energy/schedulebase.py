@@ -7,8 +7,8 @@ from uuid import UUID, uuid4
 
 class ScheduleNumericType (str, Enum):
     """Designates how the range values are validated."""
-    schedule_continuous = 'ScheduleContinuous'
-    schedule_discrete = 'ScheduleDiscrete'
+    continuous = 'Continuous'
+    discrete = 'Discrete'
 
 class ScheduleUnitType (str, Enum):
     dimensionless = 'Dimensionless'
@@ -27,26 +27,26 @@ class ScheduleUnitType (str, Enum):
     mode = 'Mode'
 
 
-class ScheduleType(BaseModel):
+class ScheduleTypeLimit(BaseModel):
     """Specifies the data types and limits for values contained in schedules."""
 
-    type: Enum('ScheduleType', {'type': 'ScheduleType'})
+    type: Enum('ScheduleTypeLimit', {'type': 'ScheduleTypeLimit'})
 
     name: str = Schema(
         ...,
         regex=r'^[\s.A-Za-z0-9_-]*$',
     )
 
-    lower_limit_value: float = Schema(
-        0,
+    lower_limit: float = Schema(
+        default=None,
         description='Lower limit for the schedule type is entered.'
     )
 
-    upper_limit_value: float = Schema(
-        1,
+    upper_limit: float = Schema(
+        default=None,
         description='Upper limit for the schedule type is entered.'
     )
 
-    numeric_type: ScheduleNumericType
+    numeric_type: ScheduleNumericType = ScheduleNumericType.continuous
 
-    unit_type: ScheduleUnitType
+    unit_type: ScheduleUnitType = ScheduleUnitType.dimensionless

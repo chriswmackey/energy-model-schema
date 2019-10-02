@@ -7,7 +7,10 @@ from datetime import datetime
 from app.models.energy.constructionset import ConstructionSetAbridged
 from app.models.energy.construction import OpaqueConstructionAbridged, WindowConstructionAbridged, ShadeConstruction
 from app.models.energy.materials import EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialGas, EnergyWindowMaterialGasCustom, EnergyWindowMaterialGasMixture, EnergyWindowMaterialSimpleGlazSys, EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing, EnergyWindowMaterialShade
-
+from app.models.energy.programtype import ProgramTypeAbridged
+from app.models.energy.scheduleruleset import ScheduleRulesetAbridged
+from app.models.energy.schedulefixedinterval import ScheduleFixedIntervalAbridged
+from app.models.energy.schedulebase import ScheduleTypeLimit
 
 class Plane(BaseModel):
 
@@ -464,6 +467,17 @@ class ModelEnergyProperties(BaseModel):
     materials: List[Union[EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialGas, EnergyWindowMaterialGasCustom, EnergyWindowMaterialGasMixture,
                           EnergyWindowMaterialSimpleGlazSys, EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing, EnergyWindowMaterialShade]]
 
+    program_types: List[ProgramTypeAbridged] = Schema(
+        default=None
+    )
+
+    schedules: List[Union[ScheduleRulesetAbridged, ScheduleFixedIntervalAbridged]] = Schema(
+        default=None
+    )
+
+    schedule_type_limits: List[ScheduleTypeLimit] = Schema(
+        default=None
+    )
 
 class ModelProperties(BaseModel):
 
