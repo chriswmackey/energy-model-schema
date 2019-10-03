@@ -32,6 +32,7 @@ class ScheduleFixedIntervalAbridged(BaseModel):
         False
     )
 
+
     start_date: Date
 
     is_leap_year: bool = Schema(
@@ -58,7 +59,6 @@ class ScheduleFixedIntervalAbridged(BaseModel):
         'Number of values can not be lesser than 24 or greater than 8784 for leap year')
 
     placeholder_value = float
-
 
 if __name__ == '__main__':
     print(ScheduleFixedIntervalAbridged.schema_json(indent=2))
