@@ -105,7 +105,8 @@ class LightingAbridged(BaseModel):
         "Ensure sum is less than 1."
         if not 'visible_fraction' in values or not 'radiant_fraction' in values:
             return v
-        elif (v + values['visible_fraction'] + values['radiant_fraction']) > 1:
+        elif (v + values['visible_fraction']+ values['radiant_fraction']) > 1:
+
             raise ValueError(
         'Sum cannot be greater than 1.')
 
