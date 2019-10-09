@@ -11,6 +11,7 @@ from app.models.energy.programtype import ProgramTypeAbridged
 from app.models.energy.scheduleruleset import ScheduleRulesetAbridged
 from app.models.energy.schedulefixedinterval import ScheduleFixedIntervalAbridged
 from app.models.energy.schedulebase import ScheduleTypeLimit
+from app.models.energy.hvac import IdealAirSystem
 
 class Plane(BaseModel):
 
@@ -407,6 +408,9 @@ class RoomEnergyPropertiesAbridged(BaseModel):
         max_length=100
     )
 
+    hvac: IdealAirSystem = Schema(
+        default=None
+    )
 
 class RoomPropertiesAbridged(BaseModel):
 
