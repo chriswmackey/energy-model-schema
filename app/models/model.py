@@ -11,7 +11,7 @@ from app.models.energy.programtype import ProgramTypeAbridged
 from app.models.energy.scheduleruleset import ScheduleRulesetAbridged
 from app.models.energy.schedulefixedinterval import ScheduleFixedIntervalAbridged
 from app.models.energy.schedulebase import ScheduleTypeLimit
-from app.models.energy.hvac import IdealAirSystem
+from app.models.energy.idealair import IdealAirSystem
 
 class Plane(BaseModel):
 

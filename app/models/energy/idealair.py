@@ -1,10 +1,7 @@
-"""HVAC Schema"""
+"""Ideal Air Schema"""
 from pydantic import BaseModel, Schema, validator, ValidationError
 from typing import List, Union
 from enum import Enum
-from uuid import UUID, uuid4
-from datetime import datetime
-
 
 class EconomizerType(str, Enum):
     no_economizer = 'NoEconomizer'
@@ -21,10 +18,22 @@ class IdealAirSystem(BaseModel):
         ge=0
     )
 
+    @validator('heating_limit')
+    def check_string_heating_limit(cls, v):
+        "Ensure the text input is nothing other than autocalculate."
+        if v != 'autocalculate':
+            raise ValidationError( 'This is not a valid entry for heating_limit')
+
     cooling_limit: Union[float, str] = Schema(
         'autocalculate',
         ge=0
     )
+
+    @validator('cooling_limit')
+    def check_string_cooling_limit(cls, v):
+        "Ensure the text input is nothing other than autocalculate."
+        if v != 'autocalculate':
+            raise ValidationError( 'This is not a valid entry for heating_limit')
 
     economizer_type: EconomizerType = EconomizerType.differential_dry_bulb
 
