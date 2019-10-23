@@ -1648,7 +1648,8 @@
                     "type": "RoomEnergyPropertiesAbridged",
                     "program_type": "Generic Office Program",
                     "hvac": {
-                        "type": "IdealAirSystem"
+                        "type": "IdealAirSystem",
+                        "heating_limit": "autocalculate"
                     }
                 }
             },
