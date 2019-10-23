@@ -33,7 +33,7 @@ class IdealAirSystem(BaseModel):
     def check_string_cooling_limit(cls, v):
         "Ensure the text input is nothing other than autocalculate."
         if v != "autocalculate":
-            raise ValueError( 'This is not a valid entry for heating_limit')
+            raise ValueError( 'This is not a valid entry for cooling_limit')
 
     economizer_type: EconomizerType = EconomizerType.differential_dry_bulb
 
