@@ -316,6 +316,13 @@ class SetpointAbridged(BaseModel):
 
     type: Enum('SetpointAbridged', {'type': 'SetpointAbridged'})   
 
+    name: str = Schema(
+        ...,
+        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
+    )   
+
     cooling_schedule: str = Schema(
         ...,
         regex=r'^[\s.A-Za-z0-9_-]*$',
@@ -386,4 +393,4 @@ class ProgramTypeAbridged(BaseModel):
     )
 
 if __name__ == '__main__':
-    print(ProgramType.schema_json(indent=2))
+    print(ProgramTypeAbridged.schema_json(indent=2))

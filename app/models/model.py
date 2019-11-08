@@ -7,7 +7,7 @@ from datetime import datetime
 from app.models.energy.constructionset import ConstructionSetAbridged
 from app.models.energy.construction import OpaqueConstructionAbridged, WindowConstructionAbridged, ShadeConstruction
 from app.models.energy.materials import EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialGas, EnergyWindowMaterialGasCustom, EnergyWindowMaterialGasMixture, EnergyWindowMaterialSimpleGlazSys, EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing, EnergyWindowMaterialShade
-from app.models.energy.programtype import ProgramTypeAbridged
+from app.models.energy.programtype import ProgramTypeAbridged, PeopleAbridged, LightingAbridged, ElectricalEquipmentAbridged, GasEquipmentAbridged, InfiltrationAbridged, VentilationAbridged, SetpointAbridged
 from app.models.energy.scheduleruleset import ScheduleRulesetAbridged
 from app.models.energy.schedulefixedinterval import ScheduleFixedIntervalAbridged
 from app.models.energy.schedulebase import ScheduleTypeLimit
@@ -366,46 +366,32 @@ class RoomEnergyPropertiesAbridged(BaseModel):
         max_length=100
     )
 
-    people: str = Schema(
-        default=None,
-        regex=r'[A-Za-z0-9_-]',
-        min_length=1,
-        max_length=100
+    people: PeopleAbridged = Schema(
+        default=None
+    )
+    
+    lighting: LightingAbridged = Schema(
+        default=None
     )
 
-    lighting: str = Schema(
-        default=None,
-        regex=r'[A-Za-z0-9_-]',
-        min_length=1,
-        max_length=100
+    electric_equipment: ElectricalEquipmentAbridged = Schema(
+        default=None
     )
 
-    electric_equipment: str = Schema(
-        default=None,
-        regex=r'[A-Za-z0-9_-]',
-        min_length=1,
-        max_length=100
+    gas_equipment: GasEquipmentAbridged = Schema(
+        default=None
     )
 
-    gas_equipment: str = Schema(
-        default=None,
-        regex=r'[A-Za-z0-9_-]',
-        min_length=1,
-        max_length=100
+    infiltration: InfiltrationAbridged = Schema(
+        default=None
     )
 
-    infiltration: str = Schema(
-        default=None,
-        regex=r'[A-Za-z0-9_-]',
-        min_length=1,
-        max_length=100
+    ventilation: VentilationAbridged = Schema(
+        default=None
     )
 
-    ventilation: str = Schema(
-        default=None,
-        regex=r'[A-Za-z0-9_-]',
-        min_length=1,
-        max_length=100
+    setpoint: SetpointAbridged = Schema(
+        default=None
     )
 
     hvac: IdealAirSystem = Schema(
