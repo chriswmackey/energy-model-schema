@@ -106,6 +106,7 @@ class LightingAbridged(BaseModel):
         if not 'visible_fraction' in values or not 'radiant_fraction' in values:
             return v
         elif (v + values['visible_fraction']+ values['radiant_fraction']) > 1:
+
             raise ValueError(
         'Sum cannot be greater than 1.')
 
@@ -363,7 +364,7 @@ class ProgramTypeAbridged(BaseModel):
         min_length=1,
         max_length=100
     )
-
+    
     people: PeopleAbridged = Schema(
         default = None
     )
@@ -393,4 +394,5 @@ class ProgramTypeAbridged(BaseModel):
     )
 
 if __name__ == '__main__':
+
     print(ProgramTypeAbridged.schema_json(indent=2))
