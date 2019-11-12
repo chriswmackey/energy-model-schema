@@ -7,7 +7,7 @@ from datetime import datetime
 from app.models.energy.constructionset import ConstructionSetAbridged
 from app.models.energy.construction import OpaqueConstructionAbridged, WindowConstructionAbridged, ShadeConstruction
 from app.models.energy.materials import EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialGas, EnergyWindowMaterialGasCustom, EnergyWindowMaterialGasMixture, EnergyWindowMaterialSimpleGlazSys, EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing, EnergyWindowMaterialShade
-from app.models.energy.programtype import ProgramTypeAbridged, PeopleAbridged, LightingAbridged, ElectricalEquipmentAbridged, GasEquipmentAbridged, InfiltrationAbridged, VentilationAbridged, SetpointAbridged
+from app.models.energy.programtype import ProgramTypeAbridged, PeopleAbridged, LightingAbridged, ElectricEquipmentAbridged, GasEquipmentAbridged, InfiltrationAbridged, VentilationAbridged, SetpointAbridged
 from app.models.energy.scheduleruleset import ScheduleRulesetAbridged
 from app.models.energy.schedulefixedinterval import ScheduleFixedIntervalAbridged
 from app.models.energy.schedulebase import ScheduleTypeLimit
@@ -374,7 +374,7 @@ class RoomEnergyPropertiesAbridged(BaseModel):
         default=None
     )
 
-    electric_equipment: ElectricalEquipmentAbridged = Schema(
+    electric_equipment: ElectricEquipmentAbridged = Schema(
         default=None
     )
 

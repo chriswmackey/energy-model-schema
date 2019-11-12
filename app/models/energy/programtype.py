@@ -119,10 +119,10 @@ class LightingAbridged(BaseModel):
     )
 
 
-class ElectricalEquipmentAbridged(BaseModel):
+class ElectricEquipmentAbridged(BaseModel):
     """Used to specify information about the electrical equipment."""
 
-    type: Enum('ElectricalEquipmentAbridged', {'type': 'ElectricalEquipmentAbridged'})
+    type: Enum('ElectricEquipmentAbridged', {'type': 'ElectricEquipmentAbridged'})
 
     name: str = Schema(
         ...,
@@ -372,7 +372,7 @@ class ProgramTypeAbridged(BaseModel):
         default = None
     )
 
-    electrical_equipment: ElectricalEquipmentAbridged = Schema(
+    electrical_equipment: ElectricEquipmentAbridged = Schema(
         default = None
     )
 
