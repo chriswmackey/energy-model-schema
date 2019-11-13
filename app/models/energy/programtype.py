@@ -6,6 +6,7 @@ from uuid import UUID, uuid4
 from datetime import datetime
 from app.models.energy.scheduleruleset import ScheduleRulesetAbridged
 from app.models.energy.schedulefixedinterval import ScheduleFixedIntervalAbridged
+import re
 
 
 class PeopleAbridged(BaseModel):
@@ -15,10 +16,20 @@ class PeopleAbridged(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
+
+    @validator('name')
+    def check_name(cls, v):
+        try:
+            val = ''.join(i for i in v if ord(i) < 128)
+            val = re.sub(r'[,;!\n\t]', '', v)
+        except  TypeError:
+            raise TypeError('Invalid String')
+        val = val.strip()
+        assert len(v) > 0, 'Name contains no valid characters.'
+        assert len(v) <=100, 'Number of characters must be less than 100.'
 
     people_per_area: float = Schema(
         ...,
@@ -65,10 +76,20 @@ class LightingAbridged(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
+
+    @validator('name')
+    def check_name(cls, v):
+        try:
+            val = ''.join(i for i in v if ord(i) < 128)
+            val = re.sub(r'[,;!\n\t]', '', v)
+        except  TypeError:
+            raise TypeError('Invalid String')
+        val = val.strip()
+        assert len(v) > 0, 'Name contains no valid characters.'
+        assert len(v) <=100, 'Number of characters must be less than 100.'
 
     watts_per_area: float = Schema(
         ...,
@@ -127,10 +148,20 @@ class ElectricEquipmentAbridged(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
+
+    @validator('name')
+    def check_name(cls, v):
+        try:
+            val = ''.join(i for i in v if ord(i) < 128)
+            val = re.sub(r'[,;!\n\t]', '', v)
+        except  TypeError:
+            raise TypeError('Invalid String')
+        val = val.strip()
+        assert len(v) > 0, 'Name contains no valid characters.'
+        assert len(v) <=100, 'Number of characters must be less than 100.'
 
     watts_per_area: float = Schema(
         ...,
@@ -181,10 +212,20 @@ class GasEquipmentAbridged(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
+
+    @validator('name')
+    def check_name(cls, v):
+        try:
+            val = ''.join(i for i in v if ord(i) < 128)
+            val = re.sub(r'[,;!\n\t]', '', v)
+        except  TypeError:
+            raise TypeError('Invalid String')
+        val = val.strip()
+        assert len(v) > 0, 'Name contains no valid characters.'
+        assert len(v) <=100, 'Number of characters must be less than 100.'
 
     watts_per_area: float = Schema(
         ...,
@@ -234,10 +275,20 @@ class InfiltrationAbridged(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
+
+    @validator('name')
+    def check_name(cls, v):
+        try:
+            val = ''.join(i for i in v if ord(i) < 128)
+            val = re.sub(r'[,;!\n\t]', '', v)
+        except  TypeError:
+            raise TypeError('Invalid String')
+        val = val.strip()
+        assert len(v) > 0, 'Name contains no valid characters.'
+        assert len(v) <=100, 'Number of characters must be less than 100.'
 
     flow_per_exterior_area: float = Schema(
         ...,
@@ -277,10 +328,20 @@ class VentilationAbridged(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
+
+    @validator('name')
+    def check_name(cls, v):
+        try:
+            val = ''.join(i for i in v if ord(i) < 128)
+            val = re.sub(r'[,;!\n\t]', '', v)
+        except  TypeError:
+            raise TypeError('Invalid String')
+        val = val.strip()
+        assert len(v) > 0, 'Name contains no valid characters.'
+        assert len(v) <=100, 'Number of characters must be less than 100.'
 
     air_changes_per_hour: float = Schema(
         0,
@@ -319,10 +380,20 @@ class SetpointAbridged(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
-    )   
+    )
+
+    @validator('name')
+    def check_name(cls, v):
+        try:
+            val = ''.join(i for i in v if ord(i) < 128)
+            val = re.sub(r'[,;!\n\t]', '', v)
+        except  TypeError:
+            raise TypeError('Invalid String')
+        val = val.strip()
+        assert len(v) > 0, 'Name contains no valid characters.'
+        assert len(v) <=100, 'Number of characters must be less than 100.'
 
     cooling_schedule: str = Schema(
         ...,
@@ -360,10 +431,20 @@ class ProgramTypeAbridged(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
+
+    @validator('name')
+    def check_name(cls, v):
+        try:
+            val = ''.join(i for i in v if ord(i) < 128)
+            val = re.sub(r'[,;!\n\t]', '', v)
+        except  TypeError:
+            raise TypeError('Invalid String')
+        val = val.strip()
+        assert len(v) > 0, 'Name contains no valid characters.'
+        assert len(v) <=100, 'Number of characters must be less than 100.'
     
     people: PeopleAbridged = Schema(
         default = None

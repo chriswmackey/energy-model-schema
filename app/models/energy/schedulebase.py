@@ -3,7 +3,7 @@ from pydantic import BaseModel, Schema, validator, ValidationError, UrlStr, Cons
 from typing import List, Union
 from enum import Enum
 from uuid import UUID, uuid4
-
+import re
 
 class ScheduleNumericType (str, Enum):
     """Designates how the range values are validated."""
@@ -34,8 +34,18 @@ class ScheduleTypeLimit(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
     )
+
+    @validator('name')
+    def check_name(cls, v):
+        try:
+            val = ''.join(i for i in v if ord(i) < 128)
+            val = re.sub(r'[,;!\n\t]', '', v)
+        except  TypeError:
+            raise TypeError('Invalid String')
+        val = val.strip()
 
     lower_limit: float = Schema(
         default=None,

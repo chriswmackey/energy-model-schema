@@ -44,9 +44,9 @@ def test_model_single_zone_office_detailed_loads():
     file_path  = os.path.join(target_folder, 'model_single_zone_office_detailed_loads.json')
     Model.parse_file(file_path) 
 
-def test_model_with_humidty_setpoints():
+def test_model_with_humidity_setpoints():
     root = os.path.dirname(os.path.dirname(__file__))
     target_folder = os.path.join(root, 'app', 'models', 'samples', 'json')
-    file_path  = os.path.join(target_folder, 'model_with_humidty_setpoints.json')
+    file_path  = os.path.join(target_folder, 'model_with_humidity_setpoints.json')
     Model.parse_file(file_path) 
   

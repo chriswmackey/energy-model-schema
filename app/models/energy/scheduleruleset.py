@@ -6,6 +6,7 @@ from uuid import UUID, uuid4
 from datetime import datetime
 from app.models.energy.schedulebase import ScheduleTypeLimit
 from app.models.common.datetime import Date, Time
+import re
 
 
 class ScheduleDay(BaseModel):
@@ -14,8 +15,20 @@ class ScheduleDay(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$'
+        min_length=1,
+        max_length=100
     )
+
+    @validator('name')
+    def check_name(cls, v):
+        try:
+            val = ''.join(i for i in v if ord(i) < 128)
+            val = re.sub(r'[,;!\n\t]', '', v)
+        except TypeError:
+            raise TypeError('Invalid String')
+        val = val.strip()
+        assert len(v) > 0, 'Name contains no valid characters.'
+        assert len(v) <= 100, 'Number of characters must be less than 100.'
 
     values: List[float]
 

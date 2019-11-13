@@ -11,13 +11,13 @@ def test_detailed_simulation_par():
     root = os.path.dirname(os.path.dirname(__file__))
     target_folder = os.path.join(root, 'app', 'models', 'samples', 'json')
     file_path = os.path.join(
-        target_folder, 'detailed_simulatiion_par.json')
+        target_folder, 'detailed_simulation_par.json')
     SimulationParameter.parse_file(file_path)
 
 
-def test_simple_simulatiion_par():
+def test_simple_simulation_par():
     root = os.path.dirname(os.path.dirname(__file__))
     target_folder = os.path.join(root, 'app', 'models', 'samples', 'json')
     file_path = os.path.join(
-        target_folder, 'simple_simulatiion_par.json')
+        target_folder, 'simple_simulation_par.json')
     SimulationParameter.parse_file(file_path)
