@@ -31,11 +31,11 @@ class SimulationOutput(BaseModel):
         default=False
     )
 
-    output: list = Schema(
+    outputs: List[str] = Schema(
         default=None
     )
 
-    summary_reports: list = Schema(
+    summary_reports: List[str] = Schema(
         default=None
     )
 
@@ -53,7 +53,7 @@ class SimulationControl(BaseModel):
         default=False
     )
 
-    do_plant_sizing_periods: bool = Schema(
+    do_plant_sizing: bool = Schema(
         default=False
     )
 
