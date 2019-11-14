@@ -16,8 +16,17 @@ class ScheduleFixedIntervalAbridged(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$'
+        min_length=1,
+        max_length=100
     )
+
+    @validator('name')
+    def check_name(cls, v):
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',',';','!','\n','\t')), \
+            'Name constains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name contains no valid characters.'
+        assert len(v) <=100, 'Number of characters must be less than 100.'
 
     schedule_type_limit: str = Schema(
         default=None,

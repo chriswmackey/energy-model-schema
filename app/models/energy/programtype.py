@@ -22,12 +22,9 @@ class PeopleAbridged(BaseModel):
 
     @validator('name')
     def check_name(cls, v):
-        try:
-            val = ''.join(i for i in v if ord(i) < 128)
-            val = re.sub(r'[,;!\n\t]', '', v)
-        except  TypeError:
-            raise TypeError('Invalid String')
-        val = val.strip()
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',',';','!','\n','\t')), \
+            'Name constains invalid character for EnergyPlus (, ; ! \n \t).'
         assert len(v) > 0, 'Name contains no valid characters.'
         assert len(v) <=100, 'Number of characters must be less than 100.'
 
@@ -51,6 +48,12 @@ class PeopleAbridged(BaseModel):
         le=1,
         description='Used to specify a fixed latent fraction of heat gain due to people.'
     )
+
+    @validator('latent_fraction')
+    def check_string_latent_fraction(cls, v):
+        if not isinstance(v, float) and v != 'autocalculate':
+            raise ValueError( 'This is not a valid entry for latent_fraction')
+
 
     occupancy_schedule: str = Schema(
         ...,
@@ -82,12 +85,9 @@ class LightingAbridged(BaseModel):
 
     @validator('name')
     def check_name(cls, v):
-        try:
-            val = ''.join(i for i in v if ord(i) < 128)
-            val = re.sub(r'[,;!\n\t]', '', v)
-        except  TypeError:
-            raise TypeError('Invalid String')
-        val = val.strip()
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',',';','!','\n','\t')), \
+            'Name constains invalid character for EnergyPlus (, ; ! \n \t).'
         assert len(v) > 0, 'Name contains no valid characters.'
         assert len(v) <=100, 'Number of characters must be less than 100.'
 
@@ -154,12 +154,9 @@ class ElectricEquipmentAbridged(BaseModel):
 
     @validator('name')
     def check_name(cls, v):
-        try:
-            val = ''.join(i for i in v if ord(i) < 128)
-            val = re.sub(r'[,;!\n\t]', '', v)
-        except  TypeError:
-            raise TypeError('Invalid String')
-        val = val.strip()
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',',';','!','\n','\t')), \
+            'Name constains invalid character for EnergyPlus (, ; ! \n \t).'
         assert len(v) > 0, 'Name contains no valid characters.'
         assert len(v) <=100, 'Number of characters must be less than 100.'
 
@@ -218,12 +215,9 @@ class GasEquipmentAbridged(BaseModel):
 
     @validator('name')
     def check_name(cls, v):
-        try:
-            val = ''.join(i for i in v if ord(i) < 128)
-            val = re.sub(r'[,;!\n\t]', '', v)
-        except  TypeError:
-            raise TypeError('Invalid String')
-        val = val.strip()
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',',';','!','\n','\t')), \
+            'Name constains invalid character for EnergyPlus (, ; ! \n \t).'
         assert len(v) > 0, 'Name contains no valid characters.'
         assert len(v) <=100, 'Number of characters must be less than 100.'
 
@@ -281,12 +275,9 @@ class InfiltrationAbridged(BaseModel):
 
     @validator('name')
     def check_name(cls, v):
-        try:
-            val = ''.join(i for i in v if ord(i) < 128)
-            val = re.sub(r'[,;!\n\t]', '', v)
-        except  TypeError:
-            raise TypeError('Invalid String')
-        val = val.strip()
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',',';','!','\n','\t')), \
+            'Name constains invalid character for EnergyPlus (, ; ! \n \t).'
         assert len(v) > 0, 'Name contains no valid characters.'
         assert len(v) <=100, 'Number of characters must be less than 100.'
 
@@ -334,12 +325,9 @@ class VentilationAbridged(BaseModel):
 
     @validator('name')
     def check_name(cls, v):
-        try:
-            val = ''.join(i for i in v if ord(i) < 128)
-            val = re.sub(r'[,;!\n\t]', '', v)
-        except  TypeError:
-            raise TypeError('Invalid String')
-        val = val.strip()
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',',';','!','\n','\t')), \
+            'Name constains invalid character for EnergyPlus (, ; ! \n \t).'
         assert len(v) > 0, 'Name contains no valid characters.'
         assert len(v) <=100, 'Number of characters must be less than 100.'
 
@@ -386,12 +374,9 @@ class SetpointAbridged(BaseModel):
 
     @validator('name')
     def check_name(cls, v):
-        try:
-            val = ''.join(i for i in v if ord(i) < 128)
-            val = re.sub(r'[,;!\n\t]', '', v)
-        except  TypeError:
-            raise TypeError('Invalid String')
-        val = val.strip()
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',',';','!','\n','\t')), \
+            'Name constains invalid character for EnergyPlus (, ; ! \n \t).'
         assert len(v) > 0, 'Name contains no valid characters.'
         assert len(v) <=100, 'Number of characters must be less than 100.'
 
@@ -437,12 +422,9 @@ class ProgramTypeAbridged(BaseModel):
 
     @validator('name')
     def check_name(cls, v):
-        try:
-            val = ''.join(i for i in v if ord(i) < 128)
-            val = re.sub(r'[,;!\n\t]', '', v)
-        except  TypeError:
-            raise TypeError('Invalid String')
-        val = val.strip()
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',',';','!','\n','\t')), \
+            'Name constains invalid character for EnergyPlus (, ; ! \n \t).'
         assert len(v) > 0, 'Name contains no valid characters.'
         assert len(v) <=100, 'Number of characters must be less than 100.'
     
