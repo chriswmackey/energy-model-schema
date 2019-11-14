@@ -32,8 +32,8 @@ class EnergyMaterial(BaseModel):
     def check_name(cls, v):
         assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
         assert all(char not in v for char in (',', ';', '!', '\n', '\t')), \
-            'Name constains invalid character for EnergyPlus (, ; ! \n \t).'
-        assert len(v) > 0, 'Name contains no valid characters.'
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
         assert len(v) <= 100, 'Number of characters must be less than 100.'
 
     roughness: Roughness = Roughness.medium_rough
@@ -106,8 +106,8 @@ class EnergyMaterialNoMass(BaseModel):
     def check_name(cls, v):
         assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
         assert all(char not in v for char in (',', ';', '!', '\n', '\t')), \
-            'Name constains invalid character for EnergyPlus (, ; ! \n \t).'
-        assert len(v) > 0, 'Name contains no valid characters.'
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
         assert len(v) <= 100, 'Number of characters must be less than 100.'
 
     r_value: float = Schema(
@@ -170,8 +170,8 @@ class EnergyWindowMaterialGas(BaseModel):
     def check_name(cls, v):
         assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
         assert all(char not in v for char in (',', ';', '!', '\n', '\t')), \
-            'Name constains invalid character for EnergyPlus (, ; ! \n \t).'
-        assert len(v) > 0, 'Name contains no valid characters.'
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
         assert len(v) <= 100, 'Number of characters must be less than 100.'
 
     gas_type: GasType = GasType.air
@@ -199,8 +199,8 @@ class EnergyWindowMaterialGasCustom(BaseModel):
     def check_name(cls, v):
         assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
         assert all(char not in v for char in (',', ';', '!', '\n', '\t')), \
-            'Name constains invalid character for EnergyPlus (, ; ! \n \t).'
-        assert len(v) > 0, 'Name contains no valid characters.'
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
         assert len(v) <= 100, 'Number of characters must be less than 100.'
 
     thickness: float = Schema(
@@ -298,8 +298,8 @@ class EnergyWindowMaterialGasMixture(BaseModel):
     def check_name(cls, v):
         assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
         assert all(char not in v for char in (',', ';', '!', '\n', '\t')), \
-            'Name constains invalid character for EnergyPlus (, ; ! \n \t).'
-        assert len(v) > 0, 'Name contains no valid characters.'
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
         assert len(v) <= 100, 'Number of characters must be less than 100.'
 
     thickness: float = Schema(
@@ -341,8 +341,8 @@ class EnergyWindowMaterialSimpleGlazSys(BaseModel):
     def check_name(cls, v):
         assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
         assert all(char not in v for char in (',', ';', '!', '\n', '\t')), \
-            'Name constains invalid character for EnergyPlus (, ; ! \n \t).'
-        assert len(v) > 0, 'Name contains no valid characters.'
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
         assert len(v) <= 100, 'Number of characters must be less than 100.'
 
     u_factor: float = Schema(
@@ -397,8 +397,8 @@ class EnergyWindowMaterialBlind(BaseModel):
     def check_name(cls, v):
         assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
         assert all(char not in v for char in (',', ';', '!', '\n', '\t')), \
-            'Name constains invalid character for EnergyPlus (, ; ! \n \t).'
-        assert len(v) > 0, 'Name contains no valid characters.'
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
         assert len(v) <= 100, 'Number of characters must be less than 100.'
 
     slat_orientation: SlatOrientation
@@ -637,8 +637,8 @@ class EnergyWindowMaterialGlazing(BaseModel):
     def check_name(cls, v):
         assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
         assert all(char not in v for char in (',', ';', '!', '\n', '\t')), \
-            'Name constains invalid character for EnergyPlus (, ; ! \n \t).'
-        assert len(v) > 0, 'Name contains no valid characters.'
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
         assert len(v) <= 100, 'Number of characters must be less than 100.'
 
     thickness: float = Schema(
@@ -759,8 +759,8 @@ class EnergyWindowMaterialShade (BaseModel):
     def check_name(cls, v):
         assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
         assert all(char not in v for char in (',', ';', '!', '\n', '\t')), \
-            'Name constains invalid character for EnergyPlus (, ; ! \n \t).'
-        assert len(v) > 0, 'Name contains no valid characters.'
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
         assert len(v) <= 100, 'Number of characters must be less than 100.'
 
     solar_transmittance: float = Schema(

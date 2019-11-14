@@ -24,8 +24,8 @@ class PeopleAbridged(BaseModel):
     def check_name(cls, v):
         assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
         assert all(char not in v for char in (',',';','!','\n','\t')), \
-            'Name constains invalid character for EnergyPlus (, ; ! \n \t).'
-        assert len(v) > 0, 'Name contains no valid characters.'
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
         assert len(v) <=100, 'Number of characters must be less than 100.'
 
     people_per_area: float = Schema(
@@ -52,7 +52,7 @@ class PeopleAbridged(BaseModel):
     @validator('latent_fraction')
     def check_string_latent_fraction(cls, v):
         if not isinstance(v, float) and v != 'autocalculate':
-            raise ValueError( 'This is not a valid entry for latent_fraction')
+            raise ValueError('"{}" is not a valid entry for latent_fraction'.format(v))
 
 
     occupancy_schedule: str = Schema(
@@ -87,8 +87,8 @@ class LightingAbridged(BaseModel):
     def check_name(cls, v):
         assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
         assert all(char not in v for char in (',',';','!','\n','\t')), \
-            'Name constains invalid character for EnergyPlus (, ; ! \n \t).'
-        assert len(v) > 0, 'Name contains no valid characters.'
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
         assert len(v) <=100, 'Number of characters must be less than 100.'
 
     watts_per_area: float = Schema(
@@ -156,8 +156,8 @@ class ElectricEquipmentAbridged(BaseModel):
     def check_name(cls, v):
         assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
         assert all(char not in v for char in (',',';','!','\n','\t')), \
-            'Name constains invalid character for EnergyPlus (, ; ! \n \t).'
-        assert len(v) > 0, 'Name contains no valid characters.'
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
         assert len(v) <=100, 'Number of characters must be less than 100.'
 
     watts_per_area: float = Schema(
@@ -217,8 +217,8 @@ class GasEquipmentAbridged(BaseModel):
     def check_name(cls, v):
         assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
         assert all(char not in v for char in (',',';','!','\n','\t')), \
-            'Name constains invalid character for EnergyPlus (, ; ! \n \t).'
-        assert len(v) > 0, 'Name contains no valid characters.'
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
         assert len(v) <=100, 'Number of characters must be less than 100.'
 
     watts_per_area: float = Schema(
@@ -277,8 +277,8 @@ class InfiltrationAbridged(BaseModel):
     def check_name(cls, v):
         assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
         assert all(char not in v for char in (',',';','!','\n','\t')), \
-            'Name constains invalid character for EnergyPlus (, ; ! \n \t).'
-        assert len(v) > 0, 'Name contains no valid characters.'
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
         assert len(v) <=100, 'Number of characters must be less than 100.'
 
     flow_per_exterior_area: float = Schema(
@@ -327,8 +327,8 @@ class VentilationAbridged(BaseModel):
     def check_name(cls, v):
         assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
         assert all(char not in v for char in (',',';','!','\n','\t')), \
-            'Name constains invalid character for EnergyPlus (, ; ! \n \t).'
-        assert len(v) > 0, 'Name contains no valid characters.'
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
         assert len(v) <=100, 'Number of characters must be less than 100.'
 
     air_changes_per_hour: float = Schema(
@@ -376,8 +376,8 @@ class SetpointAbridged(BaseModel):
     def check_name(cls, v):
         assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
         assert all(char not in v for char in (',',';','!','\n','\t')), \
-            'Name constains invalid character for EnergyPlus (, ; ! \n \t).'
-        assert len(v) > 0, 'Name contains no valid characters.'
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
         assert len(v) <=100, 'Number of characters must be less than 100.'
 
     cooling_schedule: str = Schema(
@@ -424,8 +424,8 @@ class ProgramTypeAbridged(BaseModel):
     def check_name(cls, v):
         assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
         assert all(char not in v for char in (',',';','!','\n','\t')), \
-            'Name constains invalid character for EnergyPlus (, ; ! \n \t).'
-        assert len(v) > 0, 'Name contains no valid characters.'
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
         assert len(v) <=100, 'Number of characters must be less than 100.'
     
     people: PeopleAbridged = Schema(

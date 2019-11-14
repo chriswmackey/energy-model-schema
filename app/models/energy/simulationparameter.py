@@ -6,13 +6,10 @@ from app.models.common.datetime import Date
 
 
 class ReportingFrequency(str, Enum):
-    detailed = 'Detailed'
     timestep = 'Timestep'
     hourly = 'Hourly'
     daily = 'Daily'
     monthly = 'Monthly'
-    run_period = 'RumPeriod'
-    environment = 'Environment'
     annual = 'Annual'
 
 
@@ -24,7 +21,7 @@ class SimulationOutput(BaseModel):
     reporting_frequency: ReportingFrequency = ReportingFrequency.hourly
 
     include_sqlite: bool = Schema(
-        default=False
+        default=True
     )
 
     include_html: bool = Schema(
@@ -46,15 +43,15 @@ class SimulationControl(BaseModel):
     type: Enum('SimulationControl', {'type': 'SimulationControl'})
 
     do_zone_sizing: bool = Schema(
-        default=False
+        default=True
     )
 
     do_system_sizing: bool = Schema(
-        default=False
+        default=True
     )
 
     do_plant_sizing: bool = Schema(
-        default=False
+        default=True
     )
 
     run_for_run_periods: bool = Schema(
@@ -62,7 +59,7 @@ class SimulationControl(BaseModel):
     )
 
     run_for_sizing_periods: bool = Schema(
-        default=True
+        default=False
     )
 
 
@@ -85,12 +82,11 @@ class ShadowCalculation(BaseModel):
 
     type: Enum('ShadowCalculation', {'type': 'ShadowCalculation'})
 
-    solar_distribution: SolarDistribution = SolarDistribution.full_exterior
+    solar_distribution: SolarDistribution = SolarDistribution.full_interior_and_exterior_with_reflections
 
     calculation_frequency: int = Schema(
-        20,
-        ge=1,
-        le=31
+        30,
+        ge=1
     )
 
     calculation_method: CalculationMethod = CalculationMethod.average_over_days_in_frequency
@@ -108,13 +104,13 @@ class SizingParameter(BaseModel):
     type: Enum('SizingParameter', {'type': 'SizingParameter'})
 
     heating_factor: float = Schema(
-        1,
+        1.25,
         gt=0,
         description='The global heating sizing ratio applied to all of the zone design heating loads and air flow rates.'
     )
 
     cooling_factor: float = Schema(
-        1,
+        1.25,
         gt=0,
         description='The global cooling sizing ratio applied to all of the zone design cooling loads and air flow rates.'
     )
@@ -148,7 +144,7 @@ class RunPeriod(BaseModel):
 
     end_date: Date
 
-    start_day_of_week: DaysOfWeek = DaysOfWeek.monday
+    start_day_of_week: DaysOfWeek = DaysOfWeek.sunday
 
     holidays: List[Date] = Schema(
         default=None
@@ -164,17 +160,33 @@ class SimulationParameter(BaseModel):
 
     type: Enum('SimulationParameter', {'type': 'SimulationParameter'})
 
-    output: SimulationOutput
+    output: SimulationOutput = Schema(
+        default=None
+    )
 
-    run_period: RunPeriod
+    run_period: RunPeriod = Schema(
+        default=None
+    )
 
     timestep: int = Schema(
-        default=1,
+        default=6,
         ge=1
     )
 
-    simulation_control: SimulationControl
+    @validator('timestep')
+    def check_values(cls, v):
+        x = [1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60]
+        if v not in x:
+            raise ValueError('"{}" is not a valid timestep.'.format(v))
+            
+    simulation_control: SimulationControl = Schema(
+        default=None
+    )
 
-    shadow_calculation: ShadowCalculation
+    shadow_calculation: ShadowCalculation = Schema(
+        default=None
+    )
 
-    sizing_parameter: SizingParameter
+    sizing_parameter: SizingParameter = Schema(
+        default=None
+    )
