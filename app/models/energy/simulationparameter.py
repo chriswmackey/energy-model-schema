@@ -110,7 +110,7 @@ class SizingParameter(BaseModel):
     )
 
     cooling_factor: float = Schema(
-        1.25,
+        1.15,
         gt=0,
         description='The global cooling sizing ratio applied to all of the zone design cooling loads and air flow rates.'
     )
@@ -190,3 +190,7 @@ class SimulationParameter(BaseModel):
     sizing_parameter: SizingParameter = Schema(
         default=None
     )
+
+
+if __name__ == '__main__':
+    print(SimulationParameter.schema_json(indent=2))

@@ -6,7 +6,6 @@ from uuid import UUID, uuid4
 from datetime import datetime
 from app.models.energy.scheduleruleset import ScheduleRulesetAbridged
 from app.models.energy.schedulefixedinterval import ScheduleFixedIntervalAbridged
-import re
 
 
 class PeopleAbridged(BaseModel):

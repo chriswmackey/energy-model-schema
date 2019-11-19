@@ -6,7 +6,6 @@ from uuid import UUID, uuid4
 from datetime import datetime
 from app.models.energy.schedulebase import ScheduleTypeLimit
 from app.models.common.datetime import Date, Time
-import re
 
 
 class ScheduleDay(BaseModel):

@@ -3,7 +3,6 @@ from pydantic import BaseModel, Schema, validator, ValidationError, UrlStr, Cons
 from typing import List, Union
 from enum import Enum
 from uuid import UUID, uuid4
-import re
 
 
 class ScheduleNumericType (str, Enum):
