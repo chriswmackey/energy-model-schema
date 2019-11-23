@@ -15,21 +15,18 @@ class WallSetAbridged(BaseModel):
 
     interior_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     exterior_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     ground_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
@@ -43,21 +40,18 @@ class FloorSetAbridged(BaseModel):
 
     interior_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     exterior_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     ground_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
@@ -71,21 +65,18 @@ class RoofCeilingSetAbridged(BaseModel):
 
     interior_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     exterior_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     ground_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
@@ -99,28 +90,24 @@ class ApertureSetAbridged(BaseModel):
 
     interior_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     window_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     skylight_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     operable_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
@@ -134,35 +121,30 @@ class DoorSetAbridged(BaseModel):
 
     interior_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     exterior_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     overhead_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     exterior_glass_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     interior_glass_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
@@ -210,7 +192,6 @@ class ConstructionSetAbridged(BaseModel):
 
     shade_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )

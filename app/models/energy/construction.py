@@ -29,7 +29,7 @@ class WindowConstructionAbridged(BaseModel):
         assert len(v) > 0, 'Name is an empty string.'
         assert len(v) <= 100, 'Number of characters must be less than 100.'
 
-    layers: List[constr(regex=r'^[\s.A-Za-z0-9_-]*$', min_length=1, max_length=100)] = Schema(
+    layers: List[constr(min_length=1, max_length=100)] = Schema(
         ...,
         description='List of materials. The order of the materials is from outside to'
         ' inside.',
@@ -115,7 +115,7 @@ class OpaqueConstructionAbridged(BaseModel):
         assert len(v) > 0, 'Name is an empty string.'
         assert len(v) <= 100, 'Number of characters must be less than 100.'
 
-    layers: List[constr(regex=r'^[\s.A-Za-z0-9_-]*$', min_length=1, max_length=100)] = Schema(
+    layers: List[constr(min_length=1, max_length=100)] = Schema(
         ...,
         description='List of materials. The order of the materials is from outside to'
         ' inside.',

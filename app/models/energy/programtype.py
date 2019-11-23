@@ -56,7 +56,6 @@ class PeopleAbridged(BaseModel):
 
     occupancy_schedule: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100,
         description='Used to describe the occupancy schedule for people.'
@@ -64,7 +63,6 @@ class PeopleAbridged(BaseModel):
 
     activity_schedule: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100,
         description='Schedule that determines the amount of heat gain per person.'
@@ -132,7 +130,6 @@ class LightingAbridged(BaseModel):
 
     schedule: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100,
         description='Used to describe the schedule for lighting as a fraction applied to '
@@ -193,7 +190,6 @@ class ElectricEquipmentAbridged(BaseModel):
 
     schedule: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100,
         description='Used to describe the schedule for equipment as a fraction applied to'
@@ -253,7 +249,6 @@ class GasEquipmentAbridged(BaseModel):
 
     schedule: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100,
         description='Used to describe the schedule for equipment as a fraction applied to'
@@ -303,7 +298,6 @@ class InfiltrationAbridged(BaseModel):
 
     schedule: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100,
         description='Used to describe the schedule for equipment as a fraction applied to'
@@ -355,7 +349,6 @@ class VentilationAbridged(BaseModel):
 
     schedule: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
@@ -381,28 +374,24 @@ class SetpointAbridged(BaseModel):
 
     cooling_schedule: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     heating_schedule: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     humidification_schedule: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     dehumidification_schedule: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )

@@ -126,8 +126,7 @@ class ScheduleRulesetAbridged(BaseModel):
         assert len(v) <=100, 'Number of characters must be less than 100.'
 
     schedule_type_limit: str = Schema(
-        default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$'
+        default=None
     )
 
     default_day_schedule: ScheduleDay
