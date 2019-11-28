@@ -19,12 +19,12 @@ def test_ruleset_office_occupancy():
     ScheduleRulesetAbridged.parse_file(file_path)
 
 
-def test_ruleset_primary_school_occupancy():
+def test_primary_school_occupancy():
     root = os.path.dirname(os.path.dirname(__file__))
     target_folder = os.path.join(root, 'app', 'models', 'samples', 'json')
     file_path = os.path.join(
-        target_folder, 'schedule_ruleset_primary_school_occupancy.json')
-    ScheduleRulesetAbridged.parse_file(file_path)
+        target_folder, 'schedule_primary_school_occupancy.json')
+    ScheduleRulesetAbridged.parse_file(file_path)    
 
 
 def test_ruleset_simple_repeating():
