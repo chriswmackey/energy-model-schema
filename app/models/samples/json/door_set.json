@@ -1,1 +1,4 @@
-{"type": "DoorSet", "exterior_construction": "Exterior Door"}
+{
+    "type": "DoorSet",
+    "exterior_construction": "Exterior Door"
+}

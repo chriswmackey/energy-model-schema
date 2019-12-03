@@ -13,5 +13,5 @@ def test_detailed_air():
     root = os.path.dirname(os.path.dirname(__file__))
     target_folder = os.path.join(root, 'app', 'models', 'samples', 'json')
     file_path = os.path.join(
-        target_folder, 'detailed_ideal_air.json')
+        target_folder, 'ideal_air_detailed.json')
     IdealAirSystem.parse_file(file_path)

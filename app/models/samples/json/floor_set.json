@@ -1,1 +1,4 @@
-{"type": "FloorSetAbridged", "interior_construction": "Internal Floor"}
+{
+    "type": "FloorSetAbridged",
+    "interior_construction": "Internal Floor"
+}
