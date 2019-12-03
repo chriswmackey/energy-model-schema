@@ -24,10 +24,17 @@ class EnergyMaterial(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
+
+    @validator('name')
+    def check_name(cls, v):
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',', ';', '!', '\n', '\t')), \
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
+        assert len(v) <= 100, 'Number of characters must be less than 100.'
 
     roughness: Roughness = Roughness.medium_rough
 
@@ -91,10 +98,17 @@ class EnergyMaterialNoMass(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
+
+    @validator('name')
+    def check_name(cls, v):
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',', ';', '!', '\n', '\t')), \
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
+        assert len(v) <= 100, 'Number of characters must be less than 100.'
 
     r_value: float = Schema(
         ...,
@@ -148,10 +162,17 @@ class EnergyWindowMaterialGas(BaseModel):
 
     name: str = Schema(
         'AIRGAP',
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
+
+    @validator('name')
+    def check_name(cls, v):
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',', ';', '!', '\n', '\t')), \
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
+        assert len(v) <= 100, 'Number of characters must be less than 100.'
 
     gas_type: GasType = GasType.air
 
@@ -170,10 +191,17 @@ class EnergyWindowMaterialGasCustom(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
+
+    @validator('name')
+    def check_name(cls, v):
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',', ';', '!', '\n', '\t')), \
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
+        assert len(v) <= 100, 'Number of characters must be less than 100.'
 
     thickness: float = Schema(
         0.0125,
@@ -262,10 +290,17 @@ class EnergyWindowMaterialGasMixture(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
+
+    @validator('name')
+    def check_name(cls, v):
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',', ';', '!', '\n', '\t')), \
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
+        assert len(v) <= 100, 'Number of characters must be less than 100.'
 
     thickness: float = Schema(
         ...,
@@ -298,10 +333,17 @@ class EnergyWindowMaterialSimpleGlazSys(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
+
+    @validator('name')
+    def check_name(cls, v):
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',', ';', '!', '\n', '\t')), \
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
+        assert len(v) <= 100, 'Number of characters must be less than 100.'
 
     u_factor: float = Schema(
         ...,
@@ -347,10 +389,17 @@ class EnergyWindowMaterialBlind(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
+
+    @validator('name')
+    def check_name(cls, v):
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',', ';', '!', '\n', '\t')), \
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
+        assert len(v) <= 100, 'Number of characters must be less than 100.'
 
     slat_orientation: SlatOrientation
 
@@ -580,10 +629,17 @@ class EnergyWindowMaterialGlazing(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
+
+    @validator('name')
+    def check_name(cls, v):
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',', ';', '!', '\n', '\t')), \
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
+        assert len(v) <= 100, 'Number of characters must be less than 100.'
 
     thickness: float = Schema(
         0.003,
@@ -695,10 +751,17 @@ class EnergyWindowMaterialShade (BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
+
+    @validator('name')
+    def check_name(cls, v):
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',', ';', '!', '\n', '\t')), \
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
+        assert len(v) <= 100, 'Number of characters must be less than 100.'
 
     solar_transmittance: float = Schema(
         0.4,

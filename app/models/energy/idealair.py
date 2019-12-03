@@ -14,25 +14,24 @@ class IdealAirSystem(BaseModel):
     type: Enum('IdealAirSystem', {'type': 'IdealAirSystem'})
 
     heating_limit: Union[float, str] = Schema(
-        'autocalculate',
+        'autosize',
         ge=0
     )
 
     @validator('heating_limit')
     def check_string_heating_limit(cls, v):
-        "Ensure the text input is nothing other than autocalculate."
-        if v != 'autocalculate':
+        if not isinstance(v ,float) and v != 'autosize' and v != 'NoLimit':
             raise ValueError( 'This is not a valid entry for heating_limit')
 
+
     cooling_limit: Union[float, str] = Schema(
-        'autocalculate',
+        'autosize',
         ge=0
     )
 
     @validator('cooling_limit')
     def check_string_cooling_limit(cls, v):
-        "Ensure the text input is nothing other than autocalculate."
-        if v != "autocalculate":
+        if not isinstance(v, float) and v != 'autosize' and v != 'NoLimit':
             raise ValueError( 'This is not a valid entry for cooling_limit')
 
     economizer_type: EconomizerType = EconomizerType.differential_dry_bulb
@@ -52,3 +51,4 @@ class IdealAirSystem(BaseModel):
         ge=0,
         le=1
     )
+    

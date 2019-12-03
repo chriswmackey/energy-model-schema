@@ -17,12 +17,19 @@ class WindowConstructionAbridged(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
-    layers: List[constr(regex=r'^[\s.A-Za-z0-9_-]*$', min_length=1, max_length=100)] = Schema(
+    @validator('name')
+    def check_name(cls, v):
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',', ';', '!', '\n', '\t')), \
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
+        assert len(v) <= 100, 'Number of characters must be less than 100.'
+
+    layers: List[constr(min_length=1, max_length=100)] = Schema(
         ...,
         description='List of materials. The order of the materials is from outside to'
         ' inside.',
@@ -96,12 +103,19 @@ class OpaqueConstructionAbridged(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
-    layers: List[constr(regex=r'^[\s.A-Za-z0-9_-]*$', min_length=1, max_length=100)] = Schema(
+    @validator('name')
+    def check_name(cls, v):
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',', ';', '!', '\n', '\t')), \
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
+        assert len(v) <= 100, 'Number of characters must be less than 100.'
+
+    layers: List[constr(min_length=1, max_length=100)] = Schema(
         ...,
         description='List of materials. The order of the materials is from outside to'
         ' inside.',
@@ -167,10 +181,17 @@ class ShadeConstruction(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
+
+    @validator('name')
+    def check_name(cls, v):
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',', ';', '!', '\n', '\t')), \
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
+        assert len(v) <= 100, 'Number of characters must be less than 100.'
 
     solar_reflectance: float = Schema(
         0,

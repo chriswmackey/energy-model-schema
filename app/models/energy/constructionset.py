@@ -15,21 +15,18 @@ class WallSetAbridged(BaseModel):
 
     interior_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     exterior_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     ground_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
@@ -43,21 +40,18 @@ class FloorSetAbridged(BaseModel):
 
     interior_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     exterior_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     ground_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
@@ -71,21 +65,18 @@ class RoofCeilingSetAbridged(BaseModel):
 
     interior_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     exterior_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     ground_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
@@ -99,28 +90,24 @@ class ApertureSetAbridged(BaseModel):
 
     interior_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     window_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     skylight_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     operable_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
@@ -134,35 +121,30 @@ class DoorSetAbridged(BaseModel):
 
     interior_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     exterior_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     overhead_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     exterior_glass_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     interior_glass_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
@@ -176,8 +158,17 @@ class ConstructionSetAbridged(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$'
+        min_length=1,
+        max_length=100
     )
+
+    @validator('name')
+    def check_name(cls, v):
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',', ';', '!', '\n', '\t')), \
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
+        assert len(v) <= 100, 'Number of characters must be less than 100.'
 
     wall_set: WallSetAbridged = Schema(
         default=None
@@ -201,7 +192,6 @@ class ConstructionSetAbridged(BaseModel):
 
     shade_construction: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )

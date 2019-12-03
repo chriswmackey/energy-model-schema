@@ -14,8 +14,17 @@ class ScheduleDay(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$'
+        min_length=1,
+        max_length=100
     )
+
+    @validator('name')
+    def check_name_schedule_day(cls, v):
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',', ';', '!', '\n', '\t')), \
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
+        assert len(v) <= 100, 'Number of characters must be less than 100.'
 
     values: List[float]
 
@@ -34,13 +43,17 @@ class ScheduleDay(BaseModel):
     )
 
 
-class ScheduleRule(BaseModel):
+class ScheduleRuleAbridged(BaseModel):
     """A set of rules assigned to schedule ruleset for specific periods of time and for
   particular days of the week according to a priority sequence."""
 
-    type: Enum('ScheduleRule', {'type': 'ScheduleRule'})
+    type: Enum('ScheduleRuleAbridged', {'type': 'ScheduleRuleAbridged'})
 
-    schedule_day: ScheduleDay
+    schedule_day: str = Schema(
+        ...,
+        min_length=1,
+        max_length=100
+    )
 
     apply_sunday: bool = Schema(
         False
@@ -104,26 +117,46 @@ class ScheduleRulesetAbridged(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
+        min_length=1,
+        max_length=100
+    )
+
+    @validator('name')
+    def check_name_schedule_ruleset(cls, v):
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',', ';', '!', '\n', '\t')), \
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
+        assert len(v) <= 100, 'Number of characters must be less than 100.'
+
+    day_schedules: List[ScheduleDay]
+
+    default_day_schedule: str = Schema(
+        ...,
+        min_length=1,
+        max_length=100
+    )
+
+    schedule_rules: List[ScheduleRuleAbridged] = Schema(
+        default=None
+    )
+
+    summer_designday_schedule: str = Schema(
+        default=None,
+        min_length=1,
+        max_length=100
+    )
+
+    winter_designday_schedule: str = Schema(
+        default=None,
+        min_length=1,
+        max_length=100
     )
 
     schedule_type_limit: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$'
-    )
-
-    default_day_schedule: ScheduleDay
-
-    schedule_rules: List[ScheduleRule] = Schema(
-        default=None
-    )
-
-    summer_designday_schedule: ScheduleDay = Schema(
-        default=None
-    )
-
-    winter_designday_schedule: ScheduleDay = Schema(
-        default=None
+        min_length=1,
+        max_length=100
     )
 
 

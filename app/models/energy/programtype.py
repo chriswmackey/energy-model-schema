@@ -15,10 +15,17 @@ class PeopleAbridged(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
+
+    @validator('name')
+    def check_name(cls, v):
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',',';','!','\n','\t')), \
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
+        assert len(v) <=100, 'Number of characters must be less than 100.'
 
     people_per_area: float = Schema(
         ...,
@@ -41,9 +48,14 @@ class PeopleAbridged(BaseModel):
         description='Used to specify a fixed latent fraction of heat gain due to people.'
     )
 
+    @validator('latent_fraction')
+    def check_string_latent_fraction(cls, v):
+        if not isinstance(v, float) and v != 'autocalculate':
+            raise ValueError('"{}" is not a valid entry for latent_fraction'.format(v))
+
+
     occupancy_schedule: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100,
         description='Used to describe the occupancy schedule for people.'
@@ -51,7 +63,6 @@ class PeopleAbridged(BaseModel):
 
     activity_schedule: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100,
         description='Schedule that determines the amount of heat gain per person.'
@@ -65,10 +76,17 @@ class LightingAbridged(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
+
+    @validator('name')
+    def check_name(cls, v):
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',',';','!','\n','\t')), \
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
+        assert len(v) <=100, 'Number of characters must be less than 100.'
 
     watts_per_area: float = Schema(
         ...,
@@ -112,7 +130,6 @@ class LightingAbridged(BaseModel):
 
     schedule: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100,
         description='Used to describe the schedule for lighting as a fraction applied to '
@@ -120,17 +137,24 @@ class LightingAbridged(BaseModel):
     )
 
 
-class ElectricalEquipmentAbridged(BaseModel):
+class ElectricEquipmentAbridged(BaseModel):
     """Used to specify information about the electrical equipment."""
 
-    type: Enum('ElectricalEquipmentAbridged', {'type': 'ElectricalEquipmentAbridged'})
+    type: Enum('ElectricEquipmentAbridged', {'type': 'ElectricEquipmentAbridged'})
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
+
+    @validator('name')
+    def check_name(cls, v):
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',',';','!','\n','\t')), \
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
+        assert len(v) <=100, 'Number of characters must be less than 100.'
 
     watts_per_area: float = Schema(
         ...,
@@ -166,7 +190,6 @@ class ElectricalEquipmentAbridged(BaseModel):
 
     schedule: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100,
         description='Used to describe the schedule for equipment as a fraction applied to'
@@ -181,10 +204,17 @@ class GasEquipmentAbridged(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
+
+    @validator('name')
+    def check_name(cls, v):
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',',';','!','\n','\t')), \
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
+        assert len(v) <=100, 'Number of characters must be less than 100.'
 
     watts_per_area: float = Schema(
         ...,
@@ -219,7 +249,6 @@ class GasEquipmentAbridged(BaseModel):
 
     schedule: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100,
         description='Used to describe the schedule for equipment as a fraction applied to'
@@ -234,10 +263,17 @@ class InfiltrationAbridged(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
+
+    @validator('name')
+    def check_name(cls, v):
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',',';','!','\n','\t')), \
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
+        assert len(v) <=100, 'Number of characters must be less than 100.'
 
     flow_per_exterior_area: float = Schema(
         ...,
@@ -262,7 +298,6 @@ class InfiltrationAbridged(BaseModel):
 
     schedule: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100,
         description='Used to describe the schedule for equipment as a fraction applied to'
@@ -277,10 +312,17 @@ class VentilationAbridged(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
+
+    @validator('name')
+    def check_name(cls, v):
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',',';','!','\n','\t')), \
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
+        assert len(v) <=100, 'Number of characters must be less than 100.'
 
     air_changes_per_hour: float = Schema(
         0,
@@ -307,7 +349,6 @@ class VentilationAbridged(BaseModel):
 
     schedule: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
@@ -317,30 +358,40 @@ class SetpointAbridged(BaseModel):
 
     type: Enum('SetpointAbridged', {'type': 'SetpointAbridged'})   
 
+    name: str = Schema(
+        ...,
+        min_length=1,
+        max_length=100
+    )
+
+    @validator('name')
+    def check_name(cls, v):
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',',';','!','\n','\t')), \
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
+        assert len(v) <=100, 'Number of characters must be less than 100.'
+
     cooling_schedule: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     heating_schedule: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     humidification_schedule: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
 
     dehumidification_schedule: str = Schema(
         default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
@@ -353,13 +404,18 @@ class ProgramTypeAbridged(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$',
         min_length=1,
         max_length=100
     )
-    
-    people: PeopleAbridged
 
+    @validator('name')
+    def check_name(cls, v):
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',',';','!','\n','\t')), \
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
+        assert len(v) <=100, 'Number of characters must be less than 100.'
+    
     people: PeopleAbridged = Schema(
         default = None
     )
@@ -368,7 +424,7 @@ class ProgramTypeAbridged(BaseModel):
         default = None
     )
 
-    electrical_equipment: ElectricalEquipmentAbridged = Schema(
+    electrical_equipment: ElectricEquipmentAbridged = Schema(
         default = None
     )
 
@@ -389,4 +445,5 @@ class ProgramTypeAbridged(BaseModel):
     )
 
 if __name__ == '__main__':
+
     print(ProgramTypeAbridged.schema_json(indent=2))

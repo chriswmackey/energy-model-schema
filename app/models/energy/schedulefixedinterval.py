@@ -16,12 +16,20 @@ class ScheduleFixedIntervalAbridged(BaseModel):
 
     name: str = Schema(
         ...,
-        regex=r'^[\s.A-Za-z0-9_-]*$'
+        min_length=1,
+        max_length=100
     )
 
+    @validator('name')
+    def check_name(cls, v):
+        assert all(ord(i) < 128 for i in v), 'Name contains non ASCII characters.'
+        assert all(char not in v for char in (',',';','!','\n','\t')), \
+            'Name contains invalid character for EnergyPlus (, ; ! \n \t).'
+        assert len(v) > 0, 'Name is an empty string.'
+        assert len(v) <=100, 'Number of characters must be less than 100.'
+
     schedule_type_limit: str = Schema(
-        default=None,
-        regex=r'^[\s.A-Za-z0-9_-]*$'
+        default=None
     )
 
     timestep: float = Schema(
@@ -38,6 +46,25 @@ class ScheduleFixedIntervalAbridged(BaseModel):
     is_leap_year: bool = Schema(
         False
     )
+
+    @validator('is_leap_year')
+    def check_date(cls, v, values):
+        "Ensure valid start date in case of leap year."
+        if v == True:
+            try:
+                datetime.date(2016, values['start_date'].month , values['start_date'].day)
+            except ValueError:
+                raise ValueError(
+                    '{}/{} is not a valid date.'.format(values['start_date'].month, values['start_date'].day))
+        elif v == False:
+            try:
+                datetime.date(2017, values['start_date'].month, values['start_date'].day)
+            except ValueError:
+                raise ValueError(
+                    '{}/{} is not a valid date.'.format(values['start_date'].month, values['start_date'].day))
+        else:
+            return v
+
 
     values: List[float] = Schema(
         ...,
