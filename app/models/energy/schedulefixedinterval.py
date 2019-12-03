@@ -43,29 +43,6 @@ class ScheduleFixedIntervalAbridged(BaseModel):
 
     start_date: Date
 
-    is_leap_year: bool = Schema(
-        False
-    )
-
-    @validator('is_leap_year')
-    def check_date(cls, v, values):
-        "Ensure valid start date in case of leap year."
-        if v == True:
-            try:
-                datetime.date(2016, values['start_date'].month , values['start_date'].day)
-            except ValueError:
-                raise ValueError(
-                    '{}/{} is not a valid date.'.format(values['start_date'].month, values['start_date'].day))
-        elif v == False:
-            try:
-                datetime.date(2017, values['start_date'].month, values['start_date'].day)
-            except ValueError:
-                raise ValueError(
-                    '{}/{} is not a valid date.'.format(values['start_date'].month, values['start_date'].day))
-        else:
-            return v
-
-
     values: List[float] = Schema(
         ...,
         minItems=24,
@@ -76,12 +53,10 @@ class ScheduleFixedIntervalAbridged(BaseModel):
     @validator('values', whole=True)
     def check_range(cls, v, values):
         "Ensure correct number of values."
-        if not 'is_leap_year' in values: 
-            return v
-        if values['is_leap_year'] == False and len(v) < 24 or len(v) > 8760:
+        if values['start_date'].is_leap_year == False and len(v) < 24 or len(v) > 8760:
             raise ValueError(
         'Number of values can not be lesser than 24 or greater than 8760 for non-leap year')
-        elif values['is_leap_year'] == True and len(v) < 24 or len(v) > 8784: 
+        elif values['start_date'].is_leap_year == True and len(v) < 24 or len(v) > 8784: 
             raise ValueError(
         'Number of values can not be lesser than 24 or greater than 8784 for leap year')
 
