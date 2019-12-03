@@ -43,7 +43,7 @@ class ScheduleDay(BaseModel):
     )
 
 
-class ScheduleRule(BaseModel):
+class ScheduleRuleAbridged(BaseModel):
     """A set of rules assigned to schedule ruleset for specific periods of time and for
   particular days of the week according to a priority sequence."""
 
@@ -137,7 +137,7 @@ class ScheduleRulesetAbridged(BaseModel):
         max_length=100
     )
 
-    schedule_rules: List[ScheduleRule] = Schema(
+    schedule_rules: List[ScheduleRuleAbridged] = Schema(
         default=None
     )
 
