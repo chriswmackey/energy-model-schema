@@ -23,6 +23,11 @@ class Date(BaseModel):
         le=31
     )
 
+    is_leap_year: bool = Schema(
+        False
+    )
+
+
 class Time(BaseModel):
     """Time."""
 
