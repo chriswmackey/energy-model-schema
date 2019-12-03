@@ -19,7 +19,7 @@ def main():
         for sample in samples:
             data = eval('module.%s' % sample)
             with open(os.path.join(folder, 'json', '%s.json' % sample), 'w') as outf:
-                json.dump(data, outf)
+                json.dump(data, outf, indent=4)
                 print('exported {0} to /json/{0}.json'.format(sample))
 
 if __name__ == '__main__':

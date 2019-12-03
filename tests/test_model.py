@@ -29,24 +29,24 @@ def test_model_single_zone_tiny_house():
 def test_model_multi_zone_office():
     root = os.path.dirname(os.path.dirname(__file__))
     target_folder = os.path.join(root, 'app', 'models', 'samples', 'json')
-    file_path  = os.path.join(target_folder, 'model_multi_zone_office.json')
+    file_path  = os.path.join(target_folder, 'model_complete_multi_zone_office.json')
     Model.parse_file(file_path)
 
 def test_model_single_zone_office():
     root = os.path.dirname(os.path.dirname(__file__))
     target_folder = os.path.join(root, 'app', 'models', 'samples', 'json')
-    file_path  = os.path.join(target_folder, 'model_single_zone_office.json')
+    file_path  = os.path.join(target_folder, 'model_complete_single_zone_office.json')
     Model.parse_file(file_path)
 
 def test_model_single_zone_office_detailed_loads():
     root = os.path.dirname(os.path.dirname(__file__))
     target_folder = os.path.join(root, 'app', 'models', 'samples', 'json')
-    file_path  = os.path.join(target_folder, 'model_single_zone_office_detailed_loads.json')
+    file_path  = os.path.join(target_folder, 'model_complete_single_zone_office_detailed_loads.json')
     Model.parse_file(file_path) 
 
 def test_model_with_humidity_setpoints():
     root = os.path.dirname(os.path.dirname(__file__))
     target_folder = os.path.join(root, 'app', 'models', 'samples', 'json')
-    file_path  = os.path.join(target_folder, 'model_with_humidity_setpoints.json')
+    file_path  = os.path.join(target_folder, 'model_complete_with_humidity_setpoints.json')
     Model.parse_file(file_path) 
   

@@ -167,7 +167,6 @@
     "winter_designday_schedule": {
         "type": "ScheduleDay",
         "name": "School Winter Design",
-
         "values": [
             0.0
         ],

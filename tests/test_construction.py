@@ -1,5 +1,7 @@
 from app.models.energy.construction import OpaqueConstruction, WindowConstruction
-from app.models.samples.energyconstruction import construction_internal_floor, construction_window, construction_window_blind, construction_roof, construction_wall, construction_window2
+from app.models.samples.energyconstruction import construction_internal_floor, \
+    construction_window, construction_window_blind, construction_roof, \
+    construction_wall, construction_window2
 from copy import copy
 from pydantic import ValidationError
 import pytest
