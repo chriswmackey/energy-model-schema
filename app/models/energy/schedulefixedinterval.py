@@ -43,14 +43,22 @@ class ScheduleFixedIntervalAbridged(BaseModel):
 
     start_date: Date
 
-    
-
     values: List[float] = Schema(
         ...,
         minItems=24,
         maxItems=8784,
         description='A list of hourly values for the simulation.'
     )
+
+    @validator('values', whole=True)
+    def check_range(cls, v, values):
+        "Ensure correct number of values."
+        if values['start_date'].is_leap_year == False and len(v) < 24 or len(v) > 8760:
+            raise ValueError(
+        'Number of values can not be lesser than 24 or greater than 8760 for non-leap year')
+        elif values['start_date'].is_leap_year == True and len(v) < 24 or len(v) > 8784: 
+            raise ValueError(
+        'Number of values can not be lesser than 24 or greater than 8784 for leap year')
 
     placeholder_value = float
 

@@ -27,6 +27,24 @@ class Date(BaseModel):
         False
     )
 
+    @validator('is_leap_year')
+    def check_date(cls, v, values):
+        "Ensure valid start date in case of leap year."
+        if v == True:
+            try:
+                datetime.date(2016, values['month'] , values['day'])
+            except ValueError:
+                raise ValueError(
+                    '{}/{} is not a valid date.'.format(values['month'], values['day']))
+        elif v == False:
+            try:
+                datetime.date(2017, values['month'], values['day'])
+            except ValueError:
+                raise ValueError(
+                    '{}/{} is not a valid date.'.format(values['month'], values['day']))
+        else:
+            return v
+
 
 class Time(BaseModel):
     """Time."""
