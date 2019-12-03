@@ -47,6 +47,25 @@ class ScheduleFixedIntervalAbridged(BaseModel):
         False
     )
 
+    @validator('is_leap_year')
+    def check_date(cls, v, values):
+        "Ensure valid start date in case of leap year."
+        if v == True:
+            try:
+                datetime.date(2016, values['start_date'].month , values['start_date'].day)
+            except ValueError:
+                raise ValueError(
+                    '{}/{} is not a valid date.'.format(values['start_date'].month, values['start_date'].day))
+        elif v == False:
+            try:
+                datetime.date(2017, values['start_date'].month, values['start_date'].day)
+            except ValueError:
+                raise ValueError(
+                    '{}/{} is not a valid date.'.format(values['start_date'].month, values['start_date'].day))
+        else:
+            return v
+
+
     values: List[float] = Schema(
         ...,
         minItems=24,
