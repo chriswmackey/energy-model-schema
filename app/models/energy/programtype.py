@@ -1,11 +1,7 @@
 """Programtype Schema"""
-from pydantic import BaseModel, Schema, validator, ValidationError
-from typing import List, Union, Optional
+from pydantic import BaseModel, Schema, validator
+from typing import Union
 from enum import Enum
-from uuid import UUID, uuid4
-from datetime import datetime
-from app.models.energy.scheduleruleset import ScheduleRulesetAbridged
-from app.models.energy.schedulefixedinterval import ScheduleFixedIntervalAbridged
 
 
 class PeopleAbridged(BaseModel):

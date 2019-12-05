@@ -2,9 +2,10 @@
 from pydantic import BaseModel, Schema, validator, ValidationError, constr
 from typing import List, Union
 from enum import Enum
-from uuid import UUID, uuid4
-from datetime import datetime
-from app.models.energy.materials import EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialGas, EnergyWindowMaterialGasCustom, EnergyWindowMaterialGasMixture, EnergyWindowMaterialSimpleGlazSys, EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing, EnergyWindowMaterialShade
+from app.models.energy.materials import EnergyMaterial, EnergyMaterialNoMass, \
+    EnergyWindowMaterialGas, EnergyWindowMaterialGasCustom, \
+    EnergyWindowMaterialGasMixture, EnergyWindowMaterialSimpleGlazSys, \
+    EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing, EnergyWindowMaterialShade
 
 
 class WindowConstructionAbridged(BaseModel):

@@ -1,9 +1,7 @@
 """Materials Schema"""
-from pydantic import BaseModel, Schema, validator, ValidationError
-from typing import List, Union
+from pydantic import BaseModel, Schema, validator
+from typing import List
 from enum import Enum
-from uuid import UUID, uuid4
-from datetime import datetime
 
 
 class Roughness(str, Enum):

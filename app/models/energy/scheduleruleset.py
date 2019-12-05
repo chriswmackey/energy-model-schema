@@ -1,11 +1,7 @@
 """Schedule Ruleset Schema"""
-from pydantic import BaseModel, Schema, validator, ValidationError, UrlStr, ConstrainedStr
-from typing import List, Union
+from pydantic import BaseModel, Schema, validator
+from typing import List
 from enum import Enum
-from uuid import UUID, uuid4
-from datetime import datetime
-from app.models.energy.schedulebase import ScheduleTypeLimit
-from app.models.common.datetime import Date, Time
 
 
 class ScheduleDay(BaseModel):
