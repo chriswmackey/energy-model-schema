@@ -1,6 +1,6 @@
 """Ideal Air Schema"""
-from pydantic import BaseModel, Schema, validator, ValidationError
-from typing import List, Union
+from pydantic import BaseModel, Schema, validator
+from typing import Union
 from enum import Enum
 
 class EconomizerType(str, Enum):

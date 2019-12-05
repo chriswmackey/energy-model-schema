@@ -23,7 +23,14 @@ from app.crud.database import (create_model_db, get_models_db, get_model_db,
     delete_model_db, get_faces_db, create_faces_db, count_models_db
 )
 
-from app.models.samples.model import model_sample
+import os
+import json
+current = os.path.dirname(os.path.dirname(__file__))
+root = os.path.split(current)[0]
+target_folder = os.path.join(root, 'app', 'models', 'samples')
+file_path = os.path.join(target_folder, 'model_complete_multi_zone_office.json')
+with open(file_path) as json_file:
+    model_sample = json.load(json_file)
 
 from app.crud.util import generate_paging_link 
 
@@ -176,40 +183,4 @@ def get_faces(
         status_code=200,
         headers={'Link': str(links)},
         content= [face.to_face_out() for face in faces]
-    )
-
-@router.post(
-    "/models/{id}/faces",
-    operation_id='create_faces',
-    tags=['Model'],
-    summary='Create Model Faces',
-    status_code=HTTP_201_CREATED,
-    response_description='Created successfully',
-    response_model=CreatedContent,
-    responses={
-        **additional_error_post_responses,
-        201: {
-            'headers': created_header_schema
-        }
-    }
-)
-def create_faces(
-    id: UUID = Path(..., title = "Model id."),
-    faces: List[Face] = Body(
-        ...,
-        description = "A list of Pollination model faces",
-        title = "Faces",
-        example = model_sample['faces']),
-    user: User = Depends(get_user_info)
-):
-    """Create new model faces."""
-    nids = create_faces_db(id, faces, user)
-    location = '%s/models/%s/faces' % (HOST_NAME, nids)
-    return JSONResponse(
-        status_code=201,
-        headers={'Location': location},
-        content={
-            'ids': nids,
-            'message': 'Use Location in headers to access the new object.'
-        }
     )

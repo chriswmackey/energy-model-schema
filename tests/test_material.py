@@ -3,68 +3,86 @@ from app.models.energy.materials import EnergyMaterial, EnergyMaterialNoMass, \
     EnergyWindowMaterialGasCustom, EnergyWindowMaterialBlind, \
     EnergyWindowMaterialGlazing, EnergyWindowMaterialShade, \
     EnergyWindowMaterialSimpleGlazSys
-from app.models.samples.energyconstruction import material_gypsum, material_stucco, \
-    material_insulation, material_roof_insulation, material_metal_decking, \
-    material_concrete, material_no_mass, window_simpleglazing, window_blind, \
-    window_glazing, window_shade, window_gas, window_gas_custom, window_gas_mixture
 from copy import copy
 from pydantic import ValidationError
 import pytest
+import os
+import json
+
+# target folder where all of the samples live
+root = os.path.dirname(os.path.dirname(__file__))
+target_folder = os.path.join(root, 'app', 'models', 'samples')
 
 
 def test_windowglazing():
-    EnergyWindowMaterialGlazing.parse_obj(window_glazing)
+    file_path = os.path.join(target_folder, 'window_glazing.json')
+    EnergyWindowMaterialGlazing.parse_file(file_path)
 
 
 def test_window_blind():
-    EnergyWindowMaterialBlind.parse_obj(window_blind)
+    file_path = os.path.join(target_folder, 'window_blind.json')
+    EnergyWindowMaterialBlind.parse_file(file_path)
 
 
 def test_energymaterial_gypsum():
-    EnergyMaterial.parse_obj(material_gypsum)
+    file_path = os.path.join(target_folder, 'material_gypsum.json')
+    EnergyMaterial.parse_file(file_path)
 
 
 def test_energymaterial_stucco():
-    EnergyMaterial.parse_obj(material_stucco)
+    file_path = os.path.join(target_folder, 'material_stucco.json')
+    EnergyMaterial.parse_file(file_path)
 
 
 def test_energymaterial_insulation():
-    EnergyMaterial.parse_obj(material_insulation)
+    file_path = os.path.join(target_folder, 'material_insulation.json')
+    EnergyMaterial.parse_file(file_path)
 
 
 def test_energymaterial_roofinsulation():
-    EnergyMaterial.parse_obj(material_roof_insulation)
+    file_path = os.path.join(target_folder, 'material_roof_insulation.json')
+    EnergyMaterial.parse_file(file_path)
 
 
 def test_energymaterial_metaldecking():
-    EnergyMaterial.parse_obj(material_metal_decking)
+    file_path = os.path.join(target_folder, 'material_metal_decking.json')
+    EnergyMaterial.parse_file(file_path)
 
 
 def test_materialnomass():
-    EnergyMaterialNoMass.parse_obj(material_no_mass)
+    file_path = os.path.join(target_folder, 'material_no_mass.json')
+    EnergyMaterialNoMass.parse_file(file_path)
 
 
 def test_windowgas():
-    EnergyWindowMaterialGas.parse_obj(window_gas)
+    file_path = os.path.join(target_folder, 'window_gas.json')
+    EnergyWindowMaterialGas.parse_file(file_path)
 
 
 def test_windowgasmixture():
-    EnergyWindowMaterialGasMixture.parse_obj(window_gas_mixture)
+    file_path = os.path.join(target_folder, 'window_gas_mixture.json')
+    EnergyWindowMaterialGasMixture.parse_file(file_path)
 
 
 def test_windowgascustom():
-    EnergyWindowMaterialGasCustom.parse_obj(window_gas_custom)
+    file_path = os.path.join(target_folder, 'window_gas_custom.json')
+    EnergyWindowMaterialGasCustom.parse_file(file_path)
 
 
 def test_windowsimpleglazing():
-    EnergyWindowMaterialSimpleGlazSys.parse_obj(window_simpleglazing)
+    file_path = os.path.join(target_folder, 'window_simpleglazing.json')
+    EnergyWindowMaterialSimpleGlazSys.parse_file(file_path)
 
 
 def test_windowshade():
-    EnergyWindowMaterialShade.parse_obj(window_shade)
+    file_path = os.path.join(target_folder, 'window_shade.json')
+    EnergyWindowMaterialShade.parse_file(file_path)
 
 
 def test_material_wrong():
+    file_path = os.path.join(target_folder, 'material_gypsum.json')
+    with open(file_path) as json_file:
+        material_gypsum = json.load(json_file)
     wrong_name = copy(material_gypsum)
     wrong_name['name'] = ''
     with pytest.raises(ValidationError):
@@ -80,6 +98,9 @@ def test_material_wrong():
 
 
 def test_materialnomass_wrong():
+    file_path = os.path.join(target_folder, 'material_no_mass.json')
+    with open(file_path) as json_file:
+        material_no_mass = json.load(json_file)
     wrong_r_value = copy(material_no_mass)
     wrong_r_value['r_value'] = 0
     with pytest.raises(ValidationError):
@@ -91,6 +112,9 @@ def test_materialnomass_wrong():
 
 
 def test_window_simpleglaz_wrong():
+    file_path = os.path.join(target_folder, 'window_simpleglazing.json')
+    with open(file_path) as json_file:
+        window_simpleglazing = json.load(json_file)
     wrong_values = copy(window_simpleglazing)
     wrong_values['u_factor'] = 6
     with pytest.raises(ValidationError):
@@ -101,6 +125,9 @@ def test_window_simpleglaz_wrong():
 
 
 def test_windowshade_wrong():
+    file_path = os.path.join(target_folder, 'window_shade.json')
+    with open(file_path) as json_file:
+        window_shade = json.load(json_file)
     wrong_type = copy(window_shade)
     wrong_type['type'] = 'EnergyWindowMaterial'
     with pytest.raises(ValidationError):

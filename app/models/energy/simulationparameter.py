@@ -1,6 +1,6 @@
 """Simulation Parameter Schema"""
-from pydantic import BaseModel, Schema, validator, ValidationError
-from typing import List, Union
+from pydantic import BaseModel, Schema, validator
+from typing import List
 from enum import Enum
 from app.models.common.datetime import Date
 

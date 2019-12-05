@@ -1,8 +1,6 @@
-"""Schedule Base Schema"""
-from pydantic import BaseModel, Schema, validator, ValidationError, UrlStr, ConstrainedStr
-from typing import List, Union
+"""Schedule Type Limit Schema"""
+from pydantic import BaseModel, Schema, validator
 from enum import Enum
-from uuid import UUID, uuid4
 
 
 class ScheduleNumericType (str, Enum):
